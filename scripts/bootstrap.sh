@@ -38,5 +38,3 @@ nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz ho
 nix-channel --update
 
 nixos-install
-
-passwd "$username"

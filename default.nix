@@ -13,9 +13,9 @@
   networking.hostName = "jlo-nixos"; # TODO Make part of per-workstation config
   networking.networkmanager.enable = true;
 
-  networking.useDHCP = false;
-  networking.interfaces.enp4s0.useDHCP = true;
-  networking.interfaces.wlp2s0.useDHCP = true;
+  # networking.useDHCP = false;
+  # networking.interfaces.enp4s0.useDHCP = true;
+  # networking.interfaces.wlp2s0.useDHCP = true;
 
   time.timeZone = "Europe/Oslo";
 
@@ -44,6 +44,7 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.fish;
+    initialHashedPassword = "";
   };
 
   services.xserver = {
