@@ -14,7 +14,7 @@ in
     # Enable the X11 windowing system.
     xserver = mkMerge
     [
-      (mkIf cfg.isLaptop {
+      (mkIf cfg.laptopFeatures {
         libinput.enable = true;
         xkbOptions = "caps:swapescape";
       })

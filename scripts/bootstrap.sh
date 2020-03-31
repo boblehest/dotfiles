@@ -1,11 +1,15 @@
 #!/usr/bin/sh
 
 help() {
-	>&2 echo "Usage: $0 <target disk> <username> <hostname> <swap|noswap>"
+	>&2 echo "Usage: $0 <target disk> <username> <hostname> [feature...]"
+	>&2 echo "feature: work | laptop | swap"
+	
 	exit 1
 }
 
-if [ "$#" -ne 4 ] ; then
+numArgs=3
+
+if [ "$#" -lt $numArgs ] ; then
 	help
 fi
 
@@ -14,22 +18,41 @@ set -euxo pipefail
 targetDisk=$1
 username=$2
 hostname=$3
-swap=$4
 rootDiskNum=1
 bootDiskNum=2
 swapStart="100%"
-conserveMemory="false"
 
 root="/mnt"
 dotfilesRepo="https://github.com/boblehest/dotfiles.git"
 
-if [ "$swap" == "swap" ] ; then
+swap="false"
+laptop="false"
+work="false"
+
+shift $numArgs
+while (( "$#" )); do
+	case "$1" in
+		"swap" )
+			swap="true"
+			;;
+		"laptop" )
+			laptop="true"
+			;;
+		"work" )
+			work="true"
+			;;
+		* )
+			>&2 echo "Error: Unknown feature: $1"
+			help
+			;;
+	esac
+	shift
+done
+
+if [ "$swap" == "true" ] ; then
 	swapDiskNum=2
 	bootDiskNum=3
 	swapStart="-8GB"
-	conserveMemory="true"
-elif [ "$swap" != "noswap" ] ; then
-	help
 fi
 
 
@@ -58,7 +81,7 @@ rm "$root/etc/nixos/configuration.nix"
 nix-env -iA nixos.git
 git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
-echo "{username=\"${username}\";conserveMemory=${conserveMemory};hostName=\"${hostname}\";laptopFeatures=false;workFeatures=false;}" > "$root/etc/nixos/dotfiles/settings.nix"
+echo "{username=\"${username}\";conserveMemory=${swap};hostName=\"${hostname}\";laptopFeatures=${laptop};workFeatures=${work};}" > "$root/etc/nixos/dotfiles/settings.nix"
 
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
