@@ -7,9 +7,9 @@ with pkgs;
   programs = {
     fzf = {
       enable = true;
-      enableBashIntegration = true;
+      enableBashIntegration = false;
       enableFishIntegration = true;
-      enableZshIntegration = true;
+      enableZshIntegration = false;
       changeDirWidgetCommand = "fd --type d";
       defaultCommand = "fd --type f";
     };
