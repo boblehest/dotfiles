@@ -5,7 +5,7 @@ with import <home-manager/modules/lib/dag.nix> { inherit lib; };
 let
   execute = cmd:
   dagEntryAfter [ "installPackages" ] ''
-  ${cmd}
+    ${cmd}
   '';
 in
   {
@@ -36,7 +36,11 @@ in
       ];
     };
 
-  home.activation.neovim = execute ''
-    ln -sfT /etc/nixos/dotfiles/home/neovim/config ~/.config/nvim/
-  '';
-}
+    home.packages = with pkgs; [
+      nodejs # Unfortunately, coc-nvim runs/crawls on this.
+    ];
+
+    home.activation.neovim = execute ''
+      ln -sfT /etc/nixos/dotfiles/home/neovim/config ~/.config/nvim
+    '';
+  }

@@ -21,7 +21,7 @@ in
 
       {
       enable = true;
-      layout = "us,no";
+      layout = "us";
       xkbVariant = "altgr-intl";
       desktopManager = {
         xterm.enable = false;
@@ -35,6 +35,7 @@ in
           i3lock
           i3blocks
         ];
+        configFile = "/etc/nixos/dotfiles/home/i3/config";
       };
     }
   ];

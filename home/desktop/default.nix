@@ -1,7 +1,16 @@
 { pkgs, config, ... }:
 
 {
-  programs.rofi.enable = true;
+  programs = {
+    rofi.enable = true;
+    feh = {
+      enable = true;
+      keybindings = {
+        save_filelist = null;
+        toggle_fullscreen = "f";
+      };
+    };
+  };
 
   services = {
     redshift = {
@@ -15,6 +24,7 @@
   };
 
   home.packages = with pkgs; [
+    dunst
     firefox
     networkmanagerapplet
     openconnect

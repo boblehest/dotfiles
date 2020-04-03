@@ -1,0 +1,6 @@
+map j updir
+map k down
+map l up
+map ; open
+map h find-next
+map <delete> delete

@@ -2,14 +2,12 @@
 
 {
   imports = [
-    ./common.nix
     ./desktop
     ./fish
     ./jetbrains.nix
-    ./latex.nix
+    #./latex.nix
     ./mpv.nix
     ./neovim
-    ./programming.nix
     ./social.nix
     ./terminal.nix
   ];
