@@ -52,9 +52,18 @@ in {
     binutils
     coreutils
     curl
+    exa
+    fd
     gitMinimal
+    lf 
+    ripgrep
+    rq
+    termite 
+    tokei
     unzip
     wget
+    xclip
+    xorg.xkill
     zip
   ];
 

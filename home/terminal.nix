@@ -18,15 +18,4 @@ with pkgs;
       escapeTime = 0;
     };
   };
-  home.packages = [
-    exa
-    fd
-    lf 
-    ripgrep
-    rq
-    termite 
-    tokei
-    xclip
-    xorg.xkill
-  ];
 }
