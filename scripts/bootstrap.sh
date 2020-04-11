@@ -18,8 +18,8 @@ set -euxo pipefail
 targetDisk=$1
 username=$2
 hostname=$3
-rootDiskNum=1
-bootDiskNum=2
+rootDiskNum=0
+bootDiskNum=1
 swapStart="100%"
 
 root="/mnt"
@@ -50,8 +50,8 @@ while (( "$#" )); do
 done
 
 if [ "$swap" == "true" ] ; then
-	swapDiskNum=2
-	bootDiskNum=3
+	swapDiskNum=1
+	bootDiskNum=2
 	swapStart="-8GB"
 fi
 
@@ -65,12 +65,15 @@ fi
 parted "${targetDisk}" -- mkpart ESP fat32 1MiB 512MiB
 parted "${targetDisk}" -- set "$bootDiskNum" boot on
 
-mkfs.ext4 -L nixos "${targetDisk}${rootDiskNum}"
+nix-env -iA nixos.jq
+readarray -t partNames < <(lsblk -Jpo name "${targetDisk}" | jq -r '.blockdevices[0].children[].name')
+
+mkfs.ext4 -L nixos "${partNames[rootDiskNum]}"
 if [[ -v swapDiskNum ]] ; then
-	mkswap -L swap "${targetDisk}${swapDiskNum}"
-	swapon "${targetDisk}${swapDiskNum}"
+	mkswap -L swap "${partNames[swapDiskNum]}"
+	swapon "${partNames[swapDiskNum]}"
 fi
-mkfs.fat -F 32 -n boot "${targetDisk}${bootDiskNum}"
+mkfs.fat -F 32 -n boot "${partNames[bootDiskNum]}"
 
 mount /dev/disk/by-label/nixos "$root"
 mkdir -p "$root/boot"
