@@ -87,8 +87,9 @@ cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.ni
 echo "{username=\"${username}\";conserveMemory=${swap};hostName=\"${hostname}\";laptopFeatures=${laptop};workFeatures=${work};}" > "$root/etc/nixos/dotfiles/settings.nix"
 
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-# TODO These steps have to be re-run after reboot for them to stick. Why??
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 
 nixos-install
+
+cp /root/.nix-channels "$root/root/"
