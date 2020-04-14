@@ -4,3 +4,4 @@ map l up
 map ; open
 map h find-next
 map <delete> delete
+cmd open &xdg-open $f

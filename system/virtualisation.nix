@@ -3,7 +3,6 @@
 with lib;
 
 {
-  # Enable Docker
   virtualisation = {
     docker = {
       enable = true;

@@ -3,7 +3,6 @@
 let
   username = (import ../settings.nix).username;
 in {
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users."${username}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "fuse" ];
