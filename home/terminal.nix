@@ -4,6 +4,8 @@ with pkgs;
 with import ../lib;
 
 {
+  services.lorri.enable = true;
+
   programs = {
     fzf = {
       enable = true;
