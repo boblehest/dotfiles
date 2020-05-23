@@ -9,8 +9,8 @@ in
       ./desktop
       ./fish
       ./jetbrains.nix
-      ./mpv.nix
       ./neovim
+      ./other.nix
       ./social.nix
       ./terminal.nix
     ] ++ lib.optional cfg.latex ./latex.nix;
