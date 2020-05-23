@@ -22,6 +22,8 @@ with import ../lib;
     };
   };
 
+  home.packages = [ direnv ];
+
   home.activation.installLfConfig = execute ''
       mkdir -p ~/.config/lf
       ln -sf /etc/nixos/dotfiles/home/lf/lfrc ~/.config/lf/
