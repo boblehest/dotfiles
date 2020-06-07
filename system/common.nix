@@ -56,7 +56,6 @@ in {
     lf 
     ripgrep
     rq
-    termite 
     tokei
     unzip
     wget

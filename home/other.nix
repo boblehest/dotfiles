@@ -16,6 +16,8 @@ in
       openconnect
     ];
 
+    home.sessionVariables.EDITOR = "nvim";
+
     programs.mpv = {
       enable = true;
     };
