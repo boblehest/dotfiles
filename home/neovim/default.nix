@@ -13,22 +13,26 @@ with import ../../lib;
     withPython3 = true;
     withRuby = false;
     plugins = with pkgs.vimPlugins; [
-      vim-repeat
+      coc-nvim
+      fzf-vim
+      fzfWrapper
+      nord-vim
       vim-abolish
       vim-commentary
       vim-fugitive
-      vim-surround
-      vim-unimpaired
-      fzfWrapper
-      fzf-vim
-      vim-lion
-      coc-nvim
-      nord-vim
-      vimtex
-      vim-polyglot
       vim-glsl
+      vim-lion
       vim-markdown
+      vim-polyglot
+      vim-repeat
+      vim-sleuth
+      vim-surround
+      vimtex
+      vim-unimpaired
     ];
+    extraConfig = ''
+      source ~/.config/nvim/init.vim
+    '';
   };
 
   home.packages = with pkgs; [

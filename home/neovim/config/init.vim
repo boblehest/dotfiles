@@ -7,10 +7,7 @@ let g:rust_fold='1'
 
 " color scheme
 set termguicolors
-
-" DetectIndent
-let g:detectindent_preferred_indent = 4 
-autocmd BufReadPost * :DetectIndent 
+colors nord
 
 " # Useful indicators
 set colorcolumn=81 " Highlight column 81
