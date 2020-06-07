@@ -21,16 +21,16 @@
         night = 3000;
       };
     };
+
+    unclutter.enable = true;
   };
 
   home.packages = with pkgs; [
     dunst
     firefox
     networkmanagerapplet
-    openconnect
     pavucontrol
     spotify
-    unclutter-xfixes 
     zathura 
   ];
 }
