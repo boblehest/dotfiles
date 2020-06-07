@@ -23,6 +23,7 @@ with import ../../lib;
       fzf-vim
       vim-lion
       coc-nvim
+      nord-vim
       vimtex
       vim-polyglot
       vim-glsl

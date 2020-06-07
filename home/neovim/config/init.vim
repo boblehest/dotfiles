@@ -9,12 +9,6 @@ let g:rust_fold='1'
 let g:detectindent_preferred_indent = 4 
 autocmd BufReadPost * :DetectIndent 
 
-" color scheme
-set termguicolors
-set bg=dark
-let g:quantum_black=1
-colors quantum
-
 " # Useful indicators
 set colorcolumn=81 " Highlight column 81
 highlight ColorColumn guibg=#220000

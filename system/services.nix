@@ -13,12 +13,23 @@ in
       xserver = mkMerge
       [
         (mkIf cfg.laptopFeatures {
-          libinput.enable = true;
           xkbOptions = "caps:swapescape";
         })
 
         {
           enable = true;
+
+          libinput.enable = true;
+          config = ''
+            Section "InputClass"
+              Identifier "mouse accel"
+              Driver "libinput"
+              MatchIsPointer "on"
+              Option "AccelProfile" "flat"
+              Option "AccelSpeed" "0"
+            EndSection
+          '';
+
           layout = "us";
           xkbVariant = "altgr-intl";
           desktopManager = {
