@@ -52,7 +52,6 @@ in {
     curl
     exa
     fd
-    gitMinimal
     lf 
     ripgrep
     rq

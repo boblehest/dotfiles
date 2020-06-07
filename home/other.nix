@@ -18,7 +18,15 @@ in
 
     home.sessionVariables.EDITOR = "nvim";
 
-    programs.mpv = {
-      enable = true;
+    programs = {
+      git = {
+        enable = true;
+        package = pkgs.gitMinimal;
+        aliases = {
+          st = "status -s";
+          co = "checkout";
+        };
+      };
+      mpv.enable = true;
     };
   }
