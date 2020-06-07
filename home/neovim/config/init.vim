@@ -5,6 +5,9 @@ let g:polyglot_disabled = ['latex']
 let g:rust_recommended_style='0'
 let g:rust_fold='1'
 
+" color scheme
+set termguicolors
+
 " DetectIndent
 let g:detectindent_preferred_indent = 4 
 autocmd BufReadPost * :DetectIndent 
