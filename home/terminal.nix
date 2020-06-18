@@ -48,6 +48,8 @@ with import ../lib;
     tmux = {
       enable = true;
       escapeTime = 0;
+      keyMode = "vi";
+      terminal = "screen-256color";
     };
   };
 

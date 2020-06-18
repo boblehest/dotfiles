@@ -26,7 +26,7 @@ in
               Driver "libinput"
               MatchIsPointer "on"
               Option "AccelProfile" "flat"
-              Option "AccelSpeed" "0"
+              Option "AccelSpeed" "-0.75"
             EndSection
           '';
 
