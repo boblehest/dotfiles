@@ -2,7 +2,7 @@
 
 help() {
 	>&2 echo "Usage: $0 <target disk> <username> <hostname> [feature...]"
-	>&2 echo "feature: work | laptop | swap | latex"
+	>&2 echo "feature: work | laptop | swap | latex | tear"
 	
 	exit 1
 }
@@ -29,6 +29,7 @@ swap="false"
 laptop="false"
 work="false"
 latex="false"
+tearFix="false"
 
 shift $numArgs
 while (( "$#" )); do
@@ -45,6 +46,8 @@ while (( "$#" )); do
 		"latex" )
 			latex="true"
 			;;
+		"tear" )
+			tearFix="true"
 		* )
 			>&2 echo "Error: Unknown feature: $1"
 			help
@@ -88,7 +91,7 @@ rm "$root/etc/nixos/configuration.nix"
 nix-env -iA nixos.git
 git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
-echo "{username=\"${username}\";conserveMemory=${swap};hostName=\"${hostname}\";laptopFeatures=${laptop};workFeatures=${work};latex=${latex};}" > "$root/etc/nixos/dotfiles/settings.nix"
+echo "{username=\"${username}\";conserveMemory=${swap};hostName=\"${hostname}\";laptopFeatures=${laptop};workFeatures=${work};latex=${latex};tear=${tearFix};}" > "$root/etc/nixos/dotfiles/settings.nix"
 
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
