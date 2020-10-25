@@ -5,7 +5,7 @@ let
 in
 {
   boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
     tmpOnTmpfs = ! cfg.conserveMemory;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;

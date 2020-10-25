@@ -10,6 +10,9 @@ in
       fstrim.enable = true;
       upower.enable = true;
 
+      # Onyx Boox Max 3
+      udev.extraRules = "SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"05c6\", MODE=\"0666\"\nSUBSYSTEM==\"usb_device\", ATTRS{idVendor}==\"05c6\", MODE=\"0666\"\n";
+
       xserver = mkMerge
       [
         (mkIf cfg.laptopFeatures {

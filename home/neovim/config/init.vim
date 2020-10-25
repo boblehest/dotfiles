@@ -5,6 +5,11 @@ let g:polyglot_disabled = ['latex']
 let g:rust_recommended_style='0'
 let g:rust_fold='1'
 
+let g:tex_flavor='latex'
+let g:vimtex_compiler_latexmk = {
+            \ 'build_dir' : 'texBuild',
+            \}
+
 " color scheme
 set termguicolors
 colors nord

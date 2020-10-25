@@ -36,7 +36,10 @@ with import ../../lib;
   };
 
   home.packages = with pkgs; [
-    nodejs # Unfortunately, coc-nvim runs/crawls on this.
+    # Unfortunately, coc-nvim actually runs on this trash.
+    # Hopefully we'll be able to replace coc-nvim with something more stable at
+    # some point (preferably written around an ecosystem that isn't 99% sewage).
+    nodejs
   ];
 
   home.activation.neovim = execute ''
