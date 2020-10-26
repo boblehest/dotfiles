@@ -63,5 +63,5 @@ in {
     zip
   ];
 
-  system.stateVersion = "19.09";
+  system.stateVersion = cfg.stateVersion;
 }

@@ -48,6 +48,7 @@ while (( "$#" )); do
 			;;
 		"tear" )
 			tearFix="true"
+			;;
 		* )
 			>&2 echo "Error: Unknown feature: $1"
 			help
@@ -91,7 +92,8 @@ rm "$root/etc/nixos/configuration.nix"
 nix-env -iA nixos.git
 git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
-echo "{username=\"${username}\";conserveMemory=${swap};hostName=\"${hostname}\";laptopFeatures=${laptop};workFeatures=${work};latex=${latex};tear=${tearFix};}" > "$root/etc/nixos/dotfiles/settings.nix"
+stateVersion=$(nix eval --raw '(import <nixpkgs/nixos> {})'.config.system.stateVersion)
+echo "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  workFeatures = ${work};\n  latex = ${latex};\n  tear = ${tearFix};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
 
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager

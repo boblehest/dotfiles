@@ -22,11 +22,11 @@
       };
     };
 
+    dunst.enable = true;
     unclutter.enable = true;
   };
 
   home.packages = with pkgs; [
-    dunst
     firefox
     networkmanagerapplet
     pavucontrol
