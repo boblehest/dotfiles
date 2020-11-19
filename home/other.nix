@@ -26,6 +26,9 @@ in
           st = "status -s";
           co = "checkout";
         };
+        extraConfig = {
+          pull.rebase = false;
+        };
       };
       mpv.enable = true;
     };
