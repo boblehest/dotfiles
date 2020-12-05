@@ -1,7 +1,9 @@
 { config, pkgs, lib, fetchFromGitHub, ... }:
 
-with import ../../lib;
-with pkgs.vimUtils;
+with {
+  inherit (import ../../lib) execute;
+  inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+};
 
 let
   asyncomplete-lsp-vim = buildVimPluginFrom2Nix {
