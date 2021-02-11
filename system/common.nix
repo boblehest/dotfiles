@@ -15,14 +15,16 @@ in {
     trustedUsers = [ "root" "${cfg.username}" "@wheel" ];
     binaryCaches = [
       "https://cache.nixos.org/"
-      "https://qfpl.cachix.org"
       "https://nixcache.reflex-frp.org"
       "https://all-hies.cachix.org"
+      "https://qfpl.cachix.org"
+      "https://hydra.iohk.io"
     ];
     binaryCachePublicKeys = [
       "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
       "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
       "qfpl.cachix.org-1:JTTxGW07zLPAGglHlMbMC3kQpCd6eFRgbtnuorCogYw="
+      "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
     ]; 
   };
 
@@ -54,7 +56,6 @@ in {
     fd
     lf 
     ripgrep
-    rq
     tokei
     unzip
     wget

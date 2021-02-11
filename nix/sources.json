@@ -1,0 +1,62 @@
+{
+    "asyncomplete-lsp.vim": {
+        "branch": "master",
+        "description": null,
+        "homepage": null,
+        "owner": "prabirshrestha",
+        "repo": "asyncomplete-lsp.vim",
+        "rev": "684c34453db9dcbed5dbf4769aaa6521530a23e0",
+        "sha256": "0vqx0d6iks7c0liplh3x8vgvffpljfs1j3g2yap7as6wyvq621rq",
+        "type": "tarball",
+        "url": "https://github.com/prabirshrestha/asyncomplete-lsp.vim/archive/684c34453db9dcbed5dbf4769aaa6521530a23e0.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "asyncomplete-ultisnips.vim": {
+        "branch": "master",
+        "description": "provides ultisnips autocomplete for asyncomplete.vim",
+        "homepage": null,
+        "owner": "prabirshrestha",
+        "repo": "asyncomplete-ultisnips.vim",
+        "rev": "1037c1dfc3ab639fd569fe03310095ddeb4388d4",
+        "sha256": "1cf20rzpglj4bgrbcd010nlnabhg1qc7xyhgwvgkpbq5p71arcgl",
+        "type": "tarball",
+        "url": "https://github.com/prabirshrestha/asyncomplete-ultisnips.vim/archive/1037c1dfc3ab639fd569fe03310095ddeb4388d4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "niv": {
+        "branch": "master",
+        "description": "Easy dependency management for Nix projects",
+        "homepage": "https://github.com/nmattia/niv",
+        "owner": "nmattia",
+        "repo": "niv",
+        "rev": "af958e8057f345ee1aca714c1247ef3ba1c15f5e",
+        "sha256": "1qjavxabbrsh73yck5dcq8jggvh3r2jkbr6b5nlz5d9yrqm9255n",
+        "type": "tarball",
+        "url": "https://github.com/nmattia/niv/archive/af958e8057f345ee1aca714c1247ef3ba1c15f5e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nixpkgs": {
+        "branch": "release-20.03",
+        "description": "Nix Packages collection",
+        "homepage": "",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "929768261a3ede470eafb58d5b819e1a848aa8bf",
+        "sha256": "0zi54vbfi6i6i5hdd4v0l144y1c8rg6hq6818jjbbcnm182ygyfa",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/929768261a3ede470eafb58d5b819e1a848aa8bf.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vim-lsp-settings": {
+        "branch": "master",
+        "description": "Auto configurations for Language Server for vim-lsp",
+        "homepage": "",
+        "owner": "mattn",
+        "repo": "vim-lsp-settings",
+        "rev": "912604efc8fadb3d69c8b630696736754a557bf4",
+        "sha256": "0s0bp8l8z5bmvfzmq6hbqdlmic2ka55m3x6dm78q6nv1qgyil47k",
+        "type": "tarball",
+        "url": "https://github.com/mattn/vim-lsp-settings/archive/912604efc8fadb3d69c8b630696736754a557bf4.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
