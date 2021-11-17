@@ -50,6 +50,11 @@ with import ../lib;
       escapeTime = 0;
       keyMode = "vi";
       terminal = "screen-256color";
+      extraConfig = ''
+        bind c new-window -c "#{pane_current_path}"
+        bind '"' split-window -c "#{pane_current_path}"
+        bind % split-window -h -c "#{pane_current_path}"
+      '';
     };
   };
 

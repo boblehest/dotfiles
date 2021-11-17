@@ -2,7 +2,7 @@
 
 help() {
 	>&2 echo "Usage: $0 <target disk> <username> <hostname> [feature...]"
-	>&2 echo "feature: work | laptop | swap | latex | tear | oldIntel"
+	>&2 echo "feature: work | laptop | swap | latex | intelVideo | oldIntel | nvidia"
 	
 	exit 1
 }
@@ -29,8 +29,9 @@ swap="false"
 laptop="false"
 work="false"
 latex="false"
-tearFix="false"
+intelVideo="false"
 oldIntel="false" # https://www.reddit.com/r/linux/comments/ihdozd/linux_kernel_58_defaults_to_passive_mode_for/
+nvidia="false"
 
 shift $numArgs
 while (( "$#" )); do
@@ -47,11 +48,14 @@ while (( "$#" )); do
 		"latex" )
 			latex="true"
 			;;
-		"tear" )
-			tearFix="true"
+		"intelVideo" )
+			intelVideo="true"
 			;;
 		"oldIntel" )
 			oldIntel="true"
+			;;
+		"nvidia" )
+			nvidia="true"
 			;;
 		* )
 			>&2 echo "Error: Unknown feature: $1"
@@ -97,7 +101,7 @@ nix-env -iA nixos.git
 git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
 stateVersion=$(nix eval --raw '(import <nixpkgs/nixos> {})'.config.system.stateVersion)
-echo "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  workFeatures = ${work};\n  latex = ${latex};\n  tear = ${tearFix};\n  oldIntel = ${oldIntel};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
+echo "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  workFeatures = ${work};\n  latex = ${latex};\n  intelVideo = ${intelVideo};\n  oldIntel = ${oldIntel};\n  nvidia = ${nvidia};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
 
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
