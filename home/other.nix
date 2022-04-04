@@ -1,5 +1,8 @@
 { pkgs, lib, ... }:
 
+let
+  cfg = import ../settings.nix;
+in
   {
     home.packages = with pkgs; [
       # audacity
