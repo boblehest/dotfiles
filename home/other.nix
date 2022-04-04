@@ -1,8 +1,5 @@
 { pkgs, lib, ... }:
 
-let
-  cfg = import ../settings.nix;
-in
   {
     home.packages = with pkgs; [
       # audacity
@@ -12,8 +9,6 @@ in
       jmtpfs
       transmission-gtk
       yt-dlp-light
-    ] ++ lib.optionals cfg.workFeatures [
-      openconnect
     ];
 
     home.sessionVariables.EDITOR = "nvim";

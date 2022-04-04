@@ -19,12 +19,16 @@ in
           xkbOptions = "caps:swapescape";
         })
 
-        (mkIf cfg.intelTearing {
+        (mkIf cfg.intelVideo {
           videoDrivers = [ "intel" ];
           deviceSection = ''
             Option "DRI" "2"
             Option "TearFree" "true"
           '';
+        })
+
+        (mkIf cfg.nvidia {
+          videoDrivers = [ "nvidia" ];
         })
 
         {

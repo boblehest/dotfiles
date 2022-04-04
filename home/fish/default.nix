@@ -6,8 +6,9 @@
     shellAliases = {
       cp = "cp -i";
       l = "exa -lagFT --git-ignore --git --level 1";
-      ls = "exa -a --git-ignore";
+      ls = "exa -a";
       mv = "mv -i";
+      tb = "pkill -usr1 redshift";
       tree = "exa --tree --git-ignore";
     };
     functions = {
