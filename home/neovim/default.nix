@@ -32,6 +32,7 @@ in
       fzfWrapper
       nord-vim
       nvim-lspconfig
+      plenary-nvim
       telescope-nvim
       trouble-nvim
       ultisnips
@@ -53,6 +54,10 @@ in
     ] ++ extraVimPlugins;
     extraConfig = ''
       source ~/.config/nvim/init2.vim
+
+      lua << EOF
+        ${lib.strings.fileContents ./config/init.lua}
+      EOF
     '';
   };
 

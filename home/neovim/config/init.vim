@@ -95,14 +95,6 @@ nnoremap <Leader>bd :call MyBufDelete()<CR>
 nnoremap <Leader>w :call FixWsAndWrite()<CR>
 nnoremap <Leader>q :q<CR>
 
-nmap <silent> gd :LspDefinition
-nmap <silent> gy :LspTypeDefinition
-nmap <silent> gi :LspImplementation
-nmap <silent> gr :LspReferences
-nnoremap <silent> K :LspHover
-nmap <leader>rn :LspRename
-nmap <leader>ac  :LspAction
-
 " slightly better movement keys
 noremap ; l
 sunmap ;
@@ -168,53 +160,3 @@ func! FixWsAndWrite()
 	exe "normal `z"
 	w
 endfunc
-
-" Everything below here copied (without even reading it) from:
-" https://dev.to/moniquelive/haskell-lsp-bonus-for-vim-4nlj
-if (executable('haskell-language-server-wrapper'))
-  au User lsp_setup call lsp#register_server({
-      \ 'name': 'haskell-language-server-wrapper',
-      \ 'cmd': {server_info->['haskell-language-server-wrapper', '--lsp']},
-      \ 'whitelist': ['haskell'],
-      \ })
-endif
-
-" My Mappings
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gf <plug>(lsp-code-action)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <F2> <plug>(lsp-rename)
-    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-    xmap <buffer> f <plug>(lsp-document-range-format)
-    nmap <buffer> <F5> <plug>(lsp-code-lens)
-
-    " buffer format on save
-    " autocmd BufWritePre <buffer> LspDocumentFormatSync
-endfunction
-
-" Decorations
-augroup lsp_install
-    au!
-    let g:lsp_signs_enabled = 1         " enable signs
-    let g:lsp_diagnostics_echo_cursor = 1 " enable echo under cursor when in normal mode
-    let g:lsp_signs_error = {'text': '✗'}
-    " let g:lsp_signs_warning = {'text': '‼', 'icon': '/path/to/some/icon'} " icons require GUI
-    " let g:lsp_signs_hint = {'icon': '/path/to/some/other/icon'} " icons require GUI
-    let g:lsp_signs_warning = {'text': '‼'}
-    let g:lsp_highlight_references_enabled = 1
-    highlight link LspErrorText GruvboxRedSign " requires gruvbox
-    highlight clear LspWarningLine
-    " highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
-    highlight lspReference guibg=#303010
-
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
