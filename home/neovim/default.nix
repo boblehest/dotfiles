@@ -11,9 +11,9 @@ let
     inherit name;
     src = sources.${name};
   }) [
-    "asyncomplete-lsp.vim"
     "asyncomplete-ultisnips.vim"
-    "vim-lsp-settings"
+    "telescope-ui-select.nvim"
+    "vim-haskellFold"
   ];
 in
 {
@@ -23,14 +23,17 @@ in
     viAlias = false;
     vimAlias = false;
     withNodeJs = false;
-    withPython = false;
     withPython3 = true;
     withRuby = false;
     plugins = with pkgs.vimPlugins; [
       asyncomplete-vim
+      asyncomplete-lsp-vim
       fzf-vim
       fzfWrapper
       nord-vim
+      nvim-lspconfig
+      telescope-nvim
+      trouble-nvim
       ultisnips
       vim-abolish
       vim-commentary
@@ -40,6 +43,7 @@ in
       vim-lsp
       vim-markdown
       vim-polyglot
+      vim-qf
       vim-repeat
       vim-sleuth
       vim-snippets

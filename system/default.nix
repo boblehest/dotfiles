@@ -9,6 +9,7 @@
     ./fonts.nix
     ./services.nix
     ./users.nix
+    ./video.nix
     ./virtualisation.nix
   ];
 }

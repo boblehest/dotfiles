@@ -5,6 +5,7 @@ let g:polyglot_disabled = ['latex']
 let g:rust_recommended_style='0'
 let g:rust_fold='1'
 
+let g:tex_no_error=1
 let g:tex_flavor='latex'
 let g:vimtex_compiler_latexmk = {
             \ 'build_dir' : 'texBuild',
@@ -19,7 +20,7 @@ set colorcolumn=81 " Highlight column 81
 highlight ColorColumn guibg=#220000
 set cursorline " Highlight the whole line where the cursor is located
 set number " Numbered lines
-set relativenumber
+" set relativenumber
 set showcmd " Show the current command being entered on the status line
 set statusline=%-3.3n%f%h%m%r%w\ [type=%{strlen(&ft)?&ft:'none'}]
 			\\ [enc=%{strlen(&fenc)?&fenc:&enc}]
@@ -94,19 +95,13 @@ nnoremap <Leader>bd :call MyBufDelete()<CR>
 nnoremap <Leader>w :call FixWsAndWrite()<CR>
 nnoremap <Leader>q :q<CR>
 
-nnoremap <silent> <Leader>f :call CocAction('format')<CR>
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nnoremap <silent> K :call CocAction('doHover')<CR>
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>ac  :<C-u>CocAction<CR>
-" Fix autofix problem of current line
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <silent> gd :LspDefinition
+nmap <silent> gy :LspTypeDefinition
+nmap <silent> gi :LspImplementation
+nmap <silent> gr :LspReferences
+nnoremap <silent> K :LspHover
+nmap <leader>rn :LspRename
+nmap <leader>ac  :LspAction
 
 " slightly better movement keys
 noremap ; l

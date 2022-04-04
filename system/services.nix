@@ -15,7 +15,7 @@ in
 
       xserver = mkMerge
       [
-        (mkIf cfg.laptopFeatures {
+        (mkIf cfg.swapCapsEscape {
           xkbOptions = "caps:swapescape";
         })
 
@@ -41,8 +41,11 @@ in
             EndSection
           '';
 
+          # synaptics.enable = cfg.laptopFeatures;
+
           layout = "us";
           xkbVariant = "altgr-intl";
+          xkbOptions = "compose:menu";
           desktopManager = {
             xterm.enable = false;
           };

@@ -5,13 +5,13 @@ let
 in
   {
     home.packages = with pkgs; [
-      audacity 
-      filezilla
+      # audacity
+      # filezilla
       flameshot
-      gimp
+      # gimp
       jmtpfs
       transmission-gtk
-      youtube-dl
+      yt-dlp-light
     ] ++ lib.optionals cfg.workFeatures [
       openconnect
     ];
@@ -19,8 +19,7 @@ in
     home.sessionVariables.EDITOR = "nvim";
 
     programs = {
-      git = {
-        enable = true;
+      git = lib.mkMerge [ cfg.git {
         package = pkgs.gitMinimal;
         aliases = {
           st = "status -s";
@@ -30,7 +29,14 @@ in
           init.defaultBranch = "master";
           pull.rebase = false;
         };
+      }];
+      mpv = {
+        enable = true;
+        config = {
+          hwdec = "auto-safe";
+          vo = "gpu";
+          profile = "gpu-hq";
+        };
       };
-      mpv.enable = true;
     };
   }

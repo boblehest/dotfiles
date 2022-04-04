@@ -8,7 +8,7 @@ in
       ./common.nix
       ./desktop
       ./fish
-      ./jetbrains.nix
+      # ./jetbrains.nix
       ./neovim
       ./other.nix
       ./social.nix
