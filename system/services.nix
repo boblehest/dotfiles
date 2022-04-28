@@ -34,7 +34,10 @@ in
         {
           enable = true;
 
-          libinput.enable = true;
+          libinput = {
+            enable = true;
+            touchpad.naturalScrolling = true;
+          };
           config = ''
             Section "InputClass"
               Identifier "mouse accel"

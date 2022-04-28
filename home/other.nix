@@ -5,13 +5,12 @@ let
 in
   {
     home.packages = with pkgs; [
-      # audacity
-      # filezilla
       flameshot
-      # gimp
       jmtpfs
+      obsidian
       transmission-gtk
       yt-dlp-light
+      zotero
     ];
 
     home.sessionVariables.EDITOR = "nvim";
@@ -26,6 +25,7 @@ in
         extraConfig = {
           init.defaultBranch = "master";
           pull.rebase = false;
+          push.default = "upstream";
         };
       }];
       mpv = {
