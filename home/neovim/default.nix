@@ -13,7 +13,6 @@ let
   }) [
     "asyncomplete-ultisnips.vim"
     "telescope-ui-select.nvim"
-    "vim-haskellFold"
   ];
 in
 {
