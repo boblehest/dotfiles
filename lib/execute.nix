@@ -1,10 +1,8 @@
 { pkgs, lib, ... }:
 
-with import <home-manager/modules/lib/dag.nix> { inherit lib; };
-
 {
   execute = cmd:
-    dagEntryAfter [ "installPackages" ] ''
+    lib.hm.dag.entryAfter [ "installPackages" ] ''
       ${cmd}
     '';
 }

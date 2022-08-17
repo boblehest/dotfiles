@@ -4,6 +4,8 @@ let
   cfg = import ../settings.nix;
 in
   {
+    home.stateVersion = "18.09";
+
     imports = [
       ./common.nix
       ./desktop

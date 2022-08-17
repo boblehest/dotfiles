@@ -13,9 +13,4 @@
       libvdpau-va-gl
     ];
   };
-
-  environment.variables = {
-    LIBVA_DRIVER_NAME = "i965";
-    MESA_LOADER_DRIVER_OVERRIDE = "i965";
-  };
 }

@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 with pkgs;
-with import ../lib;
+with import ../lib/execute.nix { inherit lib pkgs; };
 
 {
   services.lorri.enable = true;

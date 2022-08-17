@@ -1,7 +1,7 @@
 { config, pkgs, lib, fetchFromGitHub, ... }:
 
 with {
-  inherit (import ../../lib) execute;
+  inherit (import ./lib/execute.nix { inherit lib pkgs; }) execute;
   inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
   sources = (import ../../nix/sources.nix);
 };
