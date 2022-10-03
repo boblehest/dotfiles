@@ -95,3 +95,6 @@ bindsym Mod4+b exec firefox
 
 bindsym Mod4+m --release exec flameshot gui
 
+bindsym Ctrl+grave exec dunstctl close-all
+bindsym Mod1+grave exec dunstctl history-pop
+

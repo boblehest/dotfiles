@@ -22,7 +22,7 @@ with import ../lib/execute.nix { inherit lib pkgs; };
       clickableUrl = true;
       font = "Hack 13";
       scrollbackLines = 10000;
-      browser = "${pkgs.xdg_utils}/bin/xdg-open";
+      browser = "${pkgs.xdg-utils}/bin/xdg-open";
 
       colorsExtra = ''
         background = #1e1e1e

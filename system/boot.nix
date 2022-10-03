@@ -8,8 +8,12 @@ in
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = lib.mkIf cfg.oldIntel [ "intel_pstate=active" ];
     tmpOnTmpfs = ! cfg.conserveMemory;
+
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        enable = true;
+        configurationLimit = 40;
+      };
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
