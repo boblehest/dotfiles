@@ -19,7 +19,7 @@ in {
         "https://nixcache.reflex-frp.org"
         "https://all-hies.cachix.org"
         "https://qfpl.cachix.org"
-        "https://hydra.iohk.io"
+        "https://cache.iog.io"
       ];
       trusted-public-keys = [
         "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
