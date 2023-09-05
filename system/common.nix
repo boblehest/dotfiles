@@ -47,6 +47,8 @@ in {
     networkmanager.enable = true;
     hostName = cfg.hostName;
     firewall.enable = false;
+    dhcpcd.denyInterfaces = [ "wlp0s20f3" ];
+    bridges.br0.interfaces = [ "enp0s20f0u11u4" ];
   };
 
   environment.systemPackages = with pkgs; [

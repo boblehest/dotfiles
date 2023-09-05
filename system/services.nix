@@ -4,9 +4,31 @@ with lib;
 
 let
   cfg = import ../settings.nix;
+  apRadio = "wlp0s20f3";
 in
   {
     services = {
+      hostapd = {
+        # TODO Test if phone and laptop nic support SAE authentication
+        enable = true;
+        radios.${apRadio} = {
+          countryCode = "NO";
+          networks.${apRadio} = {
+            ssid = "fooWifi";
+            # ignoreBroadcastSsid = "empty";
+            # authentication = {
+            #   mode = "none";
+            # };
+            authentication = {
+              mode = "wpa2-sha256";
+              wpaPassword = "abcfoo12";
+            };
+            settings = {
+              bridge = "br0";
+            };
+          };
+        };
+      };
       fstrim.enable = true;
       upower.enable = true;
 
