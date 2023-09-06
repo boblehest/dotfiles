@@ -1,7 +1,9 @@
-{ pkgs, config, ... }:
+{ pkgs, config, lib, ... }:
 
 let
   cfg = import ../settings.nix;
+  apRadio = "wlp0s20f3";
+  # ethernetInterface = ...
 in {
   i18n = { defaultLocale = "en_US.UTF-8"; };
   console = {
@@ -44,11 +46,16 @@ in {
   location.provider = "geoclue2";
 
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      unmanaged = lib.optionals config.services.hostapd.enable [
+        apRadio # We manage this through hostapd -- NetworkManager please no touch
+      ];
+    };
     hostName = cfg.hostName;
     firewall.enable = false;
-    dhcpcd.denyInterfaces = [ "wlp0s20f3" ];
-    bridges.br0.interfaces = [ "enp0s20f0u11u4" ];
+    interfaces.${apRadio}.ipv4.addresses = lib.optionals config.services.hostapd.enable [{ address = "192.168.12.1"; prefixLength = 24; }];
+    dhcpcd.denyInterfaces = lib.optionals config.services.hostapd.enable [ apRadio ]; # TODO Not sure if this is necessary, because I'm not quite sure when a dhcp client would try to request an address. I assume it is _not_ necessary.
   };
 
   environment.systemPackages = with pkgs; [

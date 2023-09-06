@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
 with lib;
 
@@ -15,20 +15,25 @@ in
           countryCode = "NO";
           networks.${apRadio} = {
             ssid = "fooWifi";
-            # ignoreBroadcastSsid = "empty";
-            # authentication = {
-            #   mode = "none";
-            # };
+            ignoreBroadcastSsid = "empty";
             authentication = {
               mode = "wpa2-sha256";
               wpaPassword = "abcfoo12";
             };
-            settings = {
-              bridge = "br0";
-            };
           };
         };
       };
+
+      haveged.enable = config.services.hostapd.enable; # Someone said that without haveged one could experience slow connection initialization or something. I just added haveged without looking into it.
+      dnsmasq = lib.optionalAttrs config.services.hostapd.enable {
+        enable = true;
+        settings = {
+          interface = apRadio;
+          bind-interfaces = true;
+          dhcp-range = [ "192.168.12.10,192.168.12.254,24h" ];
+        };
+      };
+
       fstrim.enable = true;
       upower.enable = true;
 
