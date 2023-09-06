@@ -7,7 +7,7 @@ in
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = lib.mkIf cfg.oldIntel [ "intel_pstate=active" ];
-    tmpOnTmpfs = ! cfg.conserveMemory;
+    tmp.useTmpfs = ! cfg.conserveMemory;
 
     loader = {
       systemd-boot = {

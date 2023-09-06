@@ -2,7 +2,6 @@
 
 {
   programs = {
-    rofi.enable = true;
     feh = {
       enable = true;
       keybindings = {
@@ -10,6 +9,7 @@
         toggle_fullscreen = "f";
       };
     };
+    rofi.enable = true;
   };
 
   services = {
@@ -18,8 +18,8 @@
       latitude = "60.38";
       longitude = "5.32";
       temperature = {
-        day = 3500;
-        night = 3000;
+        day = 2400;
+        night = 2100;
       };
     };
 
@@ -67,6 +67,7 @@
     };
     unclutter.enable = true;
   };
+
 
   home.packages = with pkgs; [
     firefox

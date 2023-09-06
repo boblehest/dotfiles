@@ -22,13 +22,15 @@ in {
         "https://all-hies.cachix.org"
         "https://qfpl.cachix.org"
         "https://cache.iog.io"
+        "https://ros.cachix.org"
       ];
       trusted-public-keys = [
         "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
         "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
         "qfpl.cachix.org-1:JTTxGW07zLPAGglHlMbMC3kQpCd6eFRgbtnuorCogYw="
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-      ]; 
+        "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
+      ];
     };
   };
 
@@ -65,7 +67,7 @@ in {
     curl
     exa
     fd
-    lf 
+    lf
     ripgrep
     tokei
     unzip
@@ -74,6 +76,11 @@ in {
     xorg.xkill
     zip
   ];
+
+  programs = {
+    fish.enable = true;
+    firejail.enable = true;
+  };
 
   system.stateVersion = cfg.stateVersion;
 }

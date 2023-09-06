@@ -5,7 +5,7 @@ let
 in {
   users.users."${username}" = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "docker" "fuse" ];
+    extraGroups = [ "wheel" "networkmanager" "docker" "fuse" "plugdev" "dialout" ];
     shell = pkgs.fish;
     initialHashedPassword = "";
   };

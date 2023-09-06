@@ -4,8 +4,6 @@ with pkgs;
 with import ../lib/execute.nix { inherit lib pkgs; };
 
 {
-  services.lorri.enable = true;
-
   programs = {
     fzf = {
       enable = true;
@@ -56,9 +54,10 @@ with import ../lib/execute.nix { inherit lib pkgs; };
         bind % split-window -h -c "#{pane_current_path}"
       '';
     };
-  };
 
-  home.packages = [ direnv ];
+    direnv.enable = true;
+    direnv.nix-direnv.enable = true;
+  };
 
   home.activation.installLfConfig = execute ''
       mkdir -p ~/.config/lf
