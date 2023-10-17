@@ -65,7 +65,7 @@ in {
     binutils
     coreutils
     curl
-    exa
+    eza
     fd
     lf
     ripgrep
