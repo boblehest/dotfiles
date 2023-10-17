@@ -37,7 +37,7 @@ end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'hls' }
+local servers = { 'hls', 'clangd', 'rust_analyzer' }
 for _, lsp in pairs(servers) do
   require('lspconfig')[lsp].setup {
     on_attach = on_attach,
@@ -47,6 +47,13 @@ for _, lsp in pairs(servers) do
     }
   }
 end
+
+vim.api.nvim_create_autocmd({"BufWritePre"}, {
+    pattern = {"*.c", "*.cpp", "*.h"},
+    callback = function(_ev)
+      vim.lsp.buf.format()
+    end
+  })
 
 require("telescope").setup{}
 
