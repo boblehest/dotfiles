@@ -73,7 +73,7 @@ for lsp_name, lsp_settings in pairs(servers) do
 end
 
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
-    pattern = {"*.c", "*.cpp", "*.h"},
+    pattern = {"*.c", "*.cpp", "*.cc", "*.h", "*.hpp"},
     callback = function(_ev)
       vim.lsp.buf.format()
     end
