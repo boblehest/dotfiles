@@ -2,7 +2,7 @@
 
 help() {
 	>&2 echo "Usage: $0 <target disk> <username> <hostname> [feature...]"
-	>&2 echo "feature: git <username> <email> | work | laptop | swap | latex | intelVideo | oldIntel | swapCapsEscape"
+	>&2 echo "feature: git <username> <email> | laptop | swap | latex | intelVideo | oldIntel | swapCapsEscape"
 	
 	exit 1
 }
@@ -28,7 +28,6 @@ dotfilesRepo="https://github.com/boblehest/dotfiles.git"
 git="{}"
 swap="false"
 laptop="false"
-work="false"
 latex="false"
 intelVideo="false"
 oldIntel="false" # https://www.reddit.com/r/linux/comments/ihdozd/linux_kernel_58_defaults_to_passive_mode_for/
@@ -47,9 +46,6 @@ while (( "$#" )); do
 			;;
 		"laptop" )
 			laptop="true"
-			;;
-		"work" )
-			work="true"
 			;;
 		"latex" )
 			latex="true"
@@ -110,7 +106,7 @@ nix-env -iA nixos.git
 git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
 stateVersion=$(nix eval --raw '(import <nixpkgs/nixos> {})'.config.system.stateVersion)
-echo "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  workFeatures = ${work};\n  latex = ${latex};\n  intelVideo = ${intelVideo};  oldIntel = ${oldIntel};\n  swapCapsEscape = ${swapCapsEscape};\n  nvidia = ${nvidia};\n  git = ${git};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
+echo "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  latex = ${latex};\n  intelVideo = ${intelVideo};  oldIntel = ${oldIntel};\n  swapCapsEscape = ${swapCapsEscape};\n  nvidia = ${nvidia};\n  git = ${git};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
 
 nix-channel --add https://nixos.org/channels/nixos-unstable nixos
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager

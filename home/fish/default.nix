@@ -13,6 +13,9 @@
       tree = "eza --tree --git-ignore";
     };
     functions = {
+      # Motivation: The `lf` file browser does not change the current directory
+      # of the shell. This helper function runs lf and changes the current
+      # directory of the shell to match what the user navigated to inside lf.
       lfcd.body = ''
           set tmp (mktemp)
           lf -last-dir-path=$tmp $argv
@@ -26,6 +29,13 @@
             end
           end
         '';
+
+      # Helper function to get the store path of a package
+      # E.g. `nixStorePath python3`
+      # Often used while debugging stuff "(what does package X actually contain?")
+      nixStorePath.body = ''
+        nix eval --impure --raw --expr "(import <nixpkgs> {}).$argv[1].outPath"
+      '';
     };
     interactiveShellInit = ''
       bind -M insert \co 'lfcd; commandline -f repaint'
