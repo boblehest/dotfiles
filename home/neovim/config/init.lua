@@ -35,17 +35,41 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>sf', '<cmd>lua require("telescope.builtin").lsp_document_symbols{symbols="function"}<CR>', opts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'hls', 'clangd', 'rust_analyzer' }
-for _, lsp in pairs(servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      -- This will be the default in neovim 0.7+
-      debounce_text_changes = 150,
+local servers = {
+  hls = {},
+  clangd = {},
+  rust_analyzer = {},
+  texlab = {
+    settings = {
+      texlab = {
+        auxDirectory = "build",
+        build = {
+          executable = "tectonic",
+          onSave = true,
+          args = {
+            "-X",
+            "compile",
+            "%f",
+            "--synctex",
+            "--keep-logs",
+            "--keep-intermediates",
+            "--outdir",
+            "build"
+          },
+        },
+        forwardSearch = {
+          executable = "zathura",
+          args = {"--synctex-forward", "%l:1:%f", "%p"}
+        }
+      }
     }
   }
+}
+
+local lspconfig = require('lspconfig')
+for lsp_name, lsp_settings in pairs(servers) do
+  lsp_settings.on_attach = on_attach
+  lspconfig[lsp_name].setup(lsp_settings)
 end
 
 vim.api.nvim_create_autocmd({"BufWritePre"}, {

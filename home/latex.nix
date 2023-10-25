@@ -1,9 +1,13 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [ zathura texlive.combined.scheme-full ];
+  programs.zathura = {
+    enable = true;
+    options = {
+      synctex = true;
+      synctex-editor-command = "code -g %{input}:%{line}";
+    };
+  };
 
-  home.file.".latexmkrc".text = ''
-    $pdf_previewer = 'start zathura';
-  '';
+  home.packages = with pkgs; [ tectonic ];
 }

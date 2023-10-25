@@ -2,12 +2,12 @@
 
 with {
   inherit (import ../../lib/execute.nix { inherit lib pkgs; }) execute;
-  inherit (pkgs.vimUtils) buildVimPluginFrom2Nix;
+  inherit (pkgs.vimUtils) buildVimPlugin;
   sources = (import ../../nix/sources.nix);
 };
 
 let
-  extraVimPlugins = map (name: buildVimPluginFrom2Nix {
+  extraVimPlugins = map (name: buildVimPlugin {
     inherit name;
     src = sources.${name};
   }) [
@@ -48,7 +48,6 @@ in
       vim-sleuth
       vim-snippets
       vim-surround
-      vimtex
       vim-unimpaired
     ] ++ extraVimPlugins;
     extraConfig = ''
@@ -66,5 +65,6 @@ in
 
   home.packages = [
     pkgs.haskell-language-server
+    pkgs.texlab
   ];
 }
