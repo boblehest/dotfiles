@@ -7,7 +7,16 @@ let
   apRadio = "wlp0s20f3";
 in
   {
+    environment.etc."nextcloud-admin-pass".text = "hallo123";
+
     services = {
+      nextcloud = {
+        enable = true;
+        package = pkgs.nextcloud27;
+        hostName = "localhost";
+        config.adminpassFile = "/etc/nextcloud-admin-pass";
+      };
+
       hostapd = {
         enable = false;
         radios.${apRadio} = {
