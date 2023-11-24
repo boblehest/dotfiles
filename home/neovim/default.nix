@@ -11,8 +11,16 @@ let
     inherit name;
     src = sources.${name};
   }) [
+    "1989.vim"
     "asyncomplete-ultisnips.vim"
+    "bubblegum"
+    "caret.nvim"
+    "github-colors"
+    "rasmus.nvim"
     "telescope-ui-select.nvim"
+    "vim-monochrome"
+    "vim-pink-moon"
+    "vim-vice"
     "vscode.nvim"
   ];
 in
@@ -30,8 +38,10 @@ in
       asyncomplete-lsp-vim
       fzf-vim
       fzfWrapper
-      nord-vim
+      gruvbox # colorscheme
+      nord-vim # colorscheme
       nvim-lspconfig
+      melange-nvim # colorscheme
       plenary-nvim
       telescope-nvim
       trouble-nvim
