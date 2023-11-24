@@ -65,7 +65,6 @@ in
   '';
 
   home.packages = [
-    pkgs.haskell-language-server
     pkgs.texlab
   ];
 }
