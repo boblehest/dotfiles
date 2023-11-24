@@ -9,8 +9,7 @@ in
   {
     services = {
       hostapd = {
-        # TODO Test if phone and laptop nic support SAE authentication
-        enable = true;
+        enable = false;
         radios.${apRadio} = {
           countryCode = "NO";
           networks.${apRadio} = {
@@ -24,7 +23,7 @@ in
         };
       };
 
-      haveged.enable = config.services.hostapd.enable; # Someone said that without haveged one could experience slow connection initialization or something. I just added haveged without looking into it.
+      haveged.enable = config.services.hostapd.enable; # Someone said that without haveged one could experience slow connection initialization or something (for people connecting to the access point?). I just added haveged without looking into it.
       dnsmasq = lib.optionalAttrs config.services.hostapd.enable {
         enable = true;
         settings = {
