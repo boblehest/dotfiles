@@ -52,6 +52,7 @@ with import ../lib/execute.nix { inherit lib pkgs; };
         bind c new-window -c "#{pane_current_path}"
         bind '"' split-window -c "#{pane_current_path}"
         bind % split-window -h -c "#{pane_current_path}"
+        set-option -sa terminal-features ',xterm-termite:RGB'
       '';
     };
 
