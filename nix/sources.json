@@ -58,5 +58,17 @@
         "type": "tarball",
         "url": "https://github.com/Twinside/vim-haskellFold/archive/1adb91a88fcd8b073035191cd4a840be3dbdeaa8.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "vscode.nvim": {
+        "branch": "main",
+        "description": "Neovim/Vim color scheme inspired by Dark+ and Light+ theme in Visual Studio Code",
+        "homepage": "",
+        "owner": "Mofiqul",
+        "repo": "vscode.nvim",
+        "rev": "563e3f671543ba14f23ccb57020a428add640d02",
+        "sha256": "04iwwwnqy5awvxsgd0y17nxkqbcba2jpjfg5d4j5pab3ac9yi3xd",
+        "type": "tarball",
+        "url": "https://github.com/Mofiqul/vscode.nvim/archive/563e3f671543ba14f23ccb57020a428add640d02.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

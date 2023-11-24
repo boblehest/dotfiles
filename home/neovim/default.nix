@@ -13,6 +13,7 @@ let
   }) [
     "asyncomplete-ultisnips.vim"
     "telescope-ui-select.nvim"
+    "vscode.nvim"
   ];
 in
 {

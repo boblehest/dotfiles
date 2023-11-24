@@ -7,7 +7,7 @@ let g:rust_fold='1'
 
 " color scheme
 set termguicolors
-colors nord
+colors vscode
 
 " # Useful indicators
 set colorcolumn=81 " Highlight column 81
