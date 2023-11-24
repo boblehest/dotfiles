@@ -47,6 +47,10 @@ set cpo+=y " Repeatable yank commands.
 set signcolumn=yes
 set nomodeline
 
+" fzf's GFiles doesn't work without this. I could possibly use bash as well,
+" but I'll just stick with sh as long as it doesn't cause other issues.
+set shell=/bin/sh
+
 " # Mappings / Functions
 
 " Fzf
