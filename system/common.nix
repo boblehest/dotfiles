@@ -67,7 +67,6 @@ in {
     curl
     eza
     fd
-    lf
     ripgrep
     tokei
     unzip

@@ -56,12 +56,22 @@ with import ../lib/execute.nix { inherit lib pkgs; };
       '';
     };
 
+    lf = {
+      enable = true;
+      keybindings = {
+        "j" = "updir";
+        "k" = "down";
+        "l" = "up";
+        ";" = "open";
+        "h" = "find-next";
+        "<delete>" = "delete";
+      };
+      commands = {
+        open = "&${pkgs.mimeo}/bin/mimeo \"$f\"";
+      };
+    };
+
     direnv.enable = true;
     direnv.nix-direnv.enable = true;
   };
-
-  home.activation.installLfConfig = execute ''
-      mkdir -p ~/.config/lf
-      ln -sf /etc/nixos/dotfiles/home/lf/lfrc ~/.config/lf/
-    '';
 }
