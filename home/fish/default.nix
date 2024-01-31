@@ -7,7 +7,7 @@
       cp = "cp -i";
       gcs = "git clone --depth 1";
       l = "eza -lagFT --git-ignore --git --level 1";
-      ls = "eza -a";
+      ls = "eza";
       mv = "mv -i";
       tb = "pkill -usr1 redshift";
       tree = "eza --tree --git-ignore";
