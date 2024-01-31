@@ -10,7 +10,7 @@ in {
     initialHashedPassword = "";
   };
 
-  home-manager.users."${username}" = { pkgs, ... }: {
-    imports = [ ../home ];
-  };
+  # home-manager.users."${username}" = { pkgs, ... }: {
+  #   imports = [ ../home ];
+  # };
 }

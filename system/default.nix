@@ -2,7 +2,6 @@
 
 {
   imports = [
-    <home-manager/nixos>
     ./audio.nix
     ./boot.nix
     ./common.nix

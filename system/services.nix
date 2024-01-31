@@ -45,6 +45,15 @@ in
       fstrim.enable = true;
       upower.enable = true;
 
+      seafile = {
+        enable = false;
+        adminEmail = "jlode90@gmail.com";
+        initialAdminPassword = "superStrongPassword123";
+
+        # package = 6434798a105930a9bd870689d1a505381ead762f
+        ccnetSettings.General.SERVICE_URL = "127.0.0.1:8000";
+      };
+
       # Onyx Boox Max 3
       udev.extraRules = "
       SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"05c6\", MODE=\"0666\"\nSUBSYSTEM==\"usb_device\", ATTRS{idVendor}==\"05c6\", MODE=\"0666\"\n
@@ -65,6 +74,10 @@ in
 
         (mkIf cfg.intelVideo {
           videoDrivers = [ "intel" ];
+          # I changed the DRI setting for reasons I can't recall. Maybe it was to run hagato?
+          # Anyway, I'm currently experiencing that my terminal does not always refresh on
+          # input, which is annoying, so I want to set this back to 2 once I'm done testing hagato.
+          # Edit: I put it back, because I don't have any plans to run hagato again any time soon -- I just ran it to test that it compiled today.
           deviceSection = ''
             Option "DRI" "2"
             Option "TearFree" "true"

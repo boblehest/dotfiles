@@ -34,8 +34,11 @@ in
     withPython3 = true;
     withRuby = false;
     plugins = with pkgs.vimPlugins; [
+      agda-vim
       asyncomplete-vim
       asyncomplete-lsp-vim
+      coc-texlab
+      everforest # color scheme
       fzf-vim
       fzfWrapper
       gruvbox # colorscheme
@@ -60,6 +63,8 @@ in
       vim-snippets
       vim-surround
       vim-unimpaired
+      vimtex # TODO remove
+      which-key-nvim
     ] ++ extraVimPlugins;
     extraConfig = ''
       source ~/.config/nvim/init2.vim

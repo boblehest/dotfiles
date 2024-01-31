@@ -7,7 +7,8 @@ in
     home.packages = with pkgs; [
       flameshot
       jmtpfs
-      obsidian
+      # obsidian # electron version its using is EOL
+      logseq # maybe we should give this another chance seeing as obsidian doesn't bother updating their electron dep
       transmission-gtk
       yt-dlp-light
       zotero

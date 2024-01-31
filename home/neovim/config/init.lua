@@ -82,3 +82,5 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
 require("telescope").setup{}
 
 require("telescope").load_extension("ui-select")
+
+require("which-key").setup {}

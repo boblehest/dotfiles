@@ -74,6 +74,7 @@ in {
     xclip
     xorg.xkill
     zip
+    zoom-us
   ];
 
   programs = {
