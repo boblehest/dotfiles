@@ -5,11 +5,11 @@
     enable = true;
     shellAliases = {
       cp = "cp -i";
-      l = "exa -lagFT --git-ignore --git --level 1";
-      ls = "exa -a";
+      l = "eza -lagFT --git-ignore --git --level 1";
+      ls = "eza";
       mv = "mv -i";
       tb = "pkill -usr1 redshift";
-      tree = "exa --tree --git-ignore";
+      tree = "eza --tree --git-ignore";
     };
     functions = {
       lfcd.body = ''
