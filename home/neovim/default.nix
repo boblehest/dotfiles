@@ -63,8 +63,4 @@ in
   home.activation.neovim = execute ''
       ln -sfT /etc/nixos/dotfiles/home/neovim/config/init.vim ~/.config/nvim/init2.vim
   '';
-
-  home.packages = [
-    pkgs.haskell-language-server
-  ];
 }
