@@ -11,7 +11,7 @@ in
 
     services = {
       nextcloud = {
-        enable = true;
+        enable = false;
         package = pkgs.nextcloud27;
         hostName = "localhost";
         config.adminpassFile = "/etc/nextcloud-admin-pass";
