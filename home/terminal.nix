@@ -12,8 +12,8 @@ with import ../lib/execute.nix { inherit lib pkgs; };
       enableBashIntegration = false;
       enableFishIntegration = true;
       enableZshIntegration = false;
-      changeDirWidgetCommand = "fd --type d";
-      defaultCommand = "fd --type f";
+      changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
+      defaultCommand = "${pkgs.fd}/bin/fd --type f";
     };
 
     alacritty.enable = true;
