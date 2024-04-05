@@ -5,17 +5,26 @@ with lib;
 let
   cfg = import ../settings.nix;
   apRadio = "wlp0s20f3";
+  optionalFile = b: f: if b then f else { enable = false; };
 in
   {
-    environment.etc."nextcloud-admin-pass".text = "hallo123";
+    environment.etc."nextcloud-admin-pass" =
+      optionalFile
+      config.services.nextcloud.enable {
+        text = "hallo123";
+        # TODO What user does the nextcloud service run as?
+        user = "nextcloud";
+        mode = "0600";
+      };
 
     services = {
       nextcloud = {
-        enable = true;
+        enable = false;
         package = pkgs.nextcloud27;
         hostName = "localhost";
         config.adminpassFile = "/etc/nextcloud-admin-pass";
       };
+      hardware.bolt.enable = true; # For docking station @ work
 
       hostapd = {
         enable = false;

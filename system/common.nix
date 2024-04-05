@@ -14,6 +14,10 @@ in {
   time.timeZone = "Europe/Oslo";
 
   nix = {
+    extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
     settings = {
       trusted-users = [ "root" "${cfg.username}" "@wheel" ];
       substituters = [
@@ -48,6 +52,10 @@ in {
   location.provider = "geoclue2";
 
   networking = {
+    # wireless = {
+    #   enable = true;
+    #   userControlled.enable = true;
+    # };
     networkmanager = {
       enable = true;
       unmanaged = lib.optionals config.services.hostapd.enable [
@@ -70,13 +78,13 @@ in {
     ripgrep
     tokei
     unzip
+    xclip # used by neovim. Not sure if I need it installed system-wide though (as opposed to just for my user).
     wget
-    xclip
-    xorg.xkill
     zip
   ];
 
   programs = {
+    dconf.enable = true;
     fish.enable = true;
     firejail.enable = true;
   };

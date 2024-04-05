@@ -5,6 +5,8 @@ let
 in
 {
   boot = {
+    supportedFilesystems = [ "ntfs" ];
+    consoleLogLevel = 7;
     kernelModules = [ "v4l2loopback" ];
     extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
     extraModprobeConfig = ''

@@ -11,20 +11,24 @@ let
     inherit name;
     src = sources.${name};
   }) [
-    "1989.vim"
+    "1989.vim" # colorscheme
     "asyncomplete-ultisnips.vim"
-    "bubblegum"
-    "caret.nvim"
-    "github-colors"
-    "rasmus.nvim"
+    "bubblegum" # colorscheme
+    "caret.nvim" # colorscheme
+    "github-colors" # colorscheme
+    "rasmus.nvim" # colorscheme
     "telescope-ui-select.nvim"
-    "vim-monochrome"
-    "vim-pink-moon"
-    "vim-vice"
-    "vscode.nvim"
+    "vim-monochrome" # colorscheme
+    "vim-pink-moon" # colorscheme
+    "vim-vice" # colorscheme
+    "vscode.nvim" # colorscheme
   ];
 in
 {
+  # TODO Provide an overlay in which neovim contains all the basic plugins we
+  # want, and then install it globally, with the goal that dev environments can
+  # specify neovim + the relevant language servers, and then it will instantiate
+  # neovim with our base plugins + whatever extra the dev environment adds.
   programs.neovim = {
     enable = true;
     package = pkgs.neovim-unwrapped;
@@ -39,8 +43,9 @@ in
       fzf-vim
       fzfWrapper
       gruvbox # colorscheme
+      Ionide-vim # language f#
       nord-vim # colorscheme
-      nvim-lspconfig
+      nvim-lspconfig # I'm not sure if this does anything for us
       melange-nvim # colorscheme
       plenary-nvim
       telescope-nvim
@@ -49,7 +54,7 @@ in
       vim-abolish
       vim-commentary
       vim-fugitive
-      vim-glsl
+      vim-glsl # language glsl
       vim-lion
       vim-lsp
       vim-markdown

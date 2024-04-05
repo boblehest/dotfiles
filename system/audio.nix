@@ -1,10 +1,12 @@
 { pkgs, ... }:
 
 {
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
+  hardware = {
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
+    bluetooth.enable = true; # TODO Why is this under audio
   };
-  hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 }

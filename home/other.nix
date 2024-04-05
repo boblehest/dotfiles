@@ -7,7 +7,8 @@ in
     home.packages = with pkgs; [
       flameshot
       jmtpfs
-      obsidian
+      logseq
+      # obsidian # removed because it relies on an insecure version of electron. TODO: Why do we even use an electron app?
       transmission-gtk
       yt-dlp-light
       zotero
@@ -46,6 +47,7 @@ in
         "x-scheme-handler/http" = "firefox.desktop";
         "x-scheme-handler/https" = "firefox.desktop";
         "application/pdf" = "org.pwmt.zathura.desktop";
+        "image/apng" = "feh.desktop";
       };
     };
   }

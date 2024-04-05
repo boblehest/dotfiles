@@ -38,6 +38,7 @@ end
 local servers = {
   hls = {},
   clangd = {},
+  fsautocomplete = {},
   rust_analyzer = {},
   texlab = {
     settings = {

@@ -2,6 +2,9 @@
 
 with lib;
 
+let
+  cfg = import ../settings.nix;
+in
 {
   virtualisation = {
     docker = {
@@ -9,9 +12,12 @@ with lib;
       enableOnBoot = false;
     };
     podman.enable = true;
-    # virtualbox.host.enable = true;
+    virtualbox.host.enable = false;
   };
-  # users.extraGroups.vboxusers.members = [ config.username ]
+  users.extraGroups.vboxusers.members =
+    mkIf
+    config.virtualisation.virtualbox.host.enable
+    [ cfg.username ];
 
   environment.systemPackages =
     mkIf config.virtualisation.docker.enable [ pkgs.docker-compose ];
