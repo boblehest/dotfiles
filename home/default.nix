@@ -12,10 +12,8 @@ in
       ./common.nix
       ./desktop
       ./fish
-      # ./jetbrains.nix
       ./neovim
       ./other.nix
-      ./social.nix
       ./terminal.nix
     ] ++ lib.optional cfg.latex ./latex.nix;
   }

@@ -78,35 +78,15 @@ in
       udev.packages = [ pkgs.openocd ];
 
       displayManager.defaultSession = "none+i3";
+      libinput = {
+        enable = true;
+        touchpad.naturalScrolling = true;
+      };
       xserver = mkMerge
       [
-        (mkIf cfg.swapCapsEscape {
-          xkb.options = "caps:swapescape";
-        })
-
-        (mkIf cfg.intelVideo {
-          videoDrivers = [ "intel" ];
-          # I changed the DRI setting for reasons I can't recall. Maybe it was to run hagato?
-          # Anyway, I'm currently experiencing that my terminal does not always refresh on
-          # input, which is annoying, so I want to set this back to 2 once I'm done testing hagato.
-          # Edit: I put it back, because I don't have any plans to run hagato again any time soon -- I just ran it to test that it compiled today.
-          deviceSection = ''
-            Option "DRI" "2"
-            Option "TearFree" "true"
-          '';
-        })
-
-        (mkIf cfg.nvidia {
-          videoDrivers = [ "nvidia" ];
-        })
-
         {
           enable = true;
 
-          libinput = {
-            enable = true;
-            touchpad.naturalScrolling = true;
-          };
           config = ''
             Section "InputClass"
               Identifier "mouse accel"
@@ -138,6 +118,26 @@ in
             configFile = "/etc/nixos/dotfiles/home/i3/config";
           };
         }
+
+        (mkIf cfg.swapCapsEscape {
+          xkb.options = "caps:swapescape";
+        })
+
+        (mkIf cfg.intelVideo {
+          videoDrivers = [ "intel" ];
+          # I changed the DRI setting for reasons I can't recall. Maybe it was to run hagato?
+          # Anyway, I'm currently experiencing that my terminal does not always refresh on
+          # input, which is annoying, so I want to set this back to 2 once I'm done testing hagato.
+          # Edit: I put it back, because I don't have any plans to run hagato again any time soon -- I just ran it to test that it compiled today.
+          deviceSection = ''
+            Option "DRI" "2"
+            Option "TearFree" "true"
+          '';
+        })
+
+        (mkIf cfg.nvidia {
+          videoDrivers = [ "nvidia" ];
+        })
       ];
     };
   }
