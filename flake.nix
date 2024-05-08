@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-23.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -14,8 +14,9 @@
       system = "x86_64-linux";
 
       modules = [
-        ../hardware-configuration.nix
+        ./hardware-configuration.nix
         ./system
+        ./modules/vpn.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
