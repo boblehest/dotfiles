@@ -17,6 +17,17 @@ in
         config.adminpassFile = "/etc/nextcloud-admin-pass";
       };
 
+      jlo.wireguard = {
+        enable = true;
+        isServer = true;
+        wanInterface = "wlp0s20f3";
+        vpnInterface = "wg0";
+        ipAddressWithSubnet = "10.13.37.1/24";
+        listenPort = 43434;
+        privateKeyFile = "/etc/wireguard-key";
+        peers = [];
+      };
+
       hostapd = {
         enable = false;
         radios.${apRadio} = {
