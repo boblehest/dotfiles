@@ -18,8 +18,8 @@
       latitude = "60.38";
       longitude = "5.32";
       temperature = {
-        day = 2400;
-        night = 2100;
+        day = 3200;
+        night = 2800;
       };
     };
 

@@ -63,7 +63,6 @@ in
       vim-snippets
       vim-surround
       vim-unimpaired
-      vimtex # TODO remove
       which-key-nvim
     ] ++ extraVimPlugins;
     extraConfig = ''

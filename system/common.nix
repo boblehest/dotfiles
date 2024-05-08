@@ -74,12 +74,12 @@ in {
     xclip
     xorg.xkill
     zip
-    zoom-us
   ];
 
   programs = {
     fish.enable = true;
     firejail.enable = true;
+    dconf.enable = true;
   };
 
   system.stateVersion = cfg.stateVersion;

@@ -66,10 +66,11 @@ in
       ";
       udev.packages = [ pkgs.openocd ];
 
+      displayManager.defaultSession = "none+i3";
       xserver = mkMerge
       [
         (mkIf cfg.swapCapsEscape {
-          xkbOptions = "caps:swapescape";
+          xkb.options = "caps:swapescape";
         })
 
         (mkIf cfg.intelVideo {
@@ -107,13 +108,14 @@ in
 
           # synaptics.enable = cfg.laptopFeatures;
 
-          layout = "us";
-          xkbVariant = "altgr-intl";
-          xkbOptions = "compose:menu";
-          desktopManager = {
-            xterm.enable = false;
+          xkb = {
+            layout = "us";
+            variant = "altgr-intl";
+            options = "compose:menu";
           };
-          displayManager.defaultSession = "none+i3";
+          # desktopManager = {
+          #   xterm.enable = false; # Is false by default since stateVersion 19.09
+          # };
           windowManager.i3 = {
             enable = true;
             extraPackages = with pkgs; [

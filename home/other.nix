@@ -7,8 +7,7 @@ in
     home.packages = with pkgs; [
       flameshot
       jmtpfs
-      # obsidian # electron version its using is EOL
-      logseq # maybe we should give this another chance seeing as obsidian doesn't bother updating their electron dep
+      obsidian
       transmission-gtk
       yt-dlp-light
       zotero
@@ -39,6 +38,7 @@ in
       };
     };
 
+    xdg.configFile."mimeapps.list".force = true;
     xdg.mimeApps = {
       enable = true;
 
@@ -47,6 +47,9 @@ in
         "x-scheme-handler/http" = "firefox.desktop";
         "x-scheme-handler/https" = "firefox.desktop";
         "application/pdf" = "org.pwmt.zathura.desktop";
+        "image/png" = "feh.desktop";
+        "image/apng" = "feh.desktop";
+        "image/jpeg" = "feh.desktop";
       };
     };
   }
