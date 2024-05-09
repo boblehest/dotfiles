@@ -1,10 +1,7 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, secretCfg, ... }:
 
 with lib;
 
-let
-  cfg = import ../settings.nix;
-in
   {
     services = {
       nextcloud = {
@@ -77,11 +74,11 @@ in
           };
         }
 
-        (mkIf cfg.swapCapsEscape {
+        (mkIf secretCfg.swapCapsEscape {
           xkb.options = "caps:swapescape";
         })
 
-        (mkIf cfg.intelVideo {
+        (mkIf secretCfg.intelVideo {
           videoDrivers = [ "intel" ];
           deviceSection = ''
             Option "DRI" "2"
@@ -89,7 +86,7 @@ in
           '';
         })
 
-        (mkIf cfg.nvidia {
+        (mkIf secretCfg.nvidia {
           videoDrivers = [ "nvidia" ];
         })
       ];

@@ -1,8 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, secretCfg, ... }:
 
-let
-  cfg = import ../settings.nix;
-in
   {
     home.packages = with pkgs; [
       flameshot
@@ -16,7 +13,7 @@ in
     home.sessionVariables.EDITOR = "nvim";
 
     programs = {
-      git = lib.mkMerge [ cfg.git {
+      git = lib.mkMerge [ secretCfg.git {
         package = pkgs.gitMinimal;
         aliases = {
           st = "status -s";

@@ -1,9 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, secretCfg, ... }:
 
-let
-  username = (import ../settings.nix).username;
-in {
-  users.users."${username}" = {
+{
+  users.users."${secretCfg.username}" = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" "fuse" "plugdev" "dialout" ];
     shell = pkgs.fish;

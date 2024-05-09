@@ -1,8 +1,5 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, secretCfg, ... }:
 
-let
-  cfg = import ../settings.nix;
-in
   {
     # TODO Why does home-manager have its own stateVersion, and why is it not
     # equal to the other stateVersion?
@@ -15,5 +12,5 @@ in
       ./neovim
       ./other.nix
       ./terminal.nix
-    ] ++ lib.optional cfg.latex ./latex.nix;
+    ] ++ lib.optional secretCfg.latex ./latex.nix;
   }

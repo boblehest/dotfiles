@@ -1,10 +1,6 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, lib, secretCfg, ... }:
 
-let
-  cfg = import ../settings.nix;
-  apRadio = "wlp0s20f3";
-  # ethernetInterface = ...
-in {
+{
   i18n = { defaultLocale = "en_US.UTF-8"; };
   console = {
     font = "Lat2-Terminus16";
@@ -15,29 +11,28 @@ in {
 
   nix = {
     settings = {
-      trusted-users = [ "root" "${cfg.username}" "@wheel" ];
+      extra-experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "${secretCfg.username}" "@wheel" ];
       substituters = [
         "https://cache.nixos.org/"
         "https://nixcache.reflex-frp.org"
         "https://all-hies.cachix.org"
         "https://qfpl.cachix.org"
         "https://cache.iog.io"
-        "https://ros.cachix.org"
       ];
       trusted-public-keys = [
         "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
         "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
         "qfpl.cachix.org-1:JTTxGW07zLPAGglHlMbMC3kQpCd6eFRgbtnuorCogYw="
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
-        "ros.cachix.org-1:dSyZxI8geDCJrwgvCOHDoAfOm5sV1wCPjBkKL+38Rvo="
       ];
     };
   };
 
-  systemd.services."before-home-manager-${cfg.username}" = {
-    script = "mkdir -p /nix/var/nix/profiles/per-user/${cfg.username}";
+  systemd.services."before-home-manager-${secretCfg.username}" = {
+    script = "mkdir -p /nix/var/nix/profiles/per-user/${secretCfg.username}";
     path = [ pkgs.coreutils ];
-    before = [ "home-manager-${cfg.username}.service" ];
+    before = [ "home-manager-${secretCfg.username}.service" ];
     wantedBy = [ "multi-user.target" ];
   };
 
@@ -51,7 +46,7 @@ in {
     networkmanager = {
       enable = true;
     };
-    hostName = cfg.hostName;
+    hostName = secretCfg.hostName;
     firewall.enable = false;
   };
 
@@ -77,5 +72,5 @@ in {
     dconf.enable = true;
   };
 
-  system.stateVersion = cfg.stateVersion;
+  system.stateVersion = secretCfg.stateVersion;
 }

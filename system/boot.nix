@@ -1,8 +1,5 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, secretCfg, ... }:
 
-let
-  cfg = import ../settings.nix;
-in
 {
   boot = {
     # TODO Put these in "video conferencing" module
@@ -13,8 +10,8 @@ in
     # '';
 
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = lib.mkIf cfg.oldIntel [ "intel_pstate=active" ];
-    tmp.useTmpfs = ! cfg.conserveMemory;
+    kernelParams = lib.mkIf secretCfg.oldIntel [ "intel_pstate=active" ];
+    tmp.useTmpfs = ! secretCfg.conserveMemory;
     # supportedFilesystems = [ "ntfs" ]; # TODO Put this setting behind feature flag
 
     loader = {
