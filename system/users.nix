@@ -9,8 +9,4 @@ in {
     shell = pkgs.fish;
     initialHashedPassword = "";
   };
-
-  # home-manager.users."${username}" = { pkgs, ... }: {
-  #   imports = [ ../home ];
-  # };
 }

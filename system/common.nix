@@ -50,14 +50,9 @@ in {
   networking = {
     networkmanager = {
       enable = true;
-      unmanaged = lib.optionals config.services.hostapd.enable [
-        apRadio # We manage this through hostapd -- NetworkManager please no touch
-      ];
     };
     hostName = cfg.hostName;
     firewall.enable = false;
-    interfaces.${apRadio}.ipv4.addresses = lib.optionals config.services.hostapd.enable [{ address = "192.168.12.1"; prefixLength = 24; }];
-    dhcpcd.denyInterfaces = lib.optionals config.services.hostapd.enable [ apRadio ]; # TODO Not sure if this is necessary, because I'm not quite sure when a dhcp client would try to request an address. I assume it is _not_ necessary.
   };
 
   environment.systemPackages = with pkgs; [
