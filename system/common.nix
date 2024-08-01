@@ -14,15 +14,13 @@
       extra-experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "${secretCfg.username}" "@wheel" ];
       substituters = [
-        "https://cache.nixos.org/"
+        # "https://cache.nixos.org/" # TODO 2024-05-09 Does this one have to be added manually?
         "https://nixcache.reflex-frp.org"
-        "https://all-hies.cachix.org"
         "https://qfpl.cachix.org"
         "https://cache.iog.io"
       ];
       trusted-public-keys = [
         "ryantrinkle.com-1:JJiAKaRv9mWgpVAz8dwewnZe0AzzEAzPkagE9SP5NWI="
-        "all-hies.cachix.org-1:JjrzAOEUsD9ZMt8fdFbzo3jNAyEWlPAwdVuHw4RD43k="
         "qfpl.cachix.org-1:JTTxGW07zLPAGglHlMbMC3kQpCd6eFRgbtnuorCogYw="
         "hydra.iohk.io:f/Ea+s+dFdN+3Y/G+FDgSq+a5NEWhJGzdjvKNGv0/EQ="
       ];
