@@ -4,18 +4,19 @@
   programs.fish = {
     enable = true;
     shellAliases = {
+      cal = "cal -wm";
       cp = "cp -i";
+      mv = "mv -i";
       gcs = "git clone --depth 1";
       l = "eza -lagFT --git-ignore --git --level 1";
       ls = "eza";
-      mv = "mv -i";
       tb = "pkill -usr1 redshift";
       tree = "eza --tree --git-ignore";
     };
     functions = {
-      # Motivation: The `lf` file browser does not change the current directory
-      # of the shell. This helper function runs lf and changes the current
-      # directory of the shell to match what the user navigated to inside lf.
+      # Motivation: When I use `lf` to browse the filesystem, I expect the shell
+      # to change directory to where I am when I exit `lf`. This is not default
+      # behavior; so this function adds that functionality.
       lfcd.body = ''
           set tmp (mktemp)
           lf -last-dir-path=$tmp $argv
@@ -32,7 +33,7 @@
 
       # Helper function to get the store path of a package
       # E.g. `nixStorePath python3`
-      # Often used while debugging stuff "(what does package X actually contain?")
+      # Often used while debugging stuff ("what does package X actually contain?")
       nixStorePath.body = ''
         nix eval --impure --raw --expr "(import <nixpkgs> {}).$argv[1].outPath"
       '';
