@@ -74,7 +74,6 @@
 
   programs = {
     fish.enable = true;
-    firejail.enable = true;
     dconf.enable = true;
   };
 
