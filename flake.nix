@@ -5,25 +5,33 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    battery_monitor = {
+      url = "gitlab:boblehest/battery-monitor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     secretCfg-src = {
-      flake = false;
-      url = "path:/etc/nixos/dotfiles/settings.nix";
+      type = "path";
+      path = "/etc/nixos/dotfiles/settings.nix";
     };
     hardwareConfiguration-src = {
-      flake = false;
-      url = "path:/etc/nixos/hardware-configuration.nix";
+      type = "path";
+      path = "/etc/nixos/hardware-configuration.nix";
     };
   };
 
-  outputs = { nixpkgs, home-manager, secretCfg-src, hardwareConfiguration-src, ... }: let
+  outputs = { nixpkgs, home-manager, secretCfg-src, hardwareConfiguration-src, battery_monitor, ... }: let
     hardwareConfiguration = import hardwareConfiguration-src;
     secretCfg = import secretCfg-src;
-    specialArgs = { inherit secretCfg; };
+    specialArgs = { inherit secretCfg battery_monitor;};
+    system = "x86_64-linux";
   in {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
       inherit specialArgs;
       modules = [
+        {
+          nixpkgs.overlays = [ battery_monitor.overlays.default ];
+        }
         hardwareConfiguration
         ./system
         ./modules/vpn.nix

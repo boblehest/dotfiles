@@ -10,6 +10,8 @@
       zotero
     ];
 
+    jlo.services.battery_monitor.enable = true;
+
     home.sessionVariables.EDITOR = "nvim";
 
     programs = {

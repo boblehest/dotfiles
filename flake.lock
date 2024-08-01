@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "battery_monitor": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pyproject-nix": "pyproject-nix"
+      },
+      "locked": {
+        "dirtyRev": "98436be4e0f31f47637c8e4c232f1e8dda6b7fb8-dirty",
+        "dirtyShortRev": "98436be-dirty",
+        "lastModified": 1718645602,
+        "narHash": "sha256-VO+CzYOk3OjkEb9f7/xm5OPrUnTcKJpRueP9Ce5GFLk=",
+        "type": "git",
+        "url": "file:///home/jlo/projects/personal/battery_monitor"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///home/jlo/projects/personal/battery_monitor"
+      }
+    },
     "hardwareConfiguration-src": {
       "flake": false,
       "locked": {
@@ -33,6 +53,55 @@
         "type": "github"
       }
     },
+    "mdbook-nixdoc": {
+      "inputs": {
+        "nix-github-actions": [
+          "battery_monitor",
+          "pyproject-nix",
+          "nix-github-actions"
+        ],
+        "nixpkgs": [
+          "battery_monitor",
+          "pyproject-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1708395692,
+        "narHash": "sha256-smf0VmxGbjJDZqKvxxG3ZVqubgbVwAWG26wPo+BT/A0=",
+        "owner": "adisbladis",
+        "repo": "mdbook-nixdoc",
+        "rev": "d6a71b114b9221c0b4f20d31b81766d072cc26be",
+        "type": "github"
+      },
+      "original": {
+        "owner": "adisbladis",
+        "repo": "mdbook-nixdoc",
+        "type": "github"
+      }
+    },
+    "nix-github-actions": {
+      "inputs": {
+        "nixpkgs": [
+          "battery_monitor",
+          "pyproject-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1703863825,
+        "narHash": "sha256-rXwqjtwiGKJheXB43ybM8NwWB8rO2dSRrEqes0S7F5Y=",
+        "owner": "nix-community",
+        "repo": "nix-github-actions",
+        "rev": "5163432afc817cf8bd1f031418d1869e4c9d5547",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-github-actions",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1715087517,
@@ -49,8 +118,32 @@
         "type": "github"
       }
     },
+    "pyproject-nix": {
+      "inputs": {
+        "mdbook-nixdoc": "mdbook-nixdoc",
+        "nix-github-actions": "nix-github-actions",
+        "nixpkgs": [
+          "battery_monitor",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716218469,
+        "narHash": "sha256-w2djd2mxQhBIqDhCVSW544vFxGgCFX6vm/cpk1Btzg8=",
+        "owner": "nix-community",
+        "repo": "pyproject.nix",
+        "rev": "298d55c4122a9a2177fd56cb18796d62daf386c5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "pyproject.nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "battery_monitor": "battery_monitor",
         "hardwareConfiguration-src": "hardwareConfiguration-src",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",

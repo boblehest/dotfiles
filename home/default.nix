@@ -1,4 +1,4 @@
-{ pkgs, lib, config, secretCfg, ... }:
+{ pkgs, lib, config, secretCfg, battery_monitor, ... }:
 
   {
     # TODO Why does home-manager have its own stateVersion, and why is it not
@@ -6,6 +6,7 @@
     home.stateVersion = "18.09";
 
     imports = [
+      battery_monitor.homeManagerModules.default
       ./common.nix
       ./desktop
       ./fish
