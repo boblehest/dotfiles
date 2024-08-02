@@ -35,7 +35,6 @@ with lib;
       SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1005\", MODE=\"0666\"\n
       SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1006\", MODE=\"0666\"\n
       ";
-      udev.packages = [ pkgs.openocd ];
 
       displayManager.defaultSession = "none+i3";
       libinput = {
