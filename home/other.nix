@@ -2,7 +2,6 @@
 
   {
     home.packages = with pkgs; [
-      flameshot
       jmtpfs
       obsidian
       transmission_4-gtk

@@ -38,58 +38,31 @@ with lib;
       SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1006\", MODE=\"0666\"\n
       ";
 
-      displayManager.defaultSession = "none+i3";
-      libinput = {
+      greetd = {
         enable = true;
-        touchpad.naturalScrolling = true;
+        settings = {
+          default_session = {
+            command = ''
+              ${pkgs.greetd.tuigreet}/bin/tuigreet \
+              --time \
+              --asterisks \
+              --user-menu \
+              --cmd sway
+            '';
+            user = "greeter";
+          };
+        };
       };
-      xserver = mkMerge
-      [
-        {
-          enable = true;
 
-          config = ''
-            Section "InputClass"
-              Identifier "mouse accel"
-              Driver "libinput"
-              MatchIsPointer "on"
-              Option "AccelProfile" "flat"
-              Option "AccelSpeed" "0"
-            EndSection
-          '';
 
-          xkb = {
-            layout = "us";
-            variant = "altgr-intl";
-            options = "compose:menu";
-          };
-          windowManager.i3 = {
-            enable = true;
-            extraPackages = with pkgs; [
-              rofi
-              i3status
-              i3lock
-              i3blocks
-            ];
-            configFile = "/etc/nixos/dotfiles/home/i3/config";
-          };
-        }
 
-        (mkIf secretCfg.swapCapsEscape {
-          xkb.options = "caps:swapescape";
-        })
+    environment.systemPackages = with pkgs; [
+      rofi-wayland
+      wl-clipboard
+      i3status
+    ];
 
-        (mkIf secretCfg.intelVideo {
-          videoDrivers = [ "intel" ];
-          deviceSection = ''
-            Option "DRI" "2"
-            Option "TearFree" "true"
-          '';
-        })
-
-        (mkIf secretCfg.nvidia {
-          videoDrivers = [ "nvidia" ];
-        })
-      ];
-    };
+    security.polkit.enable = true;
+    security.pam.services.swaylock = {};
+    programs.light.enable = true;
   }

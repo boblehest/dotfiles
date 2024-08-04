@@ -14,7 +14,10 @@ with import ../lib/execute.nix { inherit lib pkgs; };
       defaultCommand = "${pkgs.fd}/bin/fd --type f";
     };
 
-    alacritty.enable = true;
+    alacritty = {
+      enable = true;
+      settings.font.size = 16;
+    };
     tmux = {
       enable = true;
       escapeTime = 0;
