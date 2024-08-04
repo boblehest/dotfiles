@@ -5,12 +5,12 @@
       flameshot
       jmtpfs
       obsidian
-      transmission-gtk
+      transmission_4-gtk
       yt-dlp-light
       zotero
     ];
 
-    jlo.services.battery_monitor.enable = true;
+    jlo.services.battery-monitor.enable = true;
 
     home.sessionVariables.EDITOR = "nvim";
 
@@ -36,6 +36,8 @@
         };
       };
     };
+
+    services.nextcloud-client.enable = true;
 
     xdg.configFile."mimeapps.list".force = true;
     xdg.mimeApps = {

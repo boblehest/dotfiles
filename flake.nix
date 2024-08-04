@@ -9,20 +9,29 @@
       url = "gitlab:boblehest/battery-monitor";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    secretCfg-src = {
-      type = "path";
-      path = "/etc/nixos/dotfiles/settings.nix";
-    };
-    hardwareConfiguration-src = {
-      type = "path";
-      path = "/etc/nixos/hardware-configuration.nix";
-    };
   };
 
-  outputs = { nixpkgs, home-manager, secretCfg-src, hardwareConfiguration-src, battery_monitor, ... }: let
-    hardwareConfiguration = import hardwareConfiguration-src;
-    secretCfg = import secretCfg-src;
-    specialArgs = { inherit secretCfg battery_monitor;};
+  outputs = { nixpkgs, home-manager, battery_monitor, ... }: let
+    # TODO Make this into module options instead
+    secretCfg = {
+      username = "jlo";
+      conserveMemory = false;
+      hostName = "jlo-laptop";
+      laptopFeatures = true;
+      workFeatures = false;
+      latex = true;
+      intelVideo = true;
+      stateVersion = "23.11";
+      nvidia = false;
+      oldIntel = false;
+      swapCapsEscape = true;
+      git = {
+        enable = true;
+        userName = "Jørn Lode";
+        userEmail = "jlode90@gmail.com";
+      };
+    };
+    specialArgs = { inherit secretCfg battery_monitor; };
     system = "x86_64-linux";
   in {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
@@ -32,7 +41,7 @@
         {
           nixpkgs.overlays = [ battery_monitor.overlays.default ];
         }
-        hardwareConfiguration
+        ./hardware/lenovo-t490.nix
         ./system
         ./modules/vpn.nix
         home-manager.nixosModules.home-manager

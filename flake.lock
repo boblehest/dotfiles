@@ -8,29 +8,17 @@
         "pyproject-nix": "pyproject-nix"
       },
       "locked": {
-        "dirtyRev": "98436be4e0f31f47637c8e4c232f1e8dda6b7fb8-dirty",
-        "dirtyShortRev": "98436be-dirty",
-        "lastModified": 1718645602,
-        "narHash": "sha256-VO+CzYOk3OjkEb9f7/xm5OPrUnTcKJpRueP9Ce5GFLk=",
-        "type": "git",
-        "url": "file:///home/jlo/projects/personal/battery_monitor"
+        "lastModified": 1722587487,
+        "narHash": "sha256-hiBt0E7UfwSvg21EJcynW5b5qzk9pE1gwRATmNq+weg=",
+        "owner": "boblehest",
+        "repo": "battery-monitor",
+        "rev": "f661f3c7e475c0ab4e326c5d7a77503cae1ab7fa",
+        "type": "gitlab"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/jlo/projects/personal/battery_monitor"
-      }
-    },
-    "hardwareConfiguration-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1705603019,
-        "narHash": "sha256-PaE/MLCn6b9ZtDG/vAr2NKViw8DNSbnotJ3LwZvQp7w=",
-        "path": "/etc/nixos/hardware-configuration.nix",
-        "type": "path"
-      },
-      "original": {
-        "path": "/etc/nixos/hardware-configuration.nix",
-        "type": "path"
+        "owner": "boblehest",
+        "repo": "battery-monitor",
+        "type": "gitlab"
       }
     },
     "home-manager": {
@@ -40,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1715077503,
-        "narHash": "sha256-AfHQshzLQfUqk/efMtdebHaQHqVntCMjhymQzVFLes0=",
+        "lastModified": 1722462338,
+        "narHash": "sha256-ss0G8t8RJVDewA3MyqgAlV951cWRK6EtVhVKEZ7J5LU=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "6e277d9566de9976f47228dd8c580b97488734d4",
+        "rev": "6e090576c4824b16e8759ebca3958c5b09659ee8",
         "type": "github"
       },
       "original": {
@@ -104,11 +92,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1715087517,
-        "narHash": "sha256-CLU5Tsg24Ke4+7sH8azHWXKd0CFd4mhLWfhYgUiDBpQ=",
+        "lastModified": 1722421184,
+        "narHash": "sha256-/DJBI6trCeVnasdjUo9pbnodCLZcFqnVZiLUfqLH4jA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b211b392b8486ee79df6cdfb1157ad2133427a29",
+        "rev": "9f918d616c5321ad374ae6cb5ea89c9e04bf3e58",
         "type": "github"
       },
       "original": {
@@ -144,23 +132,8 @@
     "root": {
       "inputs": {
         "battery_monitor": "battery_monitor",
-        "hardwareConfiguration-src": "hardwareConfiguration-src",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs",
-        "secretCfg-src": "secretCfg-src"
-      }
-    },
-    "secretCfg-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1710068164,
-        "narHash": "sha256-9CwVEJSQ2Eq0T02SV9qLNZtsUH8kocp4I4FNPpWkYRY=",
-        "path": "/etc/nixos/dotfiles/settings.nix",
-        "type": "path"
-      },
-      "original": {
-        "path": "/etc/nixos/dotfiles/settings.nix",
-        "type": "path"
+        "nixpkgs": "nixpkgs"
       }
     }
   },

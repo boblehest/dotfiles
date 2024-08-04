@@ -6,10 +6,12 @@ with lib;
     services = {
       nextcloud = {
         enable = false;
-        package = pkgs.nextcloud27;
-        hostName = "localhost";
-        config.adminpassFile = "/etc/nextcloud-admin-pass";
+        package = pkgs.nextcloud29;
+        hostName = "10.13.37.1";
+        config.adminpassFile = "/etc/nextcloud-key";
       };
+
+      gnome.gnome-keyring.enable = true; # for nextcloud client
 
       jlo.wireguard = {
         enable = true;
