@@ -1,10 +1,8 @@
 { pkgs, ... }:
 
 {
-  hardware.pulseaudio = {
+  services.pipewire = {
     enable = true;
-    package = pkgs.pulseaudioFull;
+    pulse.enable = true;
   };
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
 }

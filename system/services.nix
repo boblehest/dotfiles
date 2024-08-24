@@ -4,6 +4,7 @@ with lib;
 
   {
     services = {
+      # TODO Replace by OCIS
       nextcloud = {
         enable = false;
         package = pkgs.nextcloud29;
@@ -15,13 +16,20 @@ with lib;
 
       jlo.wireguard = {
         enable = true;
-        isServer = true;
-        wanInterface = "wlp0s20f3";
+        isServer = false;
         vpnInterface = "wg0";
-        ipAddressWithSubnet = "10.13.37.1/24";
+        ipAddressWithSubnet = "10.13.37.2/24";
         listenPort = 43434;
         privateKeyFile = "/etc/wireguard-key";
-        peers = [];
+        peers = [
+          # Server
+          # TODO Do we regard this as a secret?
+          {
+            publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
+            allowedIPs = [ "10.13.37.0/24" ];
+            endpoint = "84.215.130.16:43434";
+          }
+        ];
       };
 
       fstrim.enable = true;
@@ -54,7 +62,21 @@ with lib;
         };
       };
 
+      # TODO Move this into the wayland config, if applicable
+      #   (mkIf secretCfg.intelVideo {
+      #     videoDrivers = [ "intel" ];
+      #     deviceSection = ''
+      #       Option "DRI" "2"
+      #       Option "TearFree" "true"
+      #     '';
+      #   })
 
+      # TODO This is not supported by sway, and I should just either get rid
+      # of nvidia or use another WM
+      #   (mkIf secretCfg.nvidia {
+      #     videoDrivers = [ "nvidia" ];
+      #   })
+    };
 
     environment.systemPackages = with pkgs; [
       rofi-wayland

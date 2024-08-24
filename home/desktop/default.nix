@@ -1,16 +1,6 @@
 { pkgs, config, lib, ... }:
 
 {
-  services = {
-    swayidle = {
-      enable = true;
-    };
-  };
-  programs = {
-    swaylock = {
-      enable = true;
-    };
-  };
 
   wayland.windowManager.sway = {
     enable = true;
@@ -31,7 +21,7 @@
         tap = "enabled";
         natural_scroll = "enabled";
         accel_profile = "flat";
-        pointer_accel = "0.5";
+        pointer_accel = "0.0";
         dwt = "enabled"; # disable touchpad while typing
       };
 
@@ -44,22 +34,65 @@
       menu = "rofi"; # Why does this get its own config option in sway? Does wayland treat it specially?
       focus.wrapping = "force";
 
+      # colors.focused = {
+      #   border = "#4c7899";
+      #   background = "#4488bb";
+      #   text = "#ffffff";
+      #   indicator = "#2e9ef4";
+      #   childBorder = "#285577";
+      # };
+
       colors.focused = {
-        border = "#4c7899";
-        background = "#4488bb";
+        border = "#999999";
+        background = "#5f676a";
+        text = "#999999";
+        indicator = "#999999";
+        childBorder = "#999999";
+      };
+      colors.focusedInactive = {
+        border = "#999999";
+        background = "#5f676a";
+        text = "#999999";
+        indicator = "#999999";
+        childBorder = "#999999";
+      };
+      colors.unfocused = {
+        border = "#333333";
+        background = "#222222";
+        text = "#888888";
+        indicator = "#292d2e";
+        childBorder = "#1f1e1e";
+      };
+      colors.urgent = {
+        border = "#999999";
+        background = "#5f676a";
+        text = "#999999";
+        indicator = "#999999";
+        childBorder = "#999999";
+      };
+      colors.placeholder = {
+        border = "#000000";
+        background = "#0c0c0c";
         text = "#ffffff";
-        indicator = "#2e9ef4";
-        childBorder = "#285577";
+        indicator = "#000000";
+        childBorder = "#0c0c0c";
       };
 
       keybindings = let
         modifier = config.wayland.windowManager.sway.config.modifier;
-        directions = ["Left" "Down" "Up" "Right" "0"];
+        # NOTE We unbind key 0 because it is bound to workspace 10. That in itself is fine,
+        # but when generating the config, it ends up being the first switch-to-workspace binding,
+        # (because the config generator probably sorts the key bindings before outputting them)
+        # and apparently i3/sway uses that information to decide that workspace 10 should be the
+        # first/leftmost workspace.
+        keysToUnbind = ["Left" "Down" "Up" "Right" "0"];
         withOrWithoutShift = x: [
           x
           "Shift+${x}"
         ];
-        directionalKeyUnbinds = lib.map (x: { name = "${modifier}+${x}"; value = null; }) (lib.flatten (lib.map withOrWithoutShift directions));
+        keysToUnbind' = lib.concatMap withOrWithoutShift keysToUnbind;
+        unbindKey = key: { name = "${modifier}+${key}"; value = null; }; 
+        keyUnmappings = lib.listToAttrs (lib.map unbindKey keysToUnbind');
 
       in lib.mkOptionDefault ({
         "${modifier}+r" = "exec ${pkgs.rofi-wayland}/bin/rofi -show run";
@@ -82,6 +115,7 @@
         "${modifier}+d" = "focus child";
         "${modifier}+Shift+z" = "move scratchpad";
         "${modifier}+z" = "scratchpad show";
+        "${modifier}+x" = "exec swaylock";
         "${modifier}+bracketleft" = "workspace prev_on_output";
         "${modifier}+bracketright" = "workspace next_on_output";
         "XF86AudioPlay" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause\"";
@@ -93,7 +127,7 @@
         "Ctrl+grave" = "exec makoctl dismiss --all";
         "Mod1+grave" = "exec makoctl restore";
       } // (
-        lib.listToAttrs directionalKeyUnbinds
+        keyUnmappings
         ));
 
       bars = [{
@@ -105,7 +139,6 @@
           style = "Regular";
           size = 12.0;
         };
-
       }];
 
       seat."*".hide_cursor = "3000";
@@ -128,9 +161,14 @@
         toggle_fullscreen = "f";
       };
     };
+    swaylock = {
+      enable = true;
+    };
   };
 
   services = {
+    kanshi.enable = true;
+
     gammastep = { # "night mode" (screen color adjustment)
       enable = true;
       latitude = "60.38";
@@ -145,12 +183,22 @@
       enable = true;
       defaultTimeout = 7000;
     };
+
+    flameshot = { # screenshot utility
+      package = pkgs.flameshot.override { enableWlrSupport = true; };
+      settings = {
+        General = {
+          disabledGrimWarning = true;
+          disabledTrayIcon = true;
+        };
+      };
+    };
   };
 
   home.packages = with pkgs; [
     firefox
     networkmanagerapplet
-    pavucontrol
+    pavucontrol # pulseaudio volume control
     spotify
   ];
 }

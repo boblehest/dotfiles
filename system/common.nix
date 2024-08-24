@@ -1,7 +1,7 @@
 { pkgs, config, lib, secretCfg, ... }:
 
 {
-  i18n = { defaultLocale = "en_US.UTF-8"; };
+  i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "Lat2-Terminus16";
     keyMap = "us";
@@ -27,29 +27,11 @@
     };
   };
 
-  systemd.services."before-home-manager-${secretCfg.username}" = {
-    script = "mkdir -p /nix/var/nix/profiles/per-user/${secretCfg.username}";
-    path = [ pkgs.coreutils ];
-    before = [ "home-manager-${secretCfg.username}.service" ];
-    wantedBy = [ "multi-user.target" ];
-  };
-
-  nixpkgs = {
-    config = { allowUnfree = true; };
-  };
-
+  nixpkgs.config.allowUnfree = true;
   location.provider = "geoclue2";
 
-  # NOTE 2024-05-09 I'm having issue with nixos-rebuild because the
-  # NetworkManager-wait-online service fails. I'm not sure what causes it, but
-  # I assumed it was my wireguard interface, and hoped that adding the wg interface
-  # to `networking.networkmanager.unmanaged` would help, but it does not, so
-  # I've disabled the wait-online service for now, unsure if it's useful for anything.
-  systemd.services.NetworkManager-wait-online.enable = lib.mkForce false;
   networking = {
-    networkmanager = {
-      enable = true;
-    };
+    networkmanager.enable = true;
     hostName = secretCfg.hostName;
     firewall.enable = false;
   };
@@ -65,9 +47,8 @@
     tokei
     unzip
     wget
-    xclip
-    xorg.xkill
     zip
+    capitaine-cursors # TODO Put this along with the rest of the desktop config, if possible. Does just installing this also change the default cursor? I would think not.
   ];
 
   programs = {
@@ -75,5 +56,5 @@
     dconf.enable = true;
   };
 
-  system.stateVersion = secretCfg.stateVersion;
+  system.stateVersion = secretCfg.stateVersion; # Where to set this?
 }

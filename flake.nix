@@ -31,7 +31,7 @@
         userEmail = "jlode90@gmail.com";
       };
     };
-    specialArgs = { inherit secretCfg battery_monitor; };
+    specialArgs = { inherit secretCfg battery_monitor home-manager; };
     system = "x86_64-linux";
   in {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
@@ -43,13 +43,15 @@
         }
         ./hardware/lenovo-t490.nix
         ./system
+        ./modules/video-conferencing.nix
         ./modules/vpn.nix
-        home-manager.nixosModules.home-manager
+        ./modules/users.nix
         {
-          home-manager.extraSpecialArgs = specialArgs;
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users."${secretCfg.username}" = import ./home;
+          config.jlo.users = {
+            jlo = {
+              hm-config = import ./home;
+            };
+          };
         }
       ];
     };

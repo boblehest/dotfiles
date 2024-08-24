@@ -3,6 +3,7 @@
 {
   imports = [
     ./audio.nix
+    ./bluetooth.nix
     ./boot.nix
     ./common.nix
     ./fonts.nix

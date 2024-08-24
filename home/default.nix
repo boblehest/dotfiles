@@ -1,4 +1,4 @@
-{ pkgs, lib, config, secretCfg, battery_monitor, ... }:
+{ lib, config, secretCfg, battery_monitor, ... }:
 
   {
     # TODO Why does home-manager have its own stateVersion, and why is it not
