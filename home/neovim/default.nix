@@ -1,7 +1,6 @@
 { config, pkgs, lib, fetchFromGitHub, ... }:
 
 with {
-  inherit (import ../../lib/execute.nix { inherit lib pkgs; }) execute;
   inherit (pkgs.vimUtils) buildVimPlugin;
   sources = (import ../../nix/sources.nix);
 };
@@ -11,17 +10,8 @@ let
     inherit name;
     src = sources.${name};
   }) [
-    "1989.vim"
-    "asyncomplete-ultisnips.vim"
-    "bubblegum"
-    "caret.nvim"
-    "github-colors"
-    "rasmus.nvim"
-    "telescope-ui-select.nvim"
-    "vim-monochrome"
-    "vim-pink-moon"
-    "vim-vice"
-    "vscode.nvim"
+    "telescope-ui-select.nvim" # make vim use telescope when prompting the user to make a choice
+    "vim-monochrome" # colorscheme
   ];
 in
 {
@@ -34,49 +24,26 @@ in
     withPython3 = true;
     withRuby = false;
     plugins = with pkgs.vimPlugins; [
-      agda-vim
       asyncomplete-vim
       asyncomplete-lsp-vim
       coc-texlab
       everforest # color scheme
-      fzf-vim
-      fzfWrapper
-      gruvbox # colorscheme
-      nord-vim # colorscheme
-      nvim-lspconfig
-      melange-nvim # colorscheme
-      plenary-nvim
-      telescope-nvim
-      trouble-nvim
-      ultisnips
+      nvim-lspconfig # helper for configuring the LSP client for probably all languages I use
+      plenary-nvim # dependency of telescope-nvim
+      telescope-nvim # fuzzy finder
+      trouble-nvim # shows diagnostics/errors with telescope
       vim-abolish
-      vim-commentary
-      vim-fugitive
-      vim-glsl
-      vim-lion
-      vim-lsp
-      vim-markdown
+      vim-fugitive # git commands
       vim-polyglot
       vim-qf
       vim-repeat
       vim-sleuth
-      vim-snippets
-      vim-surround
+      nvim-surround
       vim-unimpaired
       which-key-nvim
     ] ++ extraVimPlugins;
-    extraConfig = ''
-      source ~/.config/nvim/init2.vim
-
-      lua << EOF
-        ${lib.strings.fileContents ./config/init.lua}
-      EOF
-    '';
+    extraLuaConfig = lib.strings.fileContents ./config/init.lua;
   };
-
-  home.activation.neovim = execute ''
-      ln -sfT /etc/nixos/dotfiles/home/neovim/config/init.vim ~/.config/nvim/init2.vim
-  '';
 
   home.packages = [
     pkgs.texlab
