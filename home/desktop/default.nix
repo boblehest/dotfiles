@@ -1,7 +1,6 @@
 { pkgs, config, lib, ... }:
 
 {
-
   wayland.windowManager.sway = {
     enable = true;
     wrapperFeatures.gtk = true;
@@ -185,6 +184,7 @@
     };
 
     flameshot = { # screenshot utility
+      enable = true;
       package = pkgs.flameshot.override { enableWlrSupport = true; };
       settings = {
         General = {
@@ -196,6 +196,7 @@
   };
 
   home.packages = with pkgs; [
+    # chromium # for teams
     firefox
     networkmanagerapplet
     pavucontrol # pulseaudio volume control

@@ -40,6 +40,7 @@ while (( "$#" )); do
 		"git" )
 			# TODO Check if args are present
 			git="{\n    enable = true;\n    userName = \"${2}\";\n    userEmail = \"${3}\";\n  }" 
+			shift 2
 			;;
 		"swap" )
 			swap="true"

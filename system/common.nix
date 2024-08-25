@@ -10,6 +10,12 @@
   time.timeZone = "Europe/Oslo";
 
   nix = {
+    extraOptions = let
+      giga = 1024 * 1024 * 1024;
+    in ''
+      min-free = ${toString (20 * giga)}
+    '';
+
     settings = {
       extra-experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "${secretCfg.username}" "@wheel" ];

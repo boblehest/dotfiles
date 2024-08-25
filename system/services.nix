@@ -4,6 +4,7 @@ with lib;
 
   {
     services = {
+      # hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
       # TODO Replace by OCIS
       nextcloud = {
         enable = false;
@@ -86,5 +87,8 @@ with lib;
 
     security.polkit.enable = true;
     security.pam.services.swaylock = {};
-    programs.light.enable = true;
+    programs = {
+      light.enable = true;
+      ssh.startAgent = true;
+    };
   }

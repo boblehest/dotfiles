@@ -26,6 +26,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- # Misc
+vim.opt.foldenable = false -- fold keeps opening and closing at completely arbitrary times. Annoying.
 vim.opt.hidden = true
 vim.opt.scrolloff = 8
 vim.opt.fileformats = {'unix', 'dos'} -- Don't want cr+lf line on any platform, but want to preserve pre-existing cr+lf
@@ -121,14 +122,22 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
+  -- TODO Check `:h telescope.builtin` for info on which commands are available, and their parameters.
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>sf', '<cmd>lua require("telescope.builtin").lsp_document_symbols{symbols="function"}<CR>', opts)
 end
 
 local servers = {
-  hls = {},
-  clangd = {},
-  rust_analyzer = {},
-  texlab = {
+  -- clangd = {}, -- c++
+  gopls = {}, -- go
+  hls = {}, -- haskell
+  rust_analyzer = {}, -- rust
+  ruff = {}, -- python linting?
+  pyright = { -- python type checking, ++?
+    settings = {
+      disableOrganizeImports = true, -- Ruff already does this
+    },
+  },
+  texlab = { -- latex
     settings = {
       texlab = {
         auxDirectory = "build",

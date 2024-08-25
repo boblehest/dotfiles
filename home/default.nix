@@ -7,10 +7,10 @@
 
     imports = [
       battery_monitor.homeManagerModules.default
-      ./common.nix
       ./desktop
       ./fish
       ./neovim
+      ./nix.nix
       ./other.nix
       ./terminal.nix
     ] ++ lib.optional secretCfg.latex ./latex.nix;
