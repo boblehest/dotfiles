@@ -12,6 +12,4 @@
       sandbox = true;
     };
   };
-  setFlakeRegistry = false;
-  setNixPath = false;
 }

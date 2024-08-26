@@ -33,7 +33,13 @@
     };
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;
+    flake = {
+      setFlakeRegistry = false;
+      setNixPath = false;
+    };
+  };
   location.provider = "geoclue2";
 
   networking = {
