@@ -1,19 +1,5 @@
-{ config, pkgs, lib, fetchFromGitHub, ... }:
+{ config, pkgs, lib, ... }:
 
-with {
-  inherit (pkgs.vimUtils) buildVimPlugin;
-  sources = (import ../../nix/sources.nix);
-};
-
-let
-  extraVimPlugins = map (name: buildVimPlugin {
-    inherit name;
-    src = sources.${name};
-  }) [
-    "telescope-ui-select.nvim" # make vim use telescope when prompting the user to make a choice
-    "vim-monochrome" # color scheme
-  ];
-in
 {
   programs.neovim = {
     enable = true;
@@ -34,6 +20,7 @@ in
       # nvim-treesitter-textobjects # We might want stuff like this: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
       plenary-nvim # dependency of telescope-nvim
       telescope-nvim # fuzzy finder
+      telescope-ui-select # make vim use telescope when prompting the user to make a choice
       trouble-nvim # shows diagnostics/errors with telescope
       undotree
       vim-abolish # smarter substitute command + other features I never used
