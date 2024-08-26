@@ -41,8 +41,9 @@
         {
           nixpkgs.overlays = [ battery_monitor.overlays.default ];
         }
-        ./hardware/lenovo-t490.nix
+        ./hardware/hp-zbook-firefly-g10.nix
         ./system
+        ./modules/disks.nix
         ./modules/video-conferencing.nix
         ./modules/vpn.nix
         ./modules/users.nix
