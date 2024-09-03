@@ -1,7 +1,12 @@
-{ home-manager, config, lib, specialArgs, ... }:
+{ battery_monitor, home-manager, config, lib, specialArgs, ... }:
 
 let
   cfg = config.jlo;
+  extendImports = attrs: attrs // { imports = attrs.imports ++ common-imports; };
+  common-imports = [
+    ./shikane.nix
+    battery_monitor.homeManagerModules.default
+  ];
 in
 {
   imports = [
@@ -19,6 +24,6 @@ in
     home-manager.extraSpecialArgs = specialArgs;
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home-manager.users = lib.mapAttrs (_: value: value.hm-config) cfg.users;
+    home-manager.users = lib.mapAttrs (_: value: inputs: extendImports (value.hm-config inputs)) cfg.users;
   };
 }

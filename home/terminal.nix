@@ -63,7 +63,9 @@ with {
             (bindDir mod.shift "Resize" (d: "Decrease ${d}"));
           pane = bindDir mod.none "MoveFocus" id;
           move = bindDir mod.none "MovePane" id;
-          "shared_except \"locked\"" = bindDir mod.alt "MoveFocusOrTab" id;
+          "shared_except \"locked\"" = (bindDir mod.alt "MoveFocusOrTab" id) // {
+            unbind = mod.ctrl "o"; # TODO See if the config generator merges unbind correctly.
+          };
           tab = {
             "bind \"${directions.Left}\"" = { GoToPreviousTab = []; };
             "bind \"${directions.Right}\"" = { GoToNextTab = []; };

@@ -6,7 +6,6 @@
     home.stateVersion = "18.09";
 
     imports = [
-      battery_monitor.homeManagerModules.default
       ./desktop
       ./fish
       ./neovim

@@ -15,6 +15,7 @@
 
   home.sessionVariables.EDITOR = "nvim";
   home.sessionVariables.GOPATH = "/home/jlo/.cache/go"; # TODO don't hardcode home path
+  home.sessionVariables.ZELLIJ_AUTO_EXIT = "true";
 
   programs = {
     git = lib.mkMerge [

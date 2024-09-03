@@ -122,6 +122,14 @@
         "XF86AudioPrev" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous\"";
         "XF86AudioNext" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next\"";
 
+        "XF86AudioRaiseVolume" = "exec volumectl -u up";
+        "XF86AudioLowerVolume" = "exec volumectl -u down";
+        "XF86AudioMute" = "exec volumectl toggle-mute";
+        "XF86AudioMicMute" = "exec volumectl -m toggle-mute";
+
+        "XF86MonBrightnessUp" = "exec lightctl up";
+        "XF86MonBrightnessDown" = "exec lightctl down";
+
         "${modifier}+m" = "exec flameshot gui";
         "Ctrl+grave" = "exec makoctl dismiss --all";
         "Mod1+grave" = "exec makoctl restore";
@@ -140,7 +148,10 @@
         };
       }];
 
-      seat."*".hide_cursor = "3000";
+      seat."*" = {
+        xcursor_theme = "capitaine-cursors 24"; # TODO This doesn't work. I did `ln -s /run/current-system/sw/share/icons/capitaine-cursors .local/share/icons/default` to help the system find it (still this setting is probably useless then)
+        hide_cursor = "3000";
+      };
 
       floating.border = 4;
       window = {
@@ -152,7 +163,9 @@
   };
 
   programs = {
-    waybar.enable = true;
+    waybar = {
+      enable = true;
+    } // (import ./waybar-config.nix);
     feh = {
       enable = true;
       keybindings = {
@@ -166,7 +179,9 @@
   };
 
   services = {
-    kanshi.enable = true;
+    jlo.shikane.enable = true; # TODO Write a module which adds it to home.packages AND starts a systemd user service.
+
+    avizo.enable = true; # Notification daemon for volume and brightness adjustment # TODO Add bindings for volumectl and lightctl
 
     gammastep = { # "night mode" (screen color adjustment)
       enable = true;
@@ -196,7 +211,7 @@
   };
 
   home.packages = with pkgs; [
-    # chromium # for teams
+    chromium # for teams
     firefox
     networkmanagerapplet
     pavucontrol # pulseaudio volume control
