@@ -94,8 +94,10 @@ vim.keymap.set("n", "<leader>P", "\"+P")
 
 -- Mappings.
 vim.keymap.set('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>')
--- vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>') -- TODO Now default in neovim
--- vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>') -- TODO Now default in neovim
+-- The next two can be removed when we get the following PR:
+-- https://github.com/neovim/neovim/pull/29593
+vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 vim.keymap.set('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
 vim.diagnostic.config({virtual_text = false}) -- I found inline text to be horribly annoying and ugly
@@ -117,13 +119,12 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   vim.keymap.set('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   vim.keymap.set('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  vim.keymap.set('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  vim.keymap.set('n', '<space>d', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
   vim.keymap.set('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
   vim.keymap.set('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  vim.keymap.set('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<CR>', opts)
   vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
-  -- TODO Check `:h telescope.builtin` for info on which commands are available, and their parameters.
   vim.keymap.set('n', '<space>sf', '<cmd>lua require("telescope.builtin").lsp_document_symbols{symbols="function"}<CR>', opts)
 end
 
@@ -178,8 +179,9 @@ vim.api.nvim_create_autocmd({"BufWritePre"}, {
     end
   })
 
+-- plugins
+vim.g.better_whitespace_enabled = 1
+
 require("telescope").setup{}
-
 require("telescope").load_extension("ui-select")
-
-require("which-key").setup {}
+require("which-key").setup{}

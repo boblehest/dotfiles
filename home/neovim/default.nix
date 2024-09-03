@@ -20,10 +20,11 @@
       # nvim-treesitter-textobjects # We might want stuff like this: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
       plenary-nvim # dependency of telescope-nvim
       telescope-nvim # fuzzy finder
-      telescope-ui-select # make vim use telescope when prompting the user to make a choice
+      telescope-ui-select-nvim # make vim use telescope when prompting the user to make a choice
       trouble-nvim # shows diagnostics/errors with telescope
       undotree
       vim-abolish # smarter substitute command + other features I never used
+      vim-better-whitespace # highlight trailing whitespace
       vim-fugitive # git commands
       # vim-lion # commands for aligning blocks
       vim-polyglot # basic editor support lots of languages
@@ -32,7 +33,7 @@
       vim-sleuth # automatically detects shiftwidth/expandtab based on file contents
       vim-unimpaired # just custom keybindings for some commands? Not sure what keybinds I use anymore
       which-key-nvim # tooltip to show available keybindings (pops up while typing a multi-key command)
-    ] ++ extraVimPlugins;
+    ];
     extraLuaConfig = lib.strings.fileContents ./config/init.lua;
   };
 
