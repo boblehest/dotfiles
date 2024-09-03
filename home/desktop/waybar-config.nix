@@ -1,32 +1,29 @@
 {
-  settings = {
+  settings.bar = {
     # -------------------------------------------------------------------------
     # Global configuration
     # -------------------------------------------------------------------------
+    ipc = true; # sway won't be able to hide the bar without this.
 
     layer = "top";
 
-    position = "top";
+    position = "bottom";
 
     modules-left = [
       "sway/workspaces"
-      "sway/mode"
-      "custom/media"
+      # "sway/mode"
+      # "custom/media"
     ];
     modules-center = [
       "sway/window"
     ];
     modules-right = [
       "tray"
+      "bluetooth"
       "pulseaudio"
       "network"
-      "cpu"
-      "memory"
-      "backlight"
       "battery"
-      "battery#bat2"
       "clock"
-      "custom/power"
     ];
 
 
@@ -37,30 +34,15 @@
     "sway/workspaces" = {
       disable-scroll = true;
       all-outputs = false;
-      format = "{name}: {icon}";
-      format-icons = {
-        "1" = "";
-        "2" = "";
-        "3" = "";
-        "4" = "";
-        "5" = "";
-        high-priority-named = [ "1" "2" "3" "4" ];
-        urgent = "";
-        focused = "";
-        default = "";
-      };
-    };
-
-    "sway/mode" = {
       format = "<span style=\"italic\">{}</span>";
     };
 
     idle_inhibitor = {
       format = "{icon}";
       format-icons = {
-        activated = "";
-        deactivated = "";
-      }
+        activated = " ";
+        deactivated = " ";
+      };
     };
 
     tray = {
@@ -69,23 +51,29 @@
     };
 
     clock = {
-      tooltip-format = "{:%Y-%m-%d | %H:%M:%S}";
-      format-alt = "{:%Y-%m-%d}";
-    };
-
-    cpu = {
-      format = "{usage}% ";
-    };
-
-    memory = {
-      format = "{}% ";
-    };
-
-    backlight = {
-      # device = "acpi_video1";
-      format = "{percent}% {icon}";
-      states = [0,50,75];
-      format-icons = ["", "", ""];
+      format = "{:%Y-%m-%d %H:%M:%S}";
+      interval = 5;
+      tooltip = false;
+      calendar = {
+        mode = "year";
+        mode-mon-col = 3;
+        weeks-pos = "right";
+        on-scroll = 1;
+        format = {
+          months = "<span color='#ffead3'><b>{}</b></span>";
+          days = "<span color='#ecc6d9'><b>{}</b></span>";
+          weeks = "<span color='#99ffdd'><b>W{}</b></span>";
+          weekdays = "<span color='#ffcc66'><b>{}</b></span>";
+          today = "<span color='#ff6699'><b><u>{}</u></b></span>";
+        };
+      };
+      actions = {
+        on-click-right = "mode";
+        on-click-forward = "tz_up";
+        on-click-backward = "tz_down";
+        on-scroll-up = "shift_up";
+        on-scroll-down = "shift_down";
+      };
     };
 
     battery = {
@@ -97,17 +85,12 @@
       format = "{capacity}% {icon}";
       # format-good = "", # An empty format will hide the module
       # format-full = "";
-      format-icons = ["", "", "", "", ""];
-    };
-
-    "battery#bat2" = { # TODO Why two batteries?
-      bat = "BAT2";
+      format-icons = [" " " " " " " " " "];
     };
 
     network = {
-      # "interface" = "wlp2s0", # (Optional) To force the use of this interface
-      format-wifi = "{essid} ({signalStrength}%) ";
-      format-ethernet = "{ifname}: {ipaddr}/{cidr} ";
+      format-wifi = "{essid} ({signalStrength}%)  ";
+      format-ethernet = "{ifname}: {ipaddr}/{cidr}  ";
       format-disconnected = "Disconnected ⚠";
       "interval"  = 7;
     };
@@ -118,24 +101,17 @@
       format-bluetooth = "{volume}% {icon}";
       format-muted = "";
       format-icons = {
-        headphones = "";
+        headphones = " ";
         handsfree = "";
         headset = "";
-        phone = "";
-        portable = "";
-        car = "";
-        default = ["", ""];
+        phone = " ";
+        portable = " ";
+        car = " ";
+        default = [" " " "];
       };
       on-click = "pavucontrol";
-    };
-
-    "custom/power" = {
-      format = "  ";
-      interval = "once";
-      on-click = "wlogout";
-      tooltip = false;
     };
   };
 
   style = ./waybar-style.css;
-  }
+}

@@ -19,7 +19,6 @@
     animation-direction: alternate;
 }
 
-
 /* -----------------------------------------------------------------------------
  * Base styles
  * -------------------------------------------------------------------------- */
@@ -27,15 +26,13 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Roboto,'Font Awesome 5', 'SFNS Display',  Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: Hack;
+    font-size: 16px;
     min-height: 0;
 }
 
-/* The whole bar */
 window#waybar {
-    background: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background-color: rgb(43, 48, 59);
     color: #ffffff;
 }
 
@@ -48,15 +45,13 @@ window#waybar.hidden {
  * -------------------------------------------------------------------------- */
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0.4em;
     background: transparent;
     color: #ffffff;
-    border-bottom: 3px solid transparent;
 }
 
 #workspaces button.focused {
-    background: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background-color: #64727D;
 }
 
 #workspaces button.urgent {
@@ -64,82 +59,24 @@ window#waybar.hidden {
 }
 
 #mode {
-    background: #64727D;
-    border-bottom: 3px solid #ffffff;
+    background-color: #64727D;
 }
 
-#clock, #battery, #cpu, #memory, #backlight, #network, #pulseaudio, #custom-media, #tray, #mode, #idle_inhibitor {
-    padding: 0 10px;
-    margin: 0 5px;
+#clock, #battery, #bluetooth, #network, #pulseaudio, #tray, #mode, #idle_inhibitor {
+    border-radius: 0.4em;
+    padding: 0.4em;
+    margin: 0 0.2em;
+    background-color: #64727D;
 }
 
 #clock {
     background-color: #64727D;
 }
 
-#battery {
-    background-color: #ffffff;
-    color: #000000;
-}
-
 #battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
-}
-
-#cpu {
-    background: #2ecc71;
-    color: #000000;
-}
-
-#memory {
-    background: #9b59b6;
-}
-
-#backlight {
-    background: #90b1b1;
-}
-
-#network {
-    background: #2980b9;
+    color: #ffdd00;
 }
 
 #network.disconnected {
-    background: #f53c3c;
-}
-
-#pulseaudio {
-    background: #f1c40f;
-    color: #000000;
-}
-
-#pulseaudio.muted {
-    background: #90b1b1;
-    color: #2a5c45;
-}
-
-#custom-media {
-    background: #66cc99;
-    color: #2a5c45;
-}
-
-.custom-spotify {
-    background: #66cc99;
-}
-
-.custom-vlc {
-    background: #ffa000;
-}
-
-#tray {
-    background-color: #2980b9;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    background-color: #f53c3c;
 }

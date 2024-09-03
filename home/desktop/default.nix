@@ -33,48 +33,28 @@
       menu = "rofi"; # Why does this get its own config option in sway? Does wayland treat it specially?
       focus.wrapping = "force";
 
-      # colors.focused = {
-      #   border = "#4c7899";
-      #   background = "#4488bb";
-      #   text = "#ffffff";
-      #   indicator = "#2e9ef4";
-      #   childBorder = "#285577";
-      # };
-
-      colors.focused = {
-        border = "#999999";
-        background = "#5f676a";
-        text = "#999999";
-        indicator = "#999999";
-        childBorder = "#999999";
-      };
-      colors.focusedInactive = {
-        border = "#999999";
-        background = "#5f676a";
-        text = "#999999";
-        indicator = "#999999";
-        childBorder = "#999999";
-      };
-      colors.unfocused = {
-        border = "#333333";
-        background = "#222222";
-        text = "#888888";
-        indicator = "#292d2e";
-        childBorder = "#1f1e1e";
-      };
-      colors.urgent = {
-        border = "#999999";
-        background = "#5f676a";
-        text = "#999999";
-        indicator = "#999999";
-        childBorder = "#999999";
-      };
-      colors.placeholder = {
-        border = "#000000";
-        background = "#0c0c0c";
-        text = "#ffffff";
-        indicator = "#000000";
-        childBorder = "#0c0c0c";
+      colors = {
+        focused = {
+          border = "#999999";
+          background = "#458096";
+          text = "#ffffff";
+          indicator = "#999999";
+          childBorder = "#999999";
+        };
+        focusedInactive = {
+          border = "#999999";
+          background = "#5f676a";
+          text = "#999999";
+          indicator = "#999999";
+          childBorder = "#999999";
+        };
+        unfocused = {
+          border = "#333333";
+          background = "#222222";
+          text = "#888888";
+          indicator = "#292d2e";
+          childBorder = "#1f1e1e";
+        };
       };
 
       keybindings = let
@@ -138,13 +118,15 @@
         ));
 
       bars = [{
+        id = "bar";
         hiddenState = "hide";
         mode = "hide";
+        command = "waybar";
 
         fonts = {
           names = [ "Hack" ];
           style = "Regular";
-          size = 12.0;
+          size = 16.0;
         };
       }];
 
@@ -181,7 +163,13 @@
   services = {
     jlo.shikane.enable = true; # TODO Write a module which adds it to home.packages AND starts a systemd user service.
 
-    avizo.enable = true; # Notification daemon for volume and brightness adjustment # TODO Add bindings for volumectl and lightctl
+    avizo = { # Notification daemon for volume and brightness adjustment
+      enable = true;
+      settings.default = {
+        time = 2.0;
+        height = 150;
+      };
+    };
 
     gammastep = { # "night mode" (screen color adjustment)
       enable = true;
