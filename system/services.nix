@@ -6,6 +6,7 @@ with lib;
     services = {
       # hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
       # TODO Replace by OCIS
+      # TODO Move into module
       nextcloud = {
         enable = false;
         package = pkgs.nextcloud29;

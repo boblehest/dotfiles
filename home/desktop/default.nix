@@ -35,7 +35,6 @@
   jlo.services.battery-monitor.enable = true;
 
   services = {
-<<<<<<< HEAD
     jlo.shikane.enable = true; # TODO Write a module which adds it to home.packages AND starts a systemd user service.
 
     avizo = { # Notification daemon for volume and brightness adjustment
@@ -45,14 +44,6 @@
         height = 150;
       };
     };
-=======
-    # swayidle = { # TODO Figure out what this does
-    #   enable = true;
-    # };
-    # TODO Add custom cursors. The default hover/"hand" cursor sucks
-
-    kanshi.enable = true;
->>>>>>> 9cc0dbb (.)
 
     gammastep = { # "night mode" (screen color adjustment)
       enable = true;
@@ -69,6 +60,7 @@
       defaultTimeout = 7000;
     };
 
+    # TODO Removed until flameshot with enableWlrSupport attr lands in nixpkgs stable
     # flameshot = { # screenshot utility
     #   enable = true;
     #   package = pkgs.flameshot.override { enableWlrSupport = true; };
