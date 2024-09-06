@@ -69,12 +69,8 @@ window#waybar.hidden {
     background-color: #64727D;
 }
 
-#clock {
-    background-color: #64727D;
-}
-
 #battery.charging {
-    color: #ffdd00;
+    color: #d0ffd0;
 }
 
 #network.disconnected {

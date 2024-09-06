@@ -45,24 +45,24 @@ vim.opt.signcolumn = 'yes'
 vim.opt.modeline = false
 
 -- Remove highlights (TODO Now default in neovim)
-vim.keymap.set("n", "<c-l>", ":nohlsearch<CR><c-l>")
+vim.keymap.set("n", "<c-l>", "<Cmd>nohlsearch<CR><c-l>")
 -- Automatically create a new undo point before each line-break
 vim.keymap.set("i", "<CR>", "<C-G>u<CR>")
 -- Make Y behave analogous to C and D (TODO Now default in neovim)
 vim.keymap.set("n", "Y", "y$")
 
 -- Make '&' preserve flags when repeating substitutions
-vim.keymap.set("n", "&", ":&&<CR>")
-vim.keymap.set("x", "&", ":&&<CR>")
+vim.keymap.set("n", "&", "<Cmd>&&<CR>")
+vim.keymap.set("x", "&", "<Cmd>&&<CR>")
 
-vim.keymap.set("n", "<Leader>sf", ":Telescope find_files<CR>")
-vim.keymap.set("n", "<Leader>sg", ":Telescope git_files<CR>")
-vim.keymap.set("n", "<Leader>sr", ":Telescope live_grep<CR>")
-vim.keymap.set("n", "<Leader>sb", ":Telescope buffers<CR>")
+vim.keymap.set("n", "<Leader>sf", "<Cmd>Telescope find_files<CR>")
+vim.keymap.set("n", "<Leader>sg", "<Cmd>Telescope git_files<CR>")
+vim.keymap.set("n", "<Leader>sr", "<Cmd>Telescope live_grep<CR>")
+vim.keymap.set("n", "<Leader>sb", "<Cmd>Telescope buffers<CR>")
 
--- vim.keymap.set("n", "<Leader>bd", ":call MyBufDelete()<CR>")
--- vim.keymap.set("n", "<Leader>w", ":call FixWsAndWrite()<CR>")
-vim.keymap.set("n", "<Leader>q", ":q<CR>")
+vim.keymap.set("n", "<Leader>bd", "<Cmd>bd<CR>")
+-- vim.keymap.set("n", "<Leader>w", "<Cmd>call FixWsAndWrite()<CR>")
+vim.keymap.set("n", "<Leader>q", "<Cmd>q<CR>")
 
 -- slightly better movement keys
 vim.keymap.set({'n', 'v', 'o'}, ';', 'l')
@@ -73,6 +73,11 @@ vim.keymap.set({'n', 'v', 'o'}, 'j', 'h')
 vim.keymap.set({'n', 'v', 'o'}, 'h', ';')
 vim.keymap.set({'n', 'v', 'o'}, 'H', ',')
 vim.keymap.del({'n', 'v', 'o'}, ',')
+
+vim.keymap.set({'n', 'v', 'o'}, '<Up>', '<Nop>')
+vim.keymap.set({'n', 'v', 'o'}, '<Down>', '<Nop>')
+vim.keymap.set({'n', 'v', 'o'}, '<Left>', '<Nop>')
+vim.keymap.set({'n', 'v', 'o'}, '<Right>', '<Nop>')
 
 -- Use the same movement keys for navigation between split windows
 vim.keymap.set("n", "<C-W>j", "<C-W>h")
