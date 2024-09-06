@@ -12,7 +12,7 @@
     plugins = with pkgs.vimPlugins; [
       asyncomplete-lsp-vim
       asyncomplete-vim
-      coc-texlab
+      coc-texlab # TODO Why do we use this when we don't use coc?
       everforest # color scheme
       nvim-lspconfig # helper for configuring the LSP client for probably all languages I use
       nvim-surround # commands to easily add/remove/change delimiters around text objects (quotes, braces, html tags, ...) 
@@ -21,7 +21,7 @@
       plenary-nvim # dependency of telescope-nvim
       telescope-nvim # fuzzy finder
       telescope-ui-select-nvim # make vim use telescope when prompting the user to make a choice
-      trouble-nvim # shows diagnostics/errors with telescope
+      # trouble-nvim # shows diagnostics/errors with telescope TODO Do we want this? Read the manual to see what it even does
       undotree
       vim-abolish # smarter substitute command + other features I never used
       vim-better-whitespace # highlight trailing whitespace

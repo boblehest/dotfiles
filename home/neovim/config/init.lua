@@ -9,8 +9,7 @@ vim.opt.colorcolumn = {81} -- Highlight column 81
 vim.cmd.highlight('ColorColumn guibg=#220000')
 vim.opt.cursorline = true -- Highlight the whole line where the cursor is located
 vim.opt.number = true -- Numbered lines
--- vim.opt.relativenumber = true
-vim.opt.showcmd = true -- Show the current command being entered on the status line (TODO this is default, why is this here?)
+-- TODO Get a new statusline/bar
 -- vim.opt.statusline = %-3.3n%f%h%m%r%w\ [type=%{strlen(&ft)?&ft:'none'}]
 -- 			\\ [enc=%{strlen(&fenc)?&fenc:&enc}]
 -- 			\\ %=char:\ %03b,0x%02B\ \ \ \ pos:\ %-10.(%l,%c%V%)\ %P
@@ -29,40 +28,30 @@ vim.opt.smartcase = true
 vim.opt.foldenable = false -- fold keeps opening and closing at completely arbitrary times. Annoying.
 vim.opt.hidden = true
 vim.opt.scrolloff = 8
-vim.opt.fileformats = {'unix', 'dos'} -- Don't want cr+lf line on any platform, but want to preserve pre-existing cr+lf
+vim.opt.fileformats = {'unix', 'dos'} -- Don't want cr+lf EOL format by default on any platform, but want to preserve pre-existing EOL format on files I edit
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
--- let g:terminal_scrollback_buffer_size=10000 -- TODO I can't find any docs for
--- this one, so let's remove it.
 vim.opt.shortmess:append('cI')
 vim.opt.synmaxcol = 160
-vim.opt.wrapscan = false -- Search usually wraps without me noticing, which is annoying.
+vim.opt.wrapscan = false -- Notify me if wrap occurs while going to next search result
 vim.opt.cpo:append('y') -- Repeatable yank commands.
 -- Always show the sign column. Having it appear and disappear while editing is
 -- horribly annoying.
 vim.opt.signcolumn = 'yes'
 vim.opt.modeline = false
 
--- Remove highlights (TODO Now default in neovim)
-vim.keymap.set("n", "<c-l>", "<Cmd>nohlsearch<CR><c-l>")
 -- Automatically create a new undo point before each line-break
-vim.keymap.set("i", "<CR>", "<C-G>u<CR>")
--- Make Y behave analogous to C and D (TODO Now default in neovim)
-vim.keymap.set("n", "Y", "y$")
+vim.keymap.set('i', '<CR>', '<C-G>u<CR>')
 
 -- Make '&' preserve flags when repeating substitutions
-vim.keymap.set("n", "&", "<Cmd>&&<CR>")
-vim.keymap.set("x", "&", "<Cmd>&&<CR>")
+vim.keymap.set('n', '&', '<cmd>&&<CR>')
+vim.keymap.set('x', '&', '<cmd>&&<CR>')
 
-vim.keymap.set("n", "<Leader>sf", "<Cmd>Telescope find_files<CR>")
-vim.keymap.set("n", "<Leader>sg", "<Cmd>Telescope git_files<CR>")
-vim.keymap.set("n", "<Leader>sr", "<Cmd>Telescope live_grep<CR>")
-vim.keymap.set("n", "<Leader>sb", "<Cmd>Telescope buffers<CR>")
-
-vim.keymap.set("n", "<Leader>bd", "<Cmd>bd<CR>")
--- vim.keymap.set("n", "<Leader>w", "<Cmd>call FixWsAndWrite()<CR>")
-vim.keymap.set("n", "<Leader>q", "<Cmd>q<CR>")
+vim.keymap.set('n', '<Leader>sf', '<cmd>Telescope find_files<CR>')
+vim.keymap.set('n', '<Leader>sg', '<cmd>Telescope git_files<CR>')
+vim.keymap.set('n', '<Leader>sr', '<cmd>Telescope live_grep<CR>')
+vim.keymap.set('n', '<Leader>sb', '<cmd>Telescope buffers<CR>')
 
 -- slightly better movement keys
 vim.keymap.set({'n', 'v', 'o'}, ';', 'l')
@@ -80,22 +69,41 @@ vim.keymap.set({'n', 'v', 'o'}, '<Left>', '<Nop>')
 vim.keymap.set({'n', 'v', 'o'}, '<Right>', '<Nop>')
 
 -- Use the same movement keys for navigation between split windows
-vim.keymap.set("n", "<C-W>j", "<C-W>h")
-vim.keymap.set("n", "<C-W>k", "<C-W>j")
-vim.keymap.set("n", "<C-W>l", "<C-W>k")
-vim.keymap.set("n", "<C-W>;", "<C-W>l")
+vim.keymap.set('n', '<C-W>j', '<C-W>h')
+vim.keymap.set('n', '<C-W>k', '<C-W>j')
+vim.keymap.set('n', '<C-W>l', '<C-W>k')
+vim.keymap.set('n', '<C-W>;', '<C-W>l')
 
 -- Easier delete-to-black-hole
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
+vim.keymap.set('n', '<leader>d', '"_d')
+vim.keymap.set('v', '<leader>d', '"_d')
 
 -- Easier yank/paste to/from clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+y$")
-vim.keymap.set("v", "<leader>Y", "\"+Y")
-vim.keymap.set("n", "<leader>p", "\"+p")
-vim.keymap.set("n", "<leader>P", "\"+P")
+vim.keymap.set('n', '<leader>y', '"+y')
+vim.keymap.set('v', '<leader>y', '"+y')
+vim.keymap.set('n', '<leader>Y', '"+y$')
+vim.keymap.set('v', '<leader>Y', '"+Y')
+vim.keymap.set('n', '<leader>p', '"+p')
+vim.keymap.set('n', '<leader>P', '"+P')
+
+-- Close a buffer without closing the split window.
+local bd_preserve_split = function()
+  if vim.api.nvim_get_option_value('mod', {}) then
+    -- The bd command will fail because the buffer is modified,
+    -- so instead of switching to another buffer and then issuing
+    -- the failing command, we will just issue it from the current buffer
+    -- (so the user gets the error message)
+    vim.cmd('bd')
+  else
+    vim.cmd('bp')
+    vim.cmd('bd #')
+  end
+end
+
+-- Buffer saving/closing
+vim.keymap.set('n', '<leader>bd', bd_preserve_split)
+vim.keymap.set('n', '<leader>w', '<cmd>w')
+vim.keymap.set('n', '<Leader>q', '<cmd>q<CR>')
 
 -- Mappings.
 vim.keymap.set('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>')
@@ -105,16 +113,13 @@ vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 vim.keymap.set('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
-vim.diagnostic.config({virtual_text = false}) -- I found inline text to be horribly annoying and ugly
+vim.diagnostic.config({virtual_text = false}) -- I found inline text to be annoying and ugly
 
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
+-- TODO Have another look at your keymap. There's probably many new useful
+-- commands you can add bindings for.
 local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  vim.api.nvim_set_option_value('omnifunc', 'v:lua.vim.lsp.omnifunc', { buf = bufnr })
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   local opts = { buffer = bufnr, silent = true }
   vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
@@ -139,32 +144,41 @@ local servers = {
   hls = {}, -- haskell
   rust_analyzer = {}, -- rust
   ruff = {}, -- python linting?
-  pyright = { -- python type checking, ++?
+  pyright = {
     settings = {
-      disableOrganizeImports = true, -- Ruff already does this
+      disableOrganizeImports = true,
+      disableTaggedHints = true,
+    },
+    python = {
+      analysis = {
+        diagnosticSeverityOverrides = {
+          -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
+          reportUndefinedVariable = 'none',
+        },
+      },
     },
   },
   texlab = { -- latex
     settings = {
       texlab = {
-        auxDirectory = "build",
+        auxDirectory = 'build',
         build = {
-          executable = "tectonic",
+          executable = 'tectonic',
           onSave = true,
           args = {
-            "-X",
-            "compile",
-            "%f",
-            "--synctex",
-            "--keep-logs",
-            "--keep-intermediates",
-            "--outdir",
-            "build"
+            '-X',
+            'compile',
+            '%f',
+            '--synctex',
+            '--keep-logs',
+            '--keep-intermediates',
+            '--outdir',
+            'build'
           },
         },
         forwardSearch = {
-          executable = "zathura",
-          args = {"--synctex-forward", "%l:1:%f", "%p"}
+          executable = 'zathura',
+          args = {'--synctex-forward', '%l:1:%f', '%p'}
         }
       }
     }
@@ -177,8 +191,10 @@ for lsp_name, lsp_settings in pairs(servers) do
   lspconfig[lsp_name].setup(lsp_settings)
 end
 
-vim.api.nvim_create_autocmd({"BufWritePre"}, {
-    pattern = {"*.c", "*.cpp", "*.cc", "*.h", "*.hpp"},
+-- TODO Add corresponding setup for all languages? Or somehow make sure I
+-- autoformat files more often
+vim.api.nvim_create_autocmd({'BufWritePre'}, {
+    pattern = {'*.c', '*.cpp', '*.cc', '*.h', '*.hpp'},
     callback = function(_ev)
       vim.lsp.buf.format()
     end

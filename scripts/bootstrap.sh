@@ -101,18 +101,15 @@ mount /dev/disk/by-label/nixos "$root"
 mkdir -p "$root/boot"
 mount /dev/disk/by-label/boot "$root/boot"
 nixos-generate-config --root "$root"
+# TODO Add the parameters to the import call (config,lib,pkgs)
+# Or better yet, find a more idiomatic way to import the config.
+# I found this online, maybe we can do something similar: nix eval '.#machine.config.networking.firewall.allowedTCPPorts'
+stateVersion=$(nix-instantiate --eval -E "(import $root/etc/nixos/configuration.nix {})'.system.stateVersion)
 rm "$root/etc/nixos/configuration.nix"
 
 nix-env -iA nixos.git
 git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
-stateVersion=$(nix eval --raw '(import <nixpkgs/nixos> {})'.config.system.stateVersion)
-echo "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  latex = ${latex};\n  intelVideo = ${intelVideo};  oldIntel = ${oldIntel};\n  swapCapsEscape = ${swapCapsEscape};\n  nvidia = ${nvidia};\n  git = ${git};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
+echo -e "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  latex = ${latex};\n  intelVideo = ${intelVideo};\n  oldIntel = ${oldIntel};\n  swapCapsEscape = ${swapCapsEscape};\n  nvidia = ${nvidia};\n  git = ${git};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
 
-nix-channel --add https://nixos.org/channels/nixos-unstable nixos
-nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
-nix-channel --update
-
-nixos-install
-
-cp /root/.nix-channels "$root/root/"
+nixos-install --flake "$root/etc/nixos/flake.nix"

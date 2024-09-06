@@ -64,13 +64,13 @@ with lib;
       };
 
       # TODO Move this into the wayland config, if applicable
-      #   (mkIf secretCfg.intelVideo {
-      #     videoDrivers = [ "intel" ];
-      #     deviceSection = ''
-      #       Option "DRI" "2"
-      #       Option "TearFree" "true"
-      #     '';
-      #   })
+      xserver = (mkIf secretCfg.intelVideo {
+        videoDrivers = [ "intel" ];
+        deviceSection = ''
+            Option "DRI" "2"
+            Option "TearFree" "true"
+        '';
+      });
 
       # TODO This is not supported by sway, and I should just either get rid
       # of nvidia or use another WM
