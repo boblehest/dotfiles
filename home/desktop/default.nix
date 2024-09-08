@@ -31,11 +31,9 @@
     };
   };
 
-  # TODO this should be under `services.jlo...` not `jlo.services`.
-  jlo.services.battery-monitor.enable = true;
-
   services = {
-    jlo.shikane.enable = true; # TODO Write a module which adds it to home.packages AND starts a systemd user service.
+    jlo.battery-monitor.enable = true;
+    jlo.shikane.enable = true;
 
     avizo = { # Notification daemon for volume and brightness adjustment
       enable = true;
@@ -60,17 +58,16 @@
       defaultTimeout = 7000;
     };
 
-    # TODO Removed until flameshot with enableWlrSupport attr lands in nixpkgs stable
-    # flameshot = { # screenshot utility
-    #   enable = true;
-    #   package = pkgs.flameshot.override { enableWlrSupport = true; };
-    #   settings = {
-    #     General = {
-    #       disabledGrimWarning = true;
-    #       disabledTrayIcon = true;
-    #     };
-    #   };
-    # };
+    flameshot = { # screenshot utility
+      enable = true;
+      package = pkgs.flameshot.override { enableWlrSupport = true; };
+      settings = {
+        General = {
+          disabledGrimWarning = true;
+          disabledTrayIcon = true;
+        };
+      };
+    };
   };
 
   home.packages = with pkgs; [
@@ -89,14 +86,19 @@
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      # Make sure firefox takes precedence over chrome, if we have both
+      # Make sure firefox takes precedence over chromium, if we have both
       "text/html" = "firefox.desktop";
       "x-scheme-handler/http" = "firefox.desktop";
       "x-scheme-handler/https" = "firefox.desktop";
-      # "application/pdf" = "org.pwmt.zathura.desktop";
+
       # Feh appears to be missing these associations by default
       "image/svg+xml" = "feh.desktop";
       "image/apng" = "feh.desktop";
+
+      # Chromium seems to take precedence for these -- I don't like that
+      "image/png" = "feh.desktop";
+      "image/jpg" = "feh.desktop";
+      "application/pdf" = "org.pwmt.zathura.desktop";
     };
   };
 }

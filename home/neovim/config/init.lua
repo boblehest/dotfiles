@@ -25,6 +25,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- # Misc
+vim.opt.cmdheight = 0
 vim.opt.foldenable = false -- fold keeps opening and closing at completely arbitrary times. Annoying.
 vim.opt.hidden = true
 vim.opt.scrolloff = 8
@@ -102,7 +103,7 @@ end
 
 -- Buffer saving/closing
 vim.keymap.set('n', '<leader>bd', bd_preserve_split)
-vim.keymap.set('n', '<leader>w', '<cmd>w')
+vim.keymap.set('n', '<leader>w', '<cmd>w<CR>')
 vim.keymap.set('n', '<Leader>q', '<cmd>q<CR>')
 
 -- Mappings.
@@ -203,6 +204,20 @@ vim.api.nvim_create_autocmd({'BufWritePre'}, {
 -- plugins
 vim.g.better_whitespace_enabled = 1
 
-require("telescope").setup{}
-require("telescope").load_extension("ui-select")
-require("which-key").setup{}
+require('telescope').setup{}
+require('telescope').load_extension('ui-select')
+require('which-key').setup{}
+require('nvim-treesitter.configs').setup{
+  highlight = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+  textobjects = {
+    select = {
+      enable = true,
+    },
+  },
+}
+require('nvim-surround').setup{}

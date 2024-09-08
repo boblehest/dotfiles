@@ -17,7 +17,7 @@
       nvim-lspconfig # helper for configuring the LSP client for probably all languages I use
       nvim-surround # commands to easily add/remove/change delimiters around text objects (quotes, braces, html tags, ...) 
       nvim-treesitter
-      # nvim-treesitter-textobjects # We might want stuff like this: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
+      nvim-treesitter-textobjects # We might want stuff like this: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
       plenary-nvim # dependency of telescope-nvim
       telescope-nvim # fuzzy finder
       telescope-ui-select-nvim # make vim use telescope when prompting the user to make a choice
@@ -35,9 +35,9 @@
       which-key-nvim # tooltip to show available keybindings (pops up while typing a multi-key command)
     ];
     extraLuaConfig = lib.strings.fileContents ./config/init.lua;
+    extraPackages = [
+      pkgs.texlab
+      pkgs.gcc # treesitter wants `cc` available
+    ];
   };
-
-  home.packages = [
-    pkgs.texlab
-  ];
 }
