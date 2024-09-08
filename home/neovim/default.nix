@@ -12,7 +12,6 @@
     plugins = with pkgs.vimPlugins; [
       asyncomplete-lsp-vim
       asyncomplete-vim
-      coc-texlab # TODO Why do we use this when we don't use coc?
       everforest # color scheme
       nvim-lspconfig # helper for configuring the LSP client for probably all languages I use
       nvim-surround # commands to easily add/remove/change delimiters around text objects (quotes, braces, html tags, ...) 
