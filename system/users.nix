@@ -1,7 +1,7 @@
-{ pkgs, secretCfg, ... }:
+{ config, pkgs, ... }:
 
 {
-  users.users."${secretCfg.username}" = {
+  users.users."${config.jlo.username}" = {
     isNormalUser = true;
     extraGroups = [
       "wheel" # sudo

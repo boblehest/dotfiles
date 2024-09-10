@@ -1,5 +1,5 @@
 { battery_monitor, home-manager, config, lib, specialArgs, ... }:
-
+with lib;
 let
   cfg = config.jlo;
   extendImports = attrs: attrs // { imports = attrs.imports ++ common-imports; };
@@ -7,17 +7,14 @@ let
     ./shikane.nix
     battery_monitor.homeManagerModules.default
   ];
-in
-{
+in {
   imports = [
     home-manager.nixosModules.home-manager
   ];
 
-  options.jlo = {
-    users = lib.mkOption {
-      type = lib.types.attrsOf lib.types.anything;
-      default = {};
-    };
+  options.jlo.users = lib.mkOption {
+    type = lib.types.attrsOf lib.types.anything;
+    default = {};
   };
 
   config = {

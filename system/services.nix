@@ -5,27 +5,16 @@ with lib;
   {
     services = {
       # hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
-      # TODO Replace by OCIS
-      # TODO Move into module
-      nextcloud = {
-        enable = false;
-        package = pkgs.nextcloud29;
-        hostName = "10.13.37.1";
-        config.adminpassFile = "/etc/nextcloud-key";
-      };
-
       gnome.gnome-keyring.enable = true; # for nextcloud client
 
       jlo.wireguard = {
         enable = true;
-        isServer = false;
+        peerType = "client";
         vpnInterface = "wg0";
         ipAddressWithSubnet = "10.13.37.2/24";
         listenPort = 43434;
         privateKeyFile = "/etc/wireguard-key";
         peers = [
-          # Server
-          # TODO Do we regard this as a secret?
           {
             publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
             allowedIPs = [ "10.13.37.0/24" ];
@@ -64,20 +53,12 @@ with lib;
         };
       };
 
-      # TODO Move this into the wayland config, if applicable
-      xserver = (mkIf secretCfg.intelVideo {
-        videoDrivers = [ "intel" ];
-        deviceSection = ''
-            Option "DRI" "2"
-            Option "TearFree" "true"
-        '';
-      });
-
-      # TODO This is not supported by sway, and I should just either get rid
-      # of nvidia or use another WM
-      #   (mkIf secretCfg.nvidia {
-      #     videoDrivers = [ "nvidia" ];
-      #   })
+      xserver.videoDrivers = config.jlo.videoDrivers;
+        # videoDrivers = [ "intel" ];
+        # deviceSection = ''
+        #     Option "DRI" "2"
+        #     Option "TearFree" "true"
+        # '';
     };
 
     environment.systemPackages = with pkgs; [

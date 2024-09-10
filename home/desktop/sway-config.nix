@@ -8,16 +8,20 @@
   up = "l";
   right = "semicolon";
 
-  input."*" = {
-    xkb_variant = "altgr-intl";
-    xkb_layout = "us";
-    xkb_options = "compose:menu,caps:swapescape";
-    tap = "enabled";
-    natural_scroll = "enabled";
-    accel_profile = "flat";
-    pointer_accel = "0.0";
-    dwt = "enabled"; # disable touchpad while typing
-  };
+  input."*" = lib.mkMerge [
+    {
+      xkb_variant = "altgr-intl";
+      xkb_layout = "us";
+      tap = "enabled";
+      natural_scroll = "enabled";
+      accel_profile = "flat";
+      pointer_accel = "0.0";
+      dwt = "enabled"; # disable touchpad while typing
+    }
+    (lib.mkIf (config.jlo.swapCapsEscape) {
+      xkb_options = "compose:menu,caps:swapescape";
+    })
+  ];
 
   fonts = {
     names = [ "Hack" ];
@@ -68,47 +72,47 @@
       keysToUnbind' = lib.concatMap withOrWithoutShift keysToUnbind;
       unbindKey = key: { name = "${modifier}+${key}"; value = null; }; 
       keyUnmappings = lib.listToAttrs (lib.map unbindKey keysToUnbind');
-    in lib.mkOptionDefault ({
-      "${modifier}+r" = "exec ${pkgs.rofi-wayland}/bin/rofi -show run";
-      "${modifier}+t" = "exec ${pkgs.rofi-wayland}/bin/rofi -show window";
-      "${modifier}+b" = "exec firefox";
+  in lib.mkOptionDefault ({
+    "${modifier}+r" = "exec ${pkgs.rofi-wayland}/bin/rofi -show run";
+    "${modifier}+t" = "exec ${pkgs.rofi-wayland}/bin/rofi -show window";
+    "${modifier}+b" = "exec firefox";
 
-      "${modifier}+h" = "splith";
+    "${modifier}+h" = "splith";
 
-      "${modifier}+Shift+minus" = null;
-      "${modifier}+minus" = null;
+    "${modifier}+Shift+minus" = null;
+    "${modifier}+minus" = null;
 
-      "${modifier}+Tab" = "focus output right";
+    "${modifier}+Tab" = "focus output right";
 
-      "${modifier}+q" = "layout stacking";
-      "${modifier}+w" = "layout tabbed";
-      "${modifier}+e" = "layout toggle split";
-      "${modifier}+s" = "floating toggle";
-      "${modifier}+g" = "focus mode_toggle";
-      "${modifier}+a" = "focus parent";
-      "${modifier}+d" = "focus child";
-      "${modifier}+Shift+z" = "move scratchpad";
-      "${modifier}+z" = "scratchpad show";
-      "${modifier}+x" = "exec swaylock";
-      "${modifier}+bracketleft" = "workspace prev_on_output";
-      "${modifier}+bracketright" = "workspace next_on_output";
-      "XF86AudioPlay" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause\"";
-      "XF86AudioStop" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop\"";
-      "XF86AudioPrev" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous\"";
-      "XF86AudioNext" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next\"";
+    "${modifier}+q" = "layout stacking";
+    "${modifier}+w" = "layout tabbed";
+    "${modifier}+e" = "layout toggle split";
+    "${modifier}+s" = "floating toggle";
+    "${modifier}+g" = "focus mode_toggle";
+    "${modifier}+a" = "focus parent";
+    "${modifier}+d" = "focus child";
+    "${modifier}+Shift+z" = "move scratchpad";
+    "${modifier}+z" = "scratchpad show";
+    "${modifier}+x" = "exec swaylock";
+    "${modifier}+bracketleft" = "workspace prev_on_output";
+    "${modifier}+bracketright" = "workspace next_on_output";
+    "XF86AudioPlay" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause\"";
+    "XF86AudioStop" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Stop\"";
+    "XF86AudioPrev" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous\"";
+    "XF86AudioNext" = "exec \"dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next\"";
 
-      "XF86AudioRaiseVolume" = "exec volumectl -u up";
-      "XF86AudioLowerVolume" = "exec volumectl -u down";
-      "XF86AudioMute" = "exec volumectl toggle-mute";
-      "XF86AudioMicMute" = "exec volumectl -m toggle-mute";
+    "XF86AudioRaiseVolume" = "exec volumectl -u up";
+    "XF86AudioLowerVolume" = "exec volumectl -u down";
+    "XF86AudioMute" = "exec volumectl toggle-mute";
+    "XF86AudioMicMute" = "exec volumectl -m toggle-mute";
 
-      "XF86MonBrightnessUp" = "exec lightctl up";
-      "XF86MonBrightnessDown" = "exec lightctl down";
+    "XF86MonBrightnessUp" = "exec lightctl up";
+    "XF86MonBrightnessDown" = "exec lightctl down";
 
-      "${modifier}+m" = "exec flameshot gui";
-      "Ctrl+grave" = "exec makoctl dismiss --all";
-      "Mod1+grave" = "exec makoctl restore";
-    } // keyUnmappings);
+    "${modifier}+m" = "exec flameshot gui";
+    "Ctrl+grave" = "exec makoctl dismiss --all";
+    "Mod1+grave" = "exec makoctl restore";
+  } // keyUnmappings);
 
   bars = [{
     id = "bar";

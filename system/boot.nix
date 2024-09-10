@@ -1,11 +1,11 @@
-{ config, lib, pkgs, secretCfg, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   boot = {
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = lib.mkIf secretCfg.oldIntel [ "intel_pstate=active" ];
-    tmp.useTmpfs = ! secretCfg.conserveMemory;
-    # supportedFilesystems = [ "ntfs" ]; # TODO Put this setting behind feature flag
+    kernelParams = lib.mkIf config.jlo.oldIntel [ "intel_pstate=active" ];
+    tmp.useTmpfs = ! config.jlo.conserveMemory;
+    supportedFilesystems = lib.mkIf (config.jlo.ntfsDriver) [ "ntfs" ];
 
     loader = {
       systemd-boot = {

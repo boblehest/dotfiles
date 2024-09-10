@@ -1,4 +1,4 @@
-{ pkgs, config, lib, secretCfg, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   i18n.defaultLocale = "en_US.UTF-8";
@@ -18,7 +18,7 @@
 
     settings = {
       extra-experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "${secretCfg.username}" "@wheel" ];
+      trusted-users = [ "root" "${config.jlo.username}" "@wheel" ];
       substituters = [
         # "https://cache.nixos.org/" # TODO 2024-05-09 Does this one have to be added manually?
         "https://nixcache.reflex-frp.org"
@@ -44,7 +44,7 @@
 
   networking = {
     networkmanager.enable = true;
-    hostName = secretCfg.hostName;
+    hostName = config.jlo.hostName;
     firewall.enable = false;
   };
 
@@ -68,5 +68,5 @@
     dconf.enable = true;
   };
 
-  system.stateVersion = secretCfg.stateVersion; # Where to set this?
+  system.stateVersion = config.jlo.stateVersion; # Where to set this?
 }
