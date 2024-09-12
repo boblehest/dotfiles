@@ -16,6 +16,18 @@
       nvim-lspconfig # helper for configuring the LSP client for probably all languages I use
       nvim-surround # commands to easily add/remove/change delimiters around text objects (quotes, braces, html tags, ...) 
       nvim-treesitter
+      nvim-treesitter-parsers.go
+      nvim-treesitter-parsers.haskell
+      nvim-treesitter-parsers.json
+      # nvim-treesitter-parsers.latex
+      nvim-treesitter-parsers.lua
+      # nvim-treesitter-parsers.markdown
+      nvim-treesitter-parsers.nix
+      nvim-treesitter-parsers.python
+      nvim-treesitter-parsers.query # treesitter queries
+      nvim-treesitter-parsers.rust
+      nvim-treesitter-parsers.vimdoc
+      nvim-treesitter-parsers.xml
       nvim-treesitter-textobjects # We might want stuff like this: https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-swap
       plenary-nvim # dependency of telescope-nvim
       telescope-nvim # fuzzy finder
