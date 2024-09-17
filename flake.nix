@@ -31,18 +31,18 @@
           };
           config.home-manager.users.jlo = {
             jlo = {
-              latex = true;
+              latex = false;
               swapCapsEscape = true;
             };
             programs.jlo.git = {
               enable = true;
               userName = "Jørn Lode";
-              userEmail = "jlode90@gmail.com";
+              userEmail = "jorn.lode@eviny.no";
             };
           };
           config.jlo = {
             username = "jlo";
-            hostName = "jlo-laptop";
+            hostName = "jlo-eviny";
             conserveMemory = false;
             videoDrivers = [ "intel" ];
             stateVersion = "23.11";

@@ -56,9 +56,16 @@ in
     networking.wireguard.interfaces = {
       ${cfg.vpnInterface} = mkMerge [
         {
-          inherit (cfg) listenPort peers privateKeyFile;
+          inherit (cfg) listenPort privateKeyFile;
           ips = [ cfg.ipAddressWithSubnet ];
-        } (mkIf (cfg.peerType == "server" && config.networking.firewall.enable) {
+          peers = map (peerCfg: mkMerge [
+            peerCfg
+            (mkIf (cfg.peerType == "client") {
+              persistentKeepalive = 25;
+            })
+          ]) cfg.peers;
+        }
+        (mkIf (cfg.peerType == "server" && config.networking.firewall.enable) {
           postSetup = ''
             ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg.ipAddressWithSubnet} -o ${cfg.wanInterface} -j MASQUERADE
           '';

@@ -28,17 +28,14 @@
         ]
       },
       "locked": {
-        "lastModified": 1725694918,
-        "narHash": "sha256-+HsjshXpqNiJHLaJaK0JnIicJ/a1NquKcfn4YZ3ILgg=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "aaebdea769a5c10f1c6e50ebdf5924c1a13f0cda",
-        "type": "github"
+        "lastModified": 1725188376,
+        "narHash": "sha256-U89Y7oNI5t3WC+LxMLC+8wd3eyCDszXLfAbVLIaLmDc=",
+        "path": "/home/jlo/dev/reference/home-manager",
+        "type": "path"
       },
       "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
+        "path": "/home/jlo/dev/reference/home-manager",
+        "type": "path"
       }
     },
     "mdbook-nixdoc": {

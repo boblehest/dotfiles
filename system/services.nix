@@ -1,76 +1,72 @@
-{ lib, config, pkgs, secretCfg, ... }:
+{ config, lib, pkgs, ... }:
 
 with lib;
 
-  {
-    services = {
-      # hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
-      gnome.gnome-keyring.enable = true; # for nextcloud client
+{
+  services = {
+    hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
+    # TODO Replace by OCIS
+    # TODO Put into own module?
+    nextcloud = {
+      enable = false;
+      package = pkgs.nextcloud29;
+      hostName = "10.13.37.1";
+      config.adminpassFile = "/etc/nextcloud-key";
+    };
 
-      jlo.wireguard = {
-        enable = true;
-        peerType = "client";
-        vpnInterface = "wg0";
-        ipAddressWithSubnet = "10.13.37.2/24";
-        listenPort = 43434;
-        privateKeyFile = "/etc/wireguard-key";
-        peers = [
-          {
-            publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
-            allowedIPs = [ "10.13.37.0/24" ];
-            endpoint = "84.215.130.16:43434";
-          }
-        ];
-      };
+    gnome.gnome-keyring.enable = true; # for nextcloud client
 
-      fstrim.enable = true;
-      upower.enable = true;
+    jlo.wireguard = {
+      enable = true;
+      peerType = "client";
+      vpnInterface = "wg0";
+      ipAddressWithSubnet = "10.13.37.3/24";
+      listenPort = 43434;
+      privateKeyFile = "/etc/wireguard-key";
+      peers = [
+        {
+          publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
+          allowedIPs = [ "10.13.37.0/24" ];
+          endpoint = "84.215.130.16:43434";
+        }
+      ];
+    };
 
-      # Onyx Boox Max 3 (TODO: Move into own package/module)
-      udev.extraRules = "
-      SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"05c6\", MODE=\"0666\"\nSUBSYSTEM==\"usb_device\", ATTRS{idVendor}==\"05c6\", MODE=\"0666\"\n
-      SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"0925\", ATTR{idProduct}==\"3881\", MODE=\"0666\"\n
-      SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1001\", MODE=\"0666\"\n
-      SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1003\", MODE=\"0666\"\n
-      SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1004\", MODE=\"0666\"\n
-      SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1005\", MODE=\"0666\"\n
-      SUBSYSTEM==\"usb\", ENV{DEVTYPE}==\"usb_device\", ATTR{idVendor}==\"21a9\", ATTR{idProduct}==\"1006\", MODE=\"0666\"\n
-      ";
+    fstrim.enable = true;
+    upower.enable = true;
 
-      greetd = {
-        enable = true;
-        settings = {
-          default_session = {
-            command = ''
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = ''
               ${pkgs.greetd.tuigreet}/bin/tuigreet \
               --time \
               --asterisks \
               --user-menu \
               --cmd sway
-            '';
-            user = "greeter";
-          };
+          '';
+          user = "greeter";
         };
       };
-
-      xserver.videoDrivers = config.jlo.videoDrivers;
-        # videoDrivers = [ "intel" ];
-        # deviceSection = ''
-        #     Option "DRI" "2"
-        #     Option "TearFree" "true"
-        # '';
     };
 
-    environment.systemPackages = with pkgs; [
-      rofi-wayland
-      wl-clipboard
-      i3status
-    ];
+    xserver.videoDrivers = config.jlo.videoDrivers;
+    # deviceSection = ''
+    #     Option "DRI" "2"
+    #     Option "TearFree" "true"
+    # '';
+  };
 
-    security.polkit.enable = true;
-    security.pam.services.swaylock = {};
-    programs = {
-      light.enable = true;
-      ssh.startAgent = true;
-    };
-  }
+  environment.systemPackages = with pkgs; [
+    rofi-wayland
+    wl-clipboard
+  ];
+
+  security.polkit.enable = true;
+  security.pam.services.swaylock = {};
+  programs = {
+    light.enable = true;
+    ssh.startAgent = true;
+  };
+}

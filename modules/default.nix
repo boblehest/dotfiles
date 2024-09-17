@@ -3,7 +3,10 @@ with lib;
 {
   imports = [
     ./disks.nix
+    ./hardware/onyx-boox-max3.nix
+    ./nixbuild.nix
     ./video-conferencing.nix
+    ./video.nix
     ./vpn.nix
     ./users.nix
   ];

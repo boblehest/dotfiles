@@ -75,17 +75,12 @@ vim.keymap.set('n', '<C-W>k', '<C-W>j')
 vim.keymap.set('n', '<C-W>l', '<C-W>k')
 vim.keymap.set('n', '<C-W>;', '<C-W>l')
 
--- Easier delete-to-black-hole
-vim.keymap.set('n', '<leader>d', '"_d')
-vim.keymap.set('v', '<leader>d', '"_d')
-
--- Easier yank/paste to/from clipboard
-vim.keymap.set('n', '<leader>y', '"+y')
-vim.keymap.set('v', '<leader>y', '"+y')
-vim.keymap.set('n', '<leader>Y', '"+y$')
-vim.keymap.set('v', '<leader>Y', '"+Y')
+-- Easier delete/yank/paste to/from clipboard
+vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
+vim.keymap.set({'n', 'v'}, '<leader>Y', '"+y$')
 vim.keymap.set('n', '<leader>p', '"+p')
 vim.keymap.set('n', '<leader>P', '"+P')
+vim.keymap.set({'n', 'v'}, '<leader>d', '"+d')
 
 -- Close a buffer without closing the split window.
 local bd_preserve_split = function()
@@ -143,6 +138,7 @@ local servers = {
   -- clangd = {}, -- c++
   gopls = {}, -- go
   hls = {}, -- haskell
+  nil_ls = {}, -- nix
   rust_analyzer = {}, -- rust
   ruff = {}, -- python linting?
   pyright = {

@@ -50,7 +50,8 @@ in
       Install = { WantedBy = [ cfg.systemdTarget ]; };
     };
     home.packages = [
-      pkgs.shikane # For the CLI
+      pkgs.shikane # For the CLI (saving profiles)
+      pkgs.nwg-displays # for output configuration
     ];
   };
 }

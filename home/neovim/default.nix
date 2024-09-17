@@ -10,11 +10,9 @@
     withPython3 = true;
     withRuby = false;
     plugins = with pkgs.vimPlugins; [
-      asyncomplete-lsp-vim
-      asyncomplete-vim
       everforest # color scheme
       nvim-lspconfig # helper for configuring the LSP client for probably all languages I use
-      nvim-surround # commands to easily add/remove/change delimiters around text objects (quotes, braces, html tags, ...) 
+      nvim-surround # commands to easily add/remove/change delimiters around text objects (quotes, braces, html tags, ...)
       nvim-treesitter
       nvim-treesitter-parsers.go
       nvim-treesitter-parsers.haskell
@@ -46,9 +44,21 @@
       which-key-nvim # tooltip to show available keybindings (pops up while typing a multi-key command)
     ];
     extraLuaConfig = lib.strings.fileContents ./config/init.lua;
-    extraPackages = [
-      pkgs.texlab
-      pkgs.gcc # treesitter wants `cc` available
+    extraPackages = with pkgs; [
+      texlab
+      gcc # treesitter wants `cc` available
+
+      # language servers
+      # TODO I don't know if we want to put these here, since for e.g. haskell
+      # we often want to use older versions of it (but will an older version of
+      # the lsp softare always be compatible with the newer config here in
+      # neovim? Probably not)
+      rust-analyzer # rust
+      haskell-language-server # haskell
+      pyright # python
+      ruff # python
+      nil # nix
+      # TODO go, texlab
     ];
   };
 }
