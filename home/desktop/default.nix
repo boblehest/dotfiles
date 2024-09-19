@@ -11,6 +11,10 @@
     };
 
     programs = {
+      alacritty = { # terminal emulator
+        enable = true;
+        settings.font.size = 16;
+      };
       waybar = {
         enable = true;
       } // (import ./waybar-config.nix);
@@ -32,6 +36,7 @@
           profile = "gpu-hq";
         };
       };
+      zathura.enable = true;
     };
 
     services = {

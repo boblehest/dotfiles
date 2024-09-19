@@ -20,11 +20,6 @@ with {
       defaultCommand = "${pkgs.fd}/bin/fd --type f";
     };
 
-    alacritty = { # terminal
-      enable = true;
-      settings.font.size = 16;
-    };
-
     zellij = { # terminal multiplexer
       enable = true;
       enableFishIntegration = true;

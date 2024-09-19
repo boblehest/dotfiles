@@ -5,7 +5,6 @@
 
   config = lib.mkIf config.jlo.latex {
     programs.zathura = {
-      enable = true;
       options = {
         synctex = true;
         synctex-editor-command = "code -g %{input}:%{line}";
