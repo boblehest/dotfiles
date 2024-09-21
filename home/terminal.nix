@@ -20,8 +20,21 @@ with {
       defaultCommand = "${pkgs.fd}/bin/fd --type f";
     };
 
-    zellij = { # terminal multiplexer
+    tmux = {
       enable = true;
+      escapeTime = 0;
+      keyMode = "vi";
+      terminal = "screen-256color";
+      extraConfig = ''
+        bind c new-window -c "#{pane_current_path}"
+        bind '"' split-window -c "#{pane_current_path}"
+        bind % split-window -h -c "#{pane_current_path}"
+        set-option -sa terminal-features ',xterm-termite:RGB'
+      '';
+    };
+
+    zellij = { # terminal multiplexer
+      enable = false;
       enableFishIntegration = true;
       # TODO Create a custom layout (the default one is probably meant only to
       # get introduced to the features. I think its UI elements take up too

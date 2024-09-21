@@ -42,6 +42,10 @@
       bind -M insert \co 'lfcd; commandline -f repaint'
       fish_vi_key_bindings
       eval (direnv hook fish)
+      if not set -q TMUX
+          tmux
+          kill $fish_pid
+      end
       '';
   };
 }
