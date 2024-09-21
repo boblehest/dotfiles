@@ -23,13 +23,15 @@ with {
     zellij = { # terminal multiplexer
       enable = true;
       enableFishIntegration = true;
-      # TODO Figure out how to make zellij also quit the terminal when it exits
-      # As it is now, opening my terminal automatically opens zellij (which is fine),
-      # but to close the terminal I now have to first exit zellij, then the terminal (this is not fine)
       # TODO Create a custom layout (the default one is probably meant only to
       # get introduced to the features. I think its UI elements take up too
       # much space. Make a more "slim"/minimal layout.
       settings = {
+        session_serialization = false; # TODO I still see new files being created in .cache/zellij after setting this to false
+        pane_frames = false;
+        copy_on_select = false; # TODO How do I copy text with this set to false?
+        auto_layout = false; # TODO This appears to have had no effect. Layout still happens automatically when I create new panes
+        ui.pane_frames.hide_session_name = true;
         keybinds = let directions = {
           Left = "j";
           Down = "k";
