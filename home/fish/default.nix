@@ -10,7 +10,7 @@
       gcs = "git clone --depth 1";
       l = "eza -lagFT --git-ignore --git --level 1";
       ls = "eza";
-      tb = "pkill -usr1 redshift";
+      tb = "pkill -usr1 gammastep";
       tree = "eza --tree --git-ignore";
     };
     functions = {
