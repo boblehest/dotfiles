@@ -29,8 +29,10 @@ with {
         bind c new-window -c "#{pane_current_path}"
         bind '"' split-window -c "#{pane_current_path}"
         bind % split-window -h -c "#{pane_current_path}"
-        bind-key -n M-j swap-window -t -1\; select-window -t -1
-        bind-key -n M-\; swap-window -t +1\; select-window -t +1
+        bind-key j swap-window -t -1\; select-window -t -1
+        bind-key \; swap-window -t +1\; select-window -t +1
+        bind-key -n M-j select-window -t -1
+        bind-key -n M-\; select-window -t +1
         set-option -sa terminal-features ',xterm-termite:RGB'
         set-option -g status-position top
       '';
