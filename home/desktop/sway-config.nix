@@ -8,20 +8,23 @@
   up = "l";
   right = "semicolon";
 
-  input."*" = lib.mkMerge [
-    {
-      xkb_variant = "altgr-intl";
-      xkb_layout = "us";
-      tap = "enabled";
-      natural_scroll = "enabled";
+  input = {
+    "*" = {
       accel_profile = "flat";
       pointer_accel = "0.0";
-      dwt = "enabled"; # disable touchpad while typing
-    }
-    (lib.mkIf (config.jlo.swapCapsEscape) {
+      xkb_variant = "altgr-intl";
+      xkb_layout = "us";
+    };
+    "type:touchpad" = {
+      natural_scroll = "enabled";
+      dwt = "enabled";
+      tap = "enabled";
+    };
+    # TODO Don't hardcode this keyboard label
+    "1:1:AT_Translated_Set_2_keyboard" = (lib.mkIf (config.jlo.swapCapsEscape) {
       xkb_options = "compose:menu,caps:swapescape";
-    })
-  ];
+    });
+  };
 
   fonts = {
     names = [ "Hack" ];
