@@ -54,10 +54,11 @@
       # the lsp softare always be compatible with the newer config here in
       # neovim? Probably not)
       rust-analyzer # rust
+      rustfmt # rust
       haskell-language-server # haskell
       pyright # python
       ruff # python
-      nil # nix
+      nixd # nix
       # TODO go, texlab
     ];
   };
