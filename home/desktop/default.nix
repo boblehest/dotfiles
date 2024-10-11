@@ -106,6 +106,7 @@
         # Chromium seems to take precedence for these -- I don't like that
         "image/png" = "feh.desktop";
         "image/jpg" = "feh.desktop";
+        "image/jpeg" = "feh.desktop";
         "application/pdf" = "org.pwmt.zathura.desktop";
       };
     };
