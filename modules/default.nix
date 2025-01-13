@@ -3,6 +3,7 @@ with lib;
 {
   imports = [
     ./disks.nix
+    ./grafana.nix
     ./hardware/onyx-boox-max3.nix
     ./nixbuild.nix
     ./video-conferencing.nix
