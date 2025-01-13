@@ -134,16 +134,7 @@
 
   floating.border = 4;
   window = {
-    hideEdgeBorders = "smart";
-    # TODO The hm module doesn't support setting the --i3 flag, so we'll have
-    # to add it ourselves when we can be fucked to.
-    # hideEdgeBorders = "--i3 smart";
-    # I suggest this format, and add a renamedmodule thingy to make it redirect
-    # the mode
-    # hideEdgeBorders = {
-    #   mode = "smart";
-    #   i3Compatible = true;
-    # }
+    hideEdgeBorders = "--i3 smart";
     border = 4;
   };
 }
