@@ -1,7 +1,5 @@
 { config, lib, pkgs, ... }:
 
-with lib;
-
 {
   services = {
     hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
@@ -27,7 +25,7 @@ with lib;
         {
           publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
           allowedIPs = [ "10.13.37.0/24" ];
-          endpoint = "84.215.130.16:43434";
+          endpoint = "84.215.128.31:43434";
         }
       ];
     };

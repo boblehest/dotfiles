@@ -27,7 +27,7 @@ vim.opt.smartcase = true
 -- # Misc
 vim.opt.cmdheight = 0
 vim.opt.foldenable = false -- fold keeps opening and closing at completely arbitrary times. Annoying.
-vim.opt.hidden = true
+vim.opt.hidden = true -- Is this the default now? I'm pretty sure the default was `false` in vim
 vim.opt.scrolloff = 8
 vim.opt.fileformats = {'unix', 'dos'} -- Don't want cr+lf EOL format by default on any platform, but want to preserve pre-existing EOL format on files I edit
 vim.opt.tabstop = 4
@@ -131,7 +131,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<CR>', opts)
   vim.keymap.set('n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 
-  vim.keymap.set('n', '<space>sf', '<cmd>lua require("telescope.builtin").lsp_document_symbols{symbols="function"}<CR>', opts)
+  vim.keymap.set('n', '<space>sf', '<cmd>lua require("telescope.builtin").lsp_document_symbols{symbols={"function","method"}}<CR>', opts)
 end
 
 local servers = {

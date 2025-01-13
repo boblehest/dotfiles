@@ -35,7 +35,7 @@
       vim-abolish # smarter substitute command + other features I never used
       vim-better-whitespace # highlight trailing whitespace
       vim-fugitive # git commands
-      # vim-lion # commands for aligning blocks
+      vim-lion # commands for aligning blocks
       vim-polyglot # basic editor support lots of languages
       vim-qf
       vim-repeat # adds repeatability (with `.`) for some commands which are not supported out of the box

@@ -1,5 +1,4 @@
 { battery_monitor, home-manager, config, lib, specialArgs, ... }:
-with lib;
 let
   cfg = config.jlo;
   extendImports = attrs: attrs // { imports = attrs.imports ++ common-imports; };

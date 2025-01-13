@@ -7,7 +7,8 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       hack-font
-      (nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" ]; })
+      nerd-fonts.fira-code
+      nerd-fonts.droid-sans-mono
     ];
   };
 }
