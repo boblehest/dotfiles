@@ -63,7 +63,7 @@
 
       mako = { # desktop notification daemon
         enable = true;
-        defaultTimeout = 7000;
+        settings.default-timeout = 7000;
       };
 
       flameshot = { # screenshot utility

@@ -5,7 +5,6 @@ with lib;
     ./disks.nix
     ./grafana.nix
     ./hardware/onyx-boox-max3.nix
-    ./nixbuild.nix
     ./video-conferencing.nix
     ./video.nix
     ./vpn.nix

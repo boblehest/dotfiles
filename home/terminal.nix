@@ -1,6 +1,5 @@
 { pkgs, lib, ... }:
 
-with pkgs;
 with {
   inherit (lib) id;
   inherit (lib.strings) lowerChars upperChars;

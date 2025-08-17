@@ -16,6 +16,8 @@
       min-free = ${toString (20 * giga)}
     '';
 
+    channel.enable = false;
+
     settings = {
       extra-experimental-features = [ "nix-command" "flakes" ];
       trusted-users = [ "root" "${config.jlo.username}" "@wheel" ];

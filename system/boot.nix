@@ -1,9 +1,12 @@
 { config, lib, pkgs, ... }:
 
 {
-  boot = {
+  boot = lib.mkMerge [{
     kernelPackages = pkgs.linuxPackages_latest;
-    kernelParams = lib.mkIf config.jlo.oldIntel [ "intel_pstate=active" ];
+    kernelParams = [
+      "i915.enable_psr=0"
+      "i915.enable_fbc=0"
+    ];
     tmp.useTmpfs = ! config.jlo.conserveMemory;
     supportedFilesystems = lib.mkIf (config.jlo.ntfsDriver) [ "ntfs" ];
 
@@ -15,5 +18,7 @@
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-  };
+  }
+  (lib.mkIf config.jlo.oldIntel { kernelParams = [ "intel_pstate=active" ]; })
+  ];
 }
