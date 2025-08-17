@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -11,8 +12,10 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, battery_monitor, ... }: let
-    specialArgs = { inherit battery_monitor home-manager; };
+  outputs = { nixpkgs, home-manager, nixos-hardware, battery_monitor, ... }: let
+    specialArgs = {
+      inherit battery_monitor home-manager nixos-hardware;
+    };
     system = "x86_64-linux";
   in {
     nixosConfigurations.default = nixpkgs.lib.nixosSystem {
