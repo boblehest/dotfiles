@@ -37,7 +37,7 @@ in
       agda-vim
       asyncomplete-vim
       asyncomplete-lsp-vim
-      coc-texlab
+      # coc-texlab
       everforest # color scheme
       fzf-vim
       fzfWrapper
@@ -52,7 +52,6 @@ in
       vim-abolish
       vim-commentary
       vim-fugitive
-      vim-glsl
       vim-lion
       vim-lsp
       vim-markdown
@@ -78,7 +77,8 @@ in
       ln -sfT /etc/nixos/dotfiles/home/neovim/config/init.vim ~/.config/nvim/init2.vim
   '';
 
-  home.packages = [
-    pkgs.texlab
-  ];
+  # TODO This should depend on latex setting
+  # home.packages = [
+  #   pkgs.texlab
+  # ];
 }

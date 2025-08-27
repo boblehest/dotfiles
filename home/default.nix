@@ -7,7 +7,6 @@
 
     imports = [
       ./common.nix
-      ./desktop
       ./fish
       ./neovim
       ./other.nix

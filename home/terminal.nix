@@ -1,7 +1,6 @@
 { pkgs, lib, ... }:
 
 with pkgs;
-with import ../lib/execute.nix { inherit lib pkgs; };
 
 {
   programs = {
@@ -14,7 +13,6 @@ with import ../lib/execute.nix { inherit lib pkgs; };
       defaultCommand = "${pkgs.fd}/bin/fd --type f";
     };
 
-    alacritty.enable = true;
     tmux = {
       enable = true;
       escapeTime = 0;
