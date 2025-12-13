@@ -112,6 +112,8 @@
     "XF86MonBrightnessUp" = "exec lightctl up";
     "XF86MonBrightnessDown" = "exec lightctl down";
 
+    "${modifier}+Shift+s" =  "exec systemctl suspend";
+
     "${modifier}+m" = "exec flameshot gui";
     "Ctrl+grave" = "exec makoctl dismiss --all";
     "Mod1+grave" = "exec makoctl restore";

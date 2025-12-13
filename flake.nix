@@ -40,15 +40,15 @@
             programs.jlo.git = {
               enable = true;
               userName = "Jørn Lode";
-              userEmail = "jorn.lode@eviny.no";
+              userEmail = "jorn.lode@fakemail.no";
             };
           };
           config.jlo = {
             username = "jlo";
-            hostName = "jlo-eviny";
+            hostName = "jlo-zrch";
             conserveMemory = false;
             videoDrivers = [ "intel" ];
-            stateVersion = "23.11";
+            stateVersion = "25.05";
           };
         }
       ];

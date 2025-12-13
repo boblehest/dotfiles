@@ -8,7 +8,9 @@
     ./common.nix
     ./desktop.nix
     ./fonts.nix
+    ./printing.nix
     ./services.nix
+    ./sleep.nix
     ./users.nix
     ./video.nix
     ./virtualisation.nix
