@@ -40,7 +40,7 @@ in
       # coc-texlab
       everforest # color scheme
       fzf-vim
-      fzfWrapper
+      fzf-wrapper
       gruvbox # colorscheme
       nord-vim # colorscheme
       nvim-lspconfig

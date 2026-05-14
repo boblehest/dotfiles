@@ -6,15 +6,16 @@
     programs = {
       git = lib.mkMerge [ secretCfg.git {
         package = pkgs.gitMinimal;
-        aliases = {
-          st = "status -s";
-          co = "checkout";
-        };
-        extraConfig = {
+        settings = {
+          alias = {
+            st = "status -s";
+            co = "checkout";
+          };
           init.defaultBranch = "master";
           pull.rebase = false;
           push.default = "upstream";
         };
+        signing.format = null;
       }];
     };
   }

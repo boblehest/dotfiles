@@ -66,10 +66,10 @@ local servers = {
   }
 }
 
-local lspconfig = require('lspconfig')
 for lsp_name, lsp_settings in pairs(servers) do
   lsp_settings.on_attach = on_attach
-  lspconfig[lsp_name].setup(lsp_settings)
+  vim.lsp.config(lsp_name, lsp_settings)
+  vim.lsp.enable(lsp_name)
 end
 
 vim.api.nvim_create_autocmd({"BufWritePre"}, {
