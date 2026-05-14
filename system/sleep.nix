@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   config = {
     systemd.services.disable-wakeup = {
@@ -5,7 +7,7 @@
       wantedBy = [ "multi-user.target" ];
       after = [ "multi-user.target" ];
       script = ''
-        for device in $(awk '{if ($3 == "*enabled") print $1}' /proc/acpi/wakeup); do
+        for device in $(${pkgs.gawk}/bin/awk '{if ($3 == "*enabled") print $1}' /proc/acpi/wakeup); do
           echo $device > /proc/acpi/wakeup
         done
       '';

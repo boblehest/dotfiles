@@ -1,6 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
+  # Work computer keyboard
+  hardware.keyboard.zsa.enable = true;
+
   boot = lib.mkMerge [{
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [

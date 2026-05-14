@@ -84,7 +84,7 @@ vim.keymap.set({'n', 'v'}, '<leader>d', '"+d')
 
 -- Close a buffer without closing the split window.
 local bd_preserve_split = function()
-  if vim.api.nvim_get_option_value('mod', {}) then
+  if vim.api.nvim_get_option_value('mod', {}) or (#vim.fn.getbufinfo({buflisted = 1}) == 1) then
     -- The bd command will fail because the buffer is modified,
     -- so instead of switching to another buffer and then issuing
     -- the failing command, we will just issue it from the current buffer
@@ -139,7 +139,15 @@ local servers = {
   gopls = {}, -- go
   hls = {}, -- haskell
   nixd = {}, -- nix
-  rust_analyzer = {}, -- rust
+  rust_analyzer = {
+    settings = {
+      ["rust-analyzer"] = {
+        check = {
+          command = "clippy"
+        },
+      },
+    },
+  }, -- rust
   ruff = {}, -- python linting?
   pyright = {
     settings = {

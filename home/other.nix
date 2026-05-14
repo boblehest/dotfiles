@@ -18,14 +18,21 @@ in {
 
   config = {
     home.packages = with pkgs; [
-      azure-cli
       jmtpfs
-      niv
+      jq
+      yq
+
+      # software for work computer
+      slack
+      vault
+      lens # k8s gui
+      kubectl # needed by lens
+      kubelogin-oidc # needed by lens
+      dbeaver-bin
     ];
 
     home.sessionVariables.EDITOR = "nvim";
     home.sessionVariables.GOPATH = "/home/jlo/.cache/go"; # TODO don't hardcode home path
-    home.sessionVariables.ZELLIJ_AUTO_EXIT = "true";
 
     programs = {
       git = mkMerge [
@@ -40,6 +47,15 @@ in {
             init.defaultBranch = "master";
             pull.rebase = false;
             push.default = "upstream";
+            url = {
+              # TODO Could this be in work devshells instead of being globally configured like this?
+              "git@gitlab.zrch.cloud:" = {
+                insteadOf = [
+                  "https://gitlab.com/"
+                  "https://gitlab.zrch.cloud/"
+                ];
+              };
+            };
           };
         }
       ];

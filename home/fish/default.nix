@@ -18,18 +18,26 @@
       # to change directory to where I am when I exit `lf`. This is not default
       # behavior; so this function adds that functionality.
       lfcd.body = ''
-          set tmp (mktemp)
-          lf -last-dir-path=$tmp $argv
-          if test -f "$tmp"
-            set dir (cat $tmp)
-            rm -f $tmp
-            if test -d "$dir"
-              if test "$dir" != (pwd)
-                  cd $dir
-              end
+        set tmp (mktemp)
+        lf -last-dir-path=$tmp $argv
+        if test -f "$tmp"
+          set dir (cat $tmp)
+          rm -f $tmp
+          if test -d "$dir"
+            if test "$dir" != (pwd)
+                cd $dir
             end
           end
-        '';
+        end
+      '';
+
+      to_unix.body = ''
+        date -u -d "$argv" +"%s"
+      '';
+
+      from_unix.body = ''
+        date -u -d @"$argv" +"%Y-%m-%dT%H:%M:%S"
+      '';
 
       # Helper function to get the store path of a package
       # E.g. `nixStorePath python3`

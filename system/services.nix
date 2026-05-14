@@ -2,6 +2,10 @@
 
 {
   services = {
+    # yubikey
+    udev.packages = [ pkgs.yubikey-personalization ];
+    pcscd.enable = true;
+
     hardware.bolt.enable = true; # TODO What was this for? Work? (Charging via screen cable maybe?)
     # TODO Replace by OCIS
     # TODO Put into own module?
@@ -25,7 +29,7 @@
         {
           publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
           allowedIPs = [ "10.13.37.0/24" ];
-          endpoint = "84.215.128.31:43434";
+          endpoint = "92.220.73.158:43434";
         }
       ];
     };
@@ -38,7 +42,7 @@
       settings = {
         default_session = {
           command = ''
-              ${pkgs.tuigreet}/bin/tuigreet \
+              ${pkgs.greetd.tuigreet}/bin/tuigreet \
               --time \
               --asterisks \
               --user-menu \
@@ -64,6 +68,7 @@
   security.polkit.enable = true;
   security.pam.services.swaylock = {};
   programs = {
+    openvpn3.enable = true; # for zrch vpn? cant remember
     light.enable = true;
     ssh.startAgent = true;
   };

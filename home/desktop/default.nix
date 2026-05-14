@@ -14,6 +14,7 @@
       alacritty = { # terminal emulator
         enable = true;
         settings.font.size = 16;
+        settings.window.dynamic_title = true;
       };
       waybar = {
         enable = true;
