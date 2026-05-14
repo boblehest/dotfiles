@@ -3,19 +3,76 @@
 with lib;
 
   {
-    services = {
-      services.lidarr = {
-        enable = true;
-        settings.server.port = 8686;
+    # TODO: I assume that one of these two is enough. Why do I have both?
+    # (Probably for desperate testing)
+    users.users.lidarr.extraGroups = [ "transmission" "nzbget" ];
+    systemd.services.lidarr.serviceConfig = {
+      Group = lib.mkForce "";
+      SupplementaryGroups = [ "nzbget" "transmission" ];
+    };
+
+    environment.systemPackages = with pkgs; [
+      # for nzbget
+      unrar
+      p7zip
+    ];
+
+    # So that navidrome can access some files managed by nextcloud
+    # (my nextcloud music library)
+    users.groups.music = {};
+    users.users.nextcloud.extraGroups = [ "music" ];
+    users.users.navidrome.extraGroups = [ "music" ];
+
+    # Because the NixOS module for navidrome sandboxes it, we need to manually
+    # add paths we wish to expose to navidrome here:
+    systemd.services.navidrome = {
+      serviceConfig = {
+        BindReadOnlyPaths = [ "/var/lib/nextcloud/data/jlo/files/music" ];
       };
-      services.navidrome = {
+    };
+
+    services = {
+      lidarr.enable = true;
+      prowlarr.enable = true;
+      nzbget.enable = true;
+
+      mopidy = {
+        enable = true;
+        extensionPackages = [
+          pkgs.mopidy-iris
+          pkgs.mopidy-subidy
+        ];
+        settings = {
+          http = {
+            enabled = true;
+            hostname = "0.0.0.0";
+          };
+          audio.output = "alsasink device=hw:1,0";
+          subidy = {
+            url = "http://127.0.0.1:4533";
+            username = "meow";
+            password = "meowmeow";
+          };
+        };
+      };
+
+      navidrome = {
         enable = true;
         settings = {
           Address = "0.0.0.0";
+          MusicFolder = "/srv/music";
           Port = 4533;
         };
       };
 
+      transmission = {
+        enable = true;
+        package = pkgs.transmission_4;
+        settings = {
+          rpc-bind-address = "0.0.0.0";
+          rpc-whitelist-enabled = false;
+        };
+      };
 
       nextcloud = {
         enable = true;
