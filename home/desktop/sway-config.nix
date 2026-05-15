@@ -76,8 +76,8 @@
       unbindKey = key: { name = "${modifier}+${key}"; value = null; }; 
       keyUnmappings = lib.listToAttrs (lib.map unbindKey keysToUnbind');
   in lib.mkOptionDefault ({
-    "${modifier}+r" = "exec ${pkgs.rofi-wayland}/bin/rofi -show run";
-    "${modifier}+t" = "exec ${pkgs.rofi-wayland}/bin/rofi -show window";
+    "${modifier}+r" = "exec ${pkgs.rofi}/bin/rofi -show run";
+    "${modifier}+t" = "exec ${pkgs.rofi}/bin/rofi -show window";
     "${modifier}+b" = "exec firefox";
 
     "${modifier}+h" = "splith";
