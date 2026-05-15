@@ -45,10 +45,11 @@ with {
         "l" = "up";
         ";" = "open";
         "h" = "find-next";
-        "<delete>" = "delete";
+        "<delete>" = "trash";
       };
       commands = {
         open = "&${pkgs.mimeo}/bin/mimeo \"$f\"";
+        trash = "%set -f; ${pkgs.trashy}/bin/trash put \"$fx\"";
       };
     };
 
