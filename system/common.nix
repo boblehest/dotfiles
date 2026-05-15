@@ -37,10 +37,10 @@
 
   nixpkgs = {
     config.allowUnfree = true;
-    flake = {
-      setFlakeRegistry = false;
-      setNixPath = false;
-    };
+    # flake = {
+    #   setFlakeRegistry = false;
+    #   setNixPath = false;
+    # };
   };
   location.provider = "geoclue2";
 

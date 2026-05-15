@@ -13,19 +13,20 @@
     };
 
     gnome.gnome-keyring.enable = true; # for nextcloud client
+    gnome.gcr-ssh-agent.enable = false; # we already have ssh-agent; I trust that gnome keyring can use that one instead.
 
     jlo.wireguard = {
       enable = true;
       peerType = "client";
       vpnInterface = "wg0";
-      ipAddressWithSubnet = "10.13.37.3/24";
+      ipAddressWithSubnet = "10.13.37.2/24";
       listenPort = 43434;
       privateKeyFile = "/etc/wireguard-key";
       peers = [
         {
           publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
           allowedIPs = [ "10.13.37.0/24" ];
-          endpoint = "84.215.128.31:43434";
+          endpoint = "lavpan.net:43434";
         }
       ];
     };
@@ -38,7 +39,7 @@
       settings = {
         default_session = {
           command = ''
-              ${pkgs.tuigreet}/bin/tuigreet \
+              ${pkgs.greetd.tuigreet}/bin/tuigreet \
               --time \
               --asterisks \
               --user-menu \
