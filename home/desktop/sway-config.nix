@@ -20,7 +20,7 @@
       dwt = "enabled";
       tap = "enabled";
     };
-    # TODO Don't hardcode this keyboard label
+    # TODO Don't hardcode this keyboard label (unless it somehow is universal among different laptops)
     "1:1:AT_Translated_Set_2_keyboard" = (lib.mkIf (config.jlo.swapCapsEscape) {
       xkb_options = "compose:menu,caps:swapescape";
     });

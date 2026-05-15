@@ -26,6 +26,11 @@
         {
           publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
           allowedIPs = [ "10.13.37.0/24" ];
+          # The computer fails to connect to wireguard at boot, and I'm thinking
+          # it might be because it now depends on DNS to resolve it first. Try
+          # changing this back to the actual IP address of the VPN server and
+          # see if it fixes it. If so, try to figure out _how_ to make it work
+          # when using the domain name.
           endpoint = "lavpan.net:43434";
         }
       ];

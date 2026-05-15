@@ -112,4 +112,11 @@ git clone "$dotfilesRepo" "$root/etc/nixos/dotfiles"
 cp "$root/etc/nixos/dotfiles/scripts/shim.nix" "$root/etc/nixos/configuration.nix"
 echo -e "{\n  stateVersion = \"${stateVersion}\";\n  username = \"${username}\";\n  conserveMemory = ${swap};\n  hostName = \"${hostname}\";\n  laptopFeatures = ${laptop};\n  latex = ${latex};\n  intelVideo = ${intelVideo};\n  oldIntel = ${oldIntel};\n  swapCapsEscape = ${swapCapsEscape};\n  nvidia = ${nvidia};\n  git = ${git};\n}" > "$root/etc/nixos/dotfiles/settings.nix"
 
-nixos-install --flake "$root/etc/nixos/flake.nix"
+nixos-install --flake "$root/etc/nixos/dotfiles#default"
+
+# What's missing:
+# * Wifi setup (provide instructions for wpa_cli if nothing more)
+# * Copy the hardware-configuration that's generated (actually, do we even want all of it? I think not. E.g. it has disk setup, but our config also contains disk setup which is cleaner than the one in hardware-configuration.nix)
+# * Get rid of the settings.nix stuff. Instead, replace it by a simple flake.nix which looks something like:
+# { inputs.jlosystem = ...; outputs.<foo> = jlosystem.mkSystem { <settings go here> } }
+# * Move neovim out from here? Something in the config pulls in A LOT of dependencies, and I'm assuming the language servers are a big part of it. It would be nice if we could get a BOM (bill of materials) for the config, to see what pulls in what, so I could optimize the config a bit. E.g. if something pulls in 100 KB of dependencies, I don't think it's important to consider whether I need it on all my systems. But if something pulls in a gigabyte of dependencies, I might want to think more on whether I actually need it on all systems.
