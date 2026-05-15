@@ -1,9 +1,11 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      # url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     battery_monitor = {
@@ -29,23 +31,29 @@
         ./modules/default.nix
         ./system
         {
+          # NOTE the confusing similarity between the `jlo` config namespace
+          # and the username `jlo`. They are semantically very different, even
+          # though syntactically the same. Rename "jlo" to "heim".
           config.jlo.users.jlo = {
             hm-config = import ./home;
           };
           config.home-manager.users.jlo = {
             jlo = {
-              latex = false;
+              latex = true;
               swapCapsEscape = true;
             };
             programs.jlo.git = {
               enable = true;
               userName = "Jørn Lode";
-              userEmail = "jorn.lode@eviny.no";
+              userEmail = "jlode90@gmail.com";
             };
           };
+          # config.services.jlo.grafana.enable = true;
           config.jlo = {
-            username = "jlo";
-            hostName = "jlo-eviny";
+            username = "jlo"; # TODO Why is this an own option? It should be inferred from some attrset that configures all users
+            # There rest of this is system-wide config, not user-config
+            hostName = "jlo-laptop";
+            ntfsDriver = true;
             conserveMemory = false;
             videoDrivers = [ "intel" ];
             stateVersion = "23.11";
