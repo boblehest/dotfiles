@@ -1,9 +1,9 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";  #nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     battery_monitor = {
@@ -25,7 +25,7 @@
         {
           nixpkgs.overlays = [ battery_monitor.overlays.default ];
         }
-        ./hardware/lenovo-t490.nix
+        ./hardware/lenovo-t14s.nix
         ./modules/default.nix
         ./system
         {
@@ -40,7 +40,7 @@
             programs.jlo.git = {
               enable = true;
               userName = "Jørn Lode";
-              userEmail = "jorn.lode@fakemail.no";
+              userEmail = "jl@zrch.com";
             };
           };
           config.jlo = {

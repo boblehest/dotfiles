@@ -16,7 +16,20 @@
       config.adminpassFile = "/etc/nextcloud-key";
     };
 
+    postgresql = {
+      enable = true;
+      settings.port = 5433;
+      ensureDatabases = [ "mydatabase" ];
+      authentication = pkgs.lib.mkOverride 10 ''
+      #type database  DBuser  auth-method
+      local all      all     trust
+      host  all      all     127.0.0.1/32   trust
+      host  all      all     ::1/128        trust
+      '';
+    };
+
     gnome.gnome-keyring.enable = true; # for nextcloud client
+    # gnome.gcr-ssh-agent.enable = false;
 
     jlo.wireguard = {
       enable = true;

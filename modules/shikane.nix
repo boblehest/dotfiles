@@ -51,7 +51,7 @@ in
     };
     home.packages = [
       pkgs.shikane # For the CLI (saving profiles)
-      pkgs.nwg-displays # for output configuration
+      # pkgs.nwg-displays # for output configuration
     ];
   };
 }

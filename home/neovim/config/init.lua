@@ -108,6 +108,7 @@ vim.keymap.set('n', '<space>e', '<cmd>lua vim.diagnostic.open_float()<CR>')
 vim.keymap.set('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
 vim.keymap.set('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 vim.keymap.set('n', '<space>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
+-- vim.keymap.set('n', '<space>q', '<cmd>lua vim.diagnostic.setqflist()<CR>')
 
 vim.diagnostic.config({virtual_text = false}) -- I found inline text to be annoying and ugly
 
