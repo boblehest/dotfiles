@@ -51,6 +51,16 @@
         };
       };
 
+      swayidle = {
+        enable = true;
+        events = [
+          {
+            event = "before-sleep";
+            command = "${pkgs.swaylock}/bin/swaylock -fF";
+          }
+        ];
+      };
+
       gammastep = { # "night mode" (screen color adjustment)
         enable = true;
         latitude = "60.38";
