@@ -7,6 +7,7 @@
     conserveMemory = false;
     ntfsDriver = true;
     videoDrivers = [ "intel" ];
+    disk = "/dev/nvme0n1"; # TODO: verify
     features = {
       postgres = true;
       virtualisation = true;
@@ -39,7 +40,7 @@
   config.home-manager.users.jlo = {
     my.swapCapsEscape = true;
     my.latex = true;
-    programs.my.git = {
+    my.programs.git = {
       enable = true;
       userName = "Jørn Lode";
       userEmail = "jlode90@gmail.com";

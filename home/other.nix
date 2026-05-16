@@ -11,7 +11,7 @@ let
     };
   };
 in {
-  options.programs.my.git = mkOption {
+  options.my.programs.git = mkOption {
     type = types.submodule gitModule;
     default = {};
   };
@@ -21,22 +21,14 @@ in {
       jmtpfs
       jq
       yq
-
-      # TODO Move into jlo-zrch config
-      slack
-      vault
-      lens # k8s gui
-      kubectl # needed by lens
-      kubelogin-oidc # needed by lens
-      dbeaver-bin
     ];
 
     home.sessionVariables.EDITOR = "nvim";
-    home.sessionVariables.GOPATH = "/home/jlo/.cache/go"; # TODO don't hardcode home path
+    home.sessionVariables.GOPATH = "${config.home.homeDirectory}/.cache/go";
 
     programs = {
       git = mkMerge [
-        config.programs.my.git
+        config.my.programs.git
         {
           package = pkgs.gitMinimal;
           aliases = {
@@ -47,21 +39,10 @@ in {
             init.defaultBranch = "master";
             pull.rebase = false;
             push.default = "upstream";
-            url = {
-              # TODO Could this be in work devshells instead of being globally configured like this?
-              "git@gitlab.zrch.cloud:" = {
-                insteadOf = [
-                  "https://gitlab.com/"
-                  "https://gitlab.zrch.cloud/"
-                ];
-              };
-            };
           };
         }
       ];
     };
 
-    # TODO Why is this always enabled?
-    services.nextcloud-client.enable = true;
   };
 }

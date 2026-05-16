@@ -62,12 +62,10 @@
     unzip
     wget
     zip
-    capitaine-cursors # TODO Put this along with the rest of the desktop config, if possible. Does just installing this also change the default cursor? I would think not.
     awscli2 # Needed for work
   ];
 
   services = {
-    hardware.bolt.enable = true; # TODO: What was this for? Work? (Charging via screen cable maybe?)
     fstrim.enable = true;
     upower.enable = true;
   };

@@ -44,6 +44,15 @@
     my.services.battery-monitor.enable = true;
 
     services = {
+      nextcloud-client.enable = true;
+
+      swayidle = {
+        enable = true;
+        events = [{
+          event = "before-sleep";
+          command = "${pkgs.swaylock}/bin/swaylock -fF";
+        }];
+      };
 
       avizo = { # Notification daemon for volume and brightness adjustment
         enable = true;

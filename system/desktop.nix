@@ -18,10 +18,11 @@
       };
       services.gnome.gnome-keyring.enable = true;
       services.gnome.gcr-ssh-agent.enable = false; # using programs.ssh.startAgent instead
+      services.hardware.bolt.enable = true;
       security.polkit.enable = true;
       security.pam.services.swaylock = {};
       programs.light.enable = true;
-      environment.systemPackages = with pkgs; [ rofi wl-clipboard ];
+      environment.systemPackages = with pkgs; [ rofi wl-clipboard capitaine-cursors ];
     })
   ];
 }

@@ -7,7 +7,7 @@
     ./boot.nix
     ./common.nix
     ./desktop.nix
-    ./disks.nix
+    ./disko.nix
     ./fonts.nix
     ./greeter.nix
     ./onyx-boox-max3.nix

@@ -6,6 +6,7 @@
     stateVersion = "25.05";
     conserveMemory = false;
     videoDrivers = [ "intel" ];
+    disk = "/dev/nvme0n1"; # TODO: verify
     features = {
       yubikey = true;
       zsaKeyboard = true;
@@ -44,10 +45,24 @@
   config.home-manager.users.jlo = {
     my.swapCapsEscape = true;
     my.latex = false;
-    programs.my.git = {
+    my.programs.git = {
       enable = true;
       userName = "Jørn Lode";
       userEmail = "jl@zrch.com";
     };
+    # TODO: Move into per-project devshells via GIT_CONFIG_COUNT/GIT_CONFIG_KEY_n/GIT_CONFIG_VALUE_n
+    # env vars (git 2.31+), which layer on top of ~/.gitconfig without replacing it.
+    programs.git.extraConfig.url."git@gitlab.zrch.cloud:".insteadOf = [
+      "https://gitlab.com/"
+      "https://gitlab.zrch.cloud/"
+    ];
+    home.packages = with pkgs; [
+      slack
+      vault
+      lens           # k8s gui
+      kubectl        # needed by lens
+      kubelogin-oidc # needed by lens
+      dbeaver-bin
+    ];
   };
 }
