@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.services.jlo.grafana;
+  cfg = config.my.services.grafana;
 in
   with lib;
 {
-  options.services.jlo.grafana = {
+  options.my.services.grafana = {
     enable = mkEnableOption "Grafana LGTM stack";
   };
 

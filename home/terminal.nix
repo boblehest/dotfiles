@@ -1,12 +1,4 @@
-{ pkgs, lib, ... }:
-
-with {
-  inherit (lib) id;
-  inherit (lib.strings) lowerChars upperChars;
-  zipToAttrs =
-    list1: list2:
-    lib.listToAttrs (lib.zipListsWith (name: value: { inherit name value; }) list1 list2);
-};
+{ pkgs, ... }:
 
 {
   programs = {

@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  options.jlo.swapCapsEscape = lib.mkEnableOption {};
+  options.my.swapCapsEscape = lib.mkEnableOption {};
 
   config = {
     wayland.windowManager.sway = {
@@ -40,9 +40,10 @@
       zathura.enable = true;
     };
 
+    my.services.shikane.enable = true;
+    my.services.battery-monitor.enable = true;
+
     services = {
-      jlo.battery-monitor.enable = true;
-      jlo.shikane.enable = true;
 
       avizo = { # Notification daemon for volume and brightness adjustment
         enable = true;

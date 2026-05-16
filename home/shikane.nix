@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 with { inherit (lib) mkOption mkEnableOption types; };
 let
-  cfg = config.services.jlo.shikane;
+  cfg = config.my.services.shikane;
 in
 {
-  options.services.jlo.shikane = {
+  options.my.services.shikane = {
     enable = mkEnableOption {};
     systemdTarget = mkOption {
       type = types.str;
@@ -51,7 +51,7 @@ in
     };
     home.packages = [
       pkgs.shikane # For the CLI (saving profiles)
-      # pkgs.nwg-displays # for output configuration
+      pkgs.nwg-displays # for output configuration
     ];
   };
 }

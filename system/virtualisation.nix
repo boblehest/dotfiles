@@ -1,18 +1,17 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
-
+{ config, lib, pkgs, ... }:
 {
-  virtualisation = {
-    docker = {
-      enable = true;
-      enableOnBoot = false;
-    };
-    podman.enable = true;
-    # virtualbox.host.enable = true;
-  };
-  # users.extraGroups.vboxusers.members = [ config.username ]
+  options.my.features.virtualisation = lib.mkEnableOption "virtualisation (Docker, Podman)";
 
-  environment.systemPackages =
-    mkIf config.virtualisation.docker.enable [ pkgs.docker-compose ];
+  config = lib.mkIf config.my.features.virtualisation {
+    virtualisation = {
+      docker = {
+        enable = true;
+        enableOnBoot = false;
+      };
+      podman.enable = true;
+    };
+
+    environment.systemPackages =
+      lib.mkIf config.virtualisation.docker.enable [ pkgs.docker-compose ];
+  };
 }

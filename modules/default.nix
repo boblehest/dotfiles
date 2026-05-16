@@ -2,35 +2,19 @@
 with lib;
 {
   imports = [
-    ./disks.nix
     ./grafana.nix
-    ./hardware/onyx-boox-max3.nix
-    ./video-conferencing.nix
-    ./video.nix
-    ./vpn.nix
+    ./mediaserver.nix
     ./users.nix
+    ./vpn.nix
   ];
 
-  options.jlo = mkOption {
-    type = types.submodule {
-      options = {
-        stateVersion = mkOption {
-          type = types.str;
-        };
-        hostName = mkOption {
-          type = types.str;
-        };
-        username = mkOption {
-          type = types.str;
-        };
-        videoDrivers = mkOption {
-          type = types.listOf types.str;
-        };
-        ntfsDriver = mkEnableOption {};
-        oldIntel = mkEnableOption {};
-        conserveMemory = mkEnableOption { default = true; };
-      };
-    };
-    default = {};
+  # Host identity options — feature options are declared in their respective modules.
+  options.my = {
+    stateVersion  = mkOption { type = types.str; };
+    hostName      = mkOption { type = types.str; };
+    username      = mkOption { type = types.str; };
+    ntfsDriver    = mkEnableOption {};
+    oldIntel      = mkEnableOption {};
+    conserveMemory = mkEnableOption { default = true; };
   };
 }

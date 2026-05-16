@@ -8,11 +8,11 @@
         "pyproject-nix": "pyproject-nix"
       },
       "locked": {
-        "lastModified": 1774103084,
-        "narHash": "sha256-1IYuPvDOGlL8mB16q6ajZOdUNBAMNbxMS/0H6d1WLLc=",
+        "lastModified": 1778911778,
+        "narHash": "sha256-5bognMZyV3jwu+UHWyl4UuY9Ne2vg5WyeHTPQeA6USQ=",
         "owner": "boblehest",
         "repo": "battery-monitor",
-        "rev": "e76102ac31ccb15f16e1eda1387147d857b126f3",
+        "rev": "b9ed3a08af32153c3718bd858cd87c77dc2575ed",
         "type": "gitlab"
       },
       "original": {

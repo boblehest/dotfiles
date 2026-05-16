@@ -21,7 +21,7 @@
       tap = "enabled";
     };
     # TODO Don't hardcode this keyboard label
-    "1:1:AT_Translated_Set_2_keyboard" = (lib.mkIf (config.jlo.swapCapsEscape) {
+    "1:1:AT_Translated_Set_2_keyboard" = (lib.mkIf (config.my.swapCapsEscape) {
       xkb_options = "compose:menu,caps:swapescape";
     });
   };
@@ -76,8 +76,8 @@
       unbindKey = key: { name = "${modifier}+${key}"; value = null; }; 
       keyUnmappings = lib.listToAttrs (lib.map unbindKey keysToUnbind');
   in lib.mkOptionDefault ({
-    "${modifier}+r" = "exec ${pkgs.rofi-wayland}/bin/rofi -show run";
-    "${modifier}+t" = "exec ${pkgs.rofi-wayland}/bin/rofi -show window";
+    "${modifier}+r" = "exec ${pkgs.rofi}/bin/rofi -show run";
+    "${modifier}+t" = "exec ${pkgs.rofi}/bin/rofi -show window";
     "${modifier}+b" = "exec firefox";
 
     "${modifier}+h" = "splith";

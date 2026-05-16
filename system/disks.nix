@@ -1,5 +1,8 @@
+{ config, lib, ... }:
 {
-  config = {
+  options.my.features.disks = lib.mkEnableOption "standard disk layout (nixos/boot labels)";
+
+  config = lib.mkIf config.my.features.disks {
     fileSystems."/" = {
       device = "/dev/disk/by-label/nixos";
       fsType = "ext4";

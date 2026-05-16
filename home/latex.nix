@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  options.jlo.latex = lib.mkEnableOption {};
+  options.my.latex = lib.mkEnableOption {};
 
-  config = lib.mkIf config.jlo.latex {
+  config = lib.mkIf config.my.latex {
     programs.zathura = {
       options = {
         synctex = true;

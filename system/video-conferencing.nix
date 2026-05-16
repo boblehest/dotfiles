@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.jlo.video-conferencing;
+  cfg = config.my.video-conferencing;
 in {
-  options.jlo.video-conferencing = {
+  options.my.video-conferencing = {
     enable = lib.mkEnableOption {};
   };
   config = lib.mkIf cfg.enable {

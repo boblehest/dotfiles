@@ -11,7 +11,7 @@ let
     };
   };
 in {
-  options.programs.jlo.git = mkOption {
+  options.programs.my.git = mkOption {
     type = types.submodule gitModule;
     default = {};
   };
@@ -22,7 +22,7 @@ in {
       jq
       yq
 
-      # software for work computer
+      # TODO Move into jlo-zrch config
       slack
       vault
       lens # k8s gui
@@ -36,7 +36,7 @@ in {
 
     programs = {
       git = mkMerge [
-        config.programs.jlo.git
+        config.programs.my.git
         {
           package = pkgs.gitMinimal;
           aliases = {

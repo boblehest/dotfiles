@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }:
 let
-  cfg = config.services.jlo.wireguard;
+  cfg = config.my.services.wireguard;
 in
   with lib;
 {
-  options.services.jlo.wireguard = {
+  options.my.services.wireguard = {
     enable = mkEnableOption "WireGuard Server";
     wanInterface = mkOption {
       type = types.nullOr types.str;

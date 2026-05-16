@@ -20,7 +20,7 @@
 
     settings = {
       extra-experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "root" "${config.jlo.username}" "@wheel" ];
+      trusted-users = [ "root" "${config.my.username}" "@wheel" ];
       substituters = [
         # "https://cache.nixos.org/" # TODO 2024-05-09 Does this one have to be added manually?
         "https://nixcache.reflex-frp.org"
@@ -46,10 +46,7 @@
 
   networking = {
     networkmanager.enable = true;
-    networkmanager.plugins = [
-      pkgs.networkmanager-openvpn # Needed for work VPN
-    ];
-    hostName = config.jlo.hostName;
+    hostName = config.my.hostName;
     firewall.enable = false;
   };
 
@@ -69,10 +66,17 @@
     awscli2 # Needed for work
   ];
 
+  services = {
+    hardware.bolt.enable = true; # TODO: What was this for? Work? (Charging via screen cable maybe?)
+    fstrim.enable = true;
+    upower.enable = true;
+  };
+
   programs = {
     fish.enable = true;
     dconf.enable = true;
+    ssh.startAgent = true;
   };
 
-  system.stateVersion = config.jlo.stateVersion; # Where to set this?
+  system.stateVersion = config.my.stateVersion; # Where to set this?
 }

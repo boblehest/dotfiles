@@ -1,7 +1,8 @@
-{ pkgs, ... }:
-
+{ config, lib, pkgs, ... }:
 {
-  config = {
+  options.my.features.sleep = lib.mkEnableOption "sleep/suspend configuration";
+
+  config = lib.mkIf config.my.features.sleep {
     systemd.services.disable-wakeup = {
       description = "Disable all ACPI wake sources";
       wantedBy = [ "multi-user.target" ];
