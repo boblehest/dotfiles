@@ -12,6 +12,7 @@
     hardware.graphics = {
       enable = true;
       extraPackages = with pkgs; [
+        # Why is this installed for all hosts?
         intel-media-driver
       ];
     };

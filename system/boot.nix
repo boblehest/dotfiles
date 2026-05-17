@@ -8,6 +8,7 @@
     boot = lib.mkMerge [{
       kernelPackages = pkgs.linuxPackages_latest;
       kernelParams = [
+        # TODO Why was this added?
         "i915.enable_psr=0"
         "i915.enable_fbc=0"
       ];
