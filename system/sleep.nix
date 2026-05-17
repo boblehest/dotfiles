@@ -15,8 +15,10 @@
       serviceConfig.Type = "oneshot";
     };
 
-    services.logind.lidSwitch = "ignore";
-    services.logind.lidSwitchDocked = "ignore";
-    services.logind.lidSwitchExternalPower = "ignore";
+    services.logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchDocked = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+    };
   };
 }

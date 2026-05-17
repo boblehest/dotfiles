@@ -28,14 +28,18 @@ in {
 
     programs = {
       git = mkMerge [
-        config.my.programs.git
+        {
+          enable = config.my.programs.git.enable;
+          settings.user.name  = config.my.programs.git.userName;
+          settings.user.email = config.my.programs.git.userEmail;
+        }
         {
           package = pkgs.gitMinimal;
-          aliases = {
-            st = "status -s";
-            co = "checkout";
-          };
-          extraConfig = {
+          settings = {
+            alias = {
+              st = "status -s";
+              co = "checkout";
+            };
             init.defaultBranch = "master";
             pull.rebase = false;
             push.default = "upstream";

@@ -52,7 +52,7 @@
     };
     # TODO: Move into per-project devshells via GIT_CONFIG_COUNT/GIT_CONFIG_KEY_n/GIT_CONFIG_VALUE_n
     # env vars (git 2.31+), which layer on top of ~/.gitconfig without replacing it.
-    programs.git.extraConfig.url."git@gitlab.zrch.cloud:".insteadOf = [
+    programs.git.settings."url.git@gitlab.zrch.cloud:".insteadOf = [
       "https://gitlab.com/"
       "https://gitlab.zrch.cloud/"
     ];
