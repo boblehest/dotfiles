@@ -4,9 +4,10 @@
     username = "jlo";
     hostName = "jlo-zrch";
     stateVersion = "25.05";
+    homeStateVersion = "25.05";
     conserveMemory = false;
     videoDrivers = [ "intel" ];
-    disk = "/dev/nvme0n1"; # TODO: verify
+    disks.device = "/dev/nvme0n1";
     features = {
       yubikey = true;
       zsaKeyboard = true;
@@ -15,7 +16,6 @@
       postgres = true;
       virtualisation = true;
       onyxBoox = true;
-      disks = true;
     };
   };
 

@@ -4,14 +4,14 @@
     username = "jlo";
     hostName = "jlo-laptop";
     stateVersion = "23.11";
+    homeStateVersion = "25.05";
     conserveMemory = false;
     ntfsDriver = true;
     videoDrivers = [ "intel" ];
-    disk = "/dev/nvme0n1"; # TODO: verify
+    disks.device = "/dev/nvme0n1"; # TODO: verify
     features = {
       postgres = true;
       virtualisation = true;
-      disks = true;
     };
   };
 

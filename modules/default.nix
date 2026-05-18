@@ -10,11 +10,12 @@ with lib;
 
   # Host identity options — feature options are declared in their respective modules.
   options.my = {
-    stateVersion  = mkOption { type = types.str; };
-    hostName      = mkOption { type = types.str; };
-    username      = mkOption { type = types.str; };
-    ntfsDriver    = mkEnableOption {};
-    oldIntel      = mkEnableOption {};
-    conserveMemory = mkEnableOption { default = true; };
+    stateVersion     = mkOption { type = types.str; };
+    homeStateVersion = mkOption { type = types.str; };
+    hostName         = mkOption { type = types.str; };
+    username         = mkOption { type = types.str; };
+    ntfsDriver       = mkEnableOption {};
+    oldIntel         = mkEnableOption {};
+    conserveMemory   = mkEnableOption { default = true; };
   };
 }

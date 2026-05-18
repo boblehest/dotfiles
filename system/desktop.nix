@@ -6,7 +6,7 @@
     {
       # Sub-features default to whatever desktop is set to, but can be
       # individually overridden in host config.
-      my.features.audio     = lib.mkDefault config.my.features.desktop;
+      my.features.audio     = lib.mkIf config.my.features.desktop (lib.mkDefault "user");
       my.features.bluetooth = lib.mkDefault config.my.features.desktop;
       my.features.greeter   = lib.mkDefault config.my.features.desktop;
     }

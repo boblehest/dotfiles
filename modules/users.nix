@@ -17,7 +17,10 @@ in {
   };
 
   config = {
-    home-manager.extraSpecialArgs = specialArgs // { myFeatures = config.my.features; };
+    home-manager.extraSpecialArgs = specialArgs // {
+      myFeatures       = config.my.features;
+      homeStateVersion = config.my.homeStateVersion;
+    };
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
     home-manager.users = lib.mapAttrs (_: value: inputs: extendImports (value.hm-config inputs)) cfg.users;

@@ -4,6 +4,7 @@
     username = "jlo";
     hostName = "bilbo";
     stateVersion = "18.03";
+    homeStateVersion = "25.05";
     videoDrivers = [];
     features = {
       desktop = false;
