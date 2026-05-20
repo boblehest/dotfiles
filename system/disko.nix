@@ -39,7 +39,7 @@
             };
           };
           root = {
-            end = if config.my.disks.swap != null then "-${config.my.disks.swap}" else "100%";
+            end = if config.my.disks.swap != null then "-${config.my.disks.swap}" else null;
             content = {
               type = "filesystem";
               format = "ext4";
@@ -49,7 +49,7 @@
           };
         } // lib.optionalAttrs (config.my.disks.swap != null) {
           swap = {
-            end = "100%";
+            size = config.my.disks.swap;
             content.type = "swap";
           };
         };
