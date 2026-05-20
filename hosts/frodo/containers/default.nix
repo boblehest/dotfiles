@@ -19,8 +19,8 @@ let stateVersion = config.my.stateVersion; in
     hostBridge = "br-containers";
     localAddress = "10.0.0.3/24";
     bindMounts = {
-      "/etc/nextcloud-admin-pass" = {
-        hostPath = "/etc/nextcloud-admin-pass"; # TODO: move into secrets management
+      "/etc/nextcloud-secrets" = {
+        hostPath = "/etc/nextcloud-secrets"; # TODO: move into secrets management
         isReadOnly = true;
       };
       "/var/lib/nextcloud" = {
