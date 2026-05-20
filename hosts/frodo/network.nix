@@ -11,7 +11,7 @@
   config.my.services.wireguard = {
     enable = true;
     peerType = "server";
-    wanInterface = "enp1s0f1"; # TODO: verify interface name on actual hardware
+    wanInterface = "eno2";
     vpnInterface = "wg0";
     ipAddressWithSubnet = "10.13.37.1/24";
     listenPort = 43434;
