@@ -5,6 +5,7 @@
   boot.initrd.availableKernelModules = [ "ahci" "ohci_pci" "ehci_pci" "usb_storage" "usbhid" "sd_mod" ];
   boot.kernelModules = [ "kvm-amd" ];
 
+  # TODO: Migrate bilbo to using `disko` instead of the filesystem config here. I've already labeled the disks on `bilbo` to match the `disko` labels.
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/934a58b7-8daf-4c08-89c9-7cc8eed1b007";
     fsType = "ext4";
