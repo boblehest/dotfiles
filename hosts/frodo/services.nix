@@ -27,6 +27,7 @@
 
   services.nginx = {
     enable = true;
+    recommendedProxySettings = true;
     virtualHosts = {
       "files.home" = {
         locations."/".proxyPass = "http://10.0.0.3";
