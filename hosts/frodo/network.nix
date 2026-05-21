@@ -2,6 +2,14 @@
 {
   config.boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
 
+  config.networking.interfaces.eno2.useDHCP = false;
+  config.networking.interfaces.eno2.ipv4.addresses = [{
+    address = "192.168.10.200";
+    prefixLength = 24;
+  }];
+  config.networking.defaultGateway = "192.168.10.1";
+  config.networking.nameservers = [ "1.1.1.1" ];
+
   config.networking.bridges.br-containers.interfaces = [];
   config.networking.interfaces.br-containers.ipv4.addresses = [{
     address = "10.0.0.1";
