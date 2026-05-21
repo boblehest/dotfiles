@@ -21,6 +21,8 @@ stateVersion: { pkgs, ... }:
 
   systemd.services.mopidy.environment.PIPEWIRE_RUNTIME_DIR = "/run/pipewire";
 
+  networking.defaultGateway = "10.0.0.1";
+
   networking.firewall.allowedTCPPorts = [
     6600 # MPD
     6680 # HTTP (iris web UI)

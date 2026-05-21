@@ -10,5 +10,6 @@ stateVersion: { pkgs, ... }:
     config.dbtype = "sqlite";
   };
 
+  networking.defaultGateway = "10.0.0.1";
   networking.firewall.allowedTCPPorts = [ 80 ];
 }
