@@ -2,6 +2,7 @@
 {
   services.dnsmasq = {
     enable = true;
+    resolveLocalQueries = false;
     settings = {
       bind-interfaces = true;
       listen-address = [ "10.13.37.1" "10.0.0.1" "192.168.10.200" ];
