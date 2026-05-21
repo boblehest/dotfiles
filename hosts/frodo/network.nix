@@ -10,6 +10,8 @@
   config.networking.defaultGateway = "192.168.10.1";
   config.networking.nameservers = [ "1.1.1.1" ];
 
+  config.networking.nat.internalInterfaces = [ "br-containers" ];
+
   config.networking.bridges.br-containers.interfaces = [];
   config.networking.interfaces.br-containers.ipv4.addresses = [{
     address = "10.0.0.1";
