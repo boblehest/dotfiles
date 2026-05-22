@@ -26,4 +26,13 @@ resource "incus_instance" "home_assistant" {
       size = "32GiB"
     }
   }
+
+  device {
+    name = "zbt2"
+    type = "usb"
+    properties = {
+      vendorid  = "303a"
+      productid = "831a"
+    }
+  }
 }
