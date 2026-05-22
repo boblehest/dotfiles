@@ -33,7 +33,10 @@
         locations."/".proxyPass = "http://10.0.0.3";
       };
       "homeassistant.home" = {
-        locations."/".proxyPass = "http://10.0.0.10:8123";
+        locations."/" = {
+          proxyPass = "http://10.0.0.10:8123";
+          proxyWebsockets = true;
+        };
       };
       "mopidy.home" = {
         locations."/".proxyPass = "http://10.0.0.2:6680";
