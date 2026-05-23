@@ -44,6 +44,9 @@
     };
   };
 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
   services.openssh = {
     enable = true;
     settings = {
