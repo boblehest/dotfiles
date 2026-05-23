@@ -45,4 +45,40 @@ resource "incus_instance" "home_assistant" {
       productid = "831a"
     }
   }
+
+  # Wait for the supervisor to be ready, then apply configuration that
+  # can't be expressed declaratively in HAOS.
+  # NOTE This script is untested! So might not work fully.
+  provisioner "local-exec" {
+    command = <<-EOF
+      set -e
+      echo "Waiting for HAOS supervisor..."
+      until incus exec home-assistant -- ha supervisor info > /dev/null 2>&1; do
+        sleep 10
+      done
+
+      echo "Configuring static network..."
+      incus exec home-assistant -- ha network update enp5s0 \
+        --ipv4-method static \
+        --ipv4-address 192.168.10.10/24 \
+        --ipv4-gateway 192.168.10.1 \
+        --ipv4-nameserver 192.168.10.200
+
+      echo "Waiting for HA core to be ready..."
+      until incus exec home-assistant -- ha core info > /dev/null 2>&1; do
+        sleep 10
+      done
+
+      echo "Configuring reverse proxy trust..."
+      incus exec home-assistant -- bash -c 'cat >> /mnt/data/supervisor/homeassistant/configuration.yaml << "YAML"
+
+http:
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.10.200
+YAML'
+
+      incus exec home-assistant -- ha core restart
+    EOF
+  }
 }
