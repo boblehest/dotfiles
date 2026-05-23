@@ -65,7 +65,9 @@ resource "incus_instance" "home_assistant" {
         --ipv4-nameserver 192.168.10.200
 
       echo "Waiting for HA core to be ready..."
-      until incus exec home-assistant -- ha core info > /dev/null 2>&1; do
+      # network update triggers a core restart; wait for it to begin, then for running state
+      sleep 10
+      until incus exec home-assistant -- ha core info 2>/dev/null | grep -q '"state": "running"'; do
         sleep 10
       done
 
