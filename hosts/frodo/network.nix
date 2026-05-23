@@ -2,8 +2,11 @@
 {
   config.boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
 
+  # eno2 is enslaved to br-lan; the bridge holds the IP
   config.networking.interfaces.eno2.useDHCP = false;
-  config.networking.interfaces.eno2.ipv4.addresses = [{
+  config.networking.bridges.br-lan.interfaces = [ "eno2" ];
+  config.networking.interfaces.br-lan.useDHCP = false;
+  config.networking.interfaces.br-lan.ipv4.addresses = [{
     address = "192.168.10.200";
     prefixLength = 24;
   }];
@@ -21,7 +24,7 @@
   config.my.services.wireguard = {
     enable = true;
     peerType = "server";
-    wanInterface = "eno2";
+    wanInterface = "br-lan";
     vpnInterface = "wg0";
     ipAddressWithSubnet = "10.13.37.1/24";
     listenPort = 43434;

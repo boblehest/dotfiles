@@ -34,7 +34,7 @@
       };
       "homeassistant.home" = {
         locations."/" = {
-          proxyPass = "http://10.0.0.10:8123";
+          proxyPass = "http://192.168.10.10:8123";
           proxyWebsockets = true;
         };
       };
