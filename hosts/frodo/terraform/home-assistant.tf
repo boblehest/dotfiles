@@ -63,24 +63,6 @@ resource "incus_instance" "home_assistant" {
         --ipv4-address 192.168.10.10/24 \
         --ipv4-gateway 192.168.10.1 \
         --ipv4-nameserver 192.168.10.200
-
-      echo "Waiting for HA core to be ready..."
-      # network update triggers a core restart; wait for it to begin, then for running state
-      sleep 10
-      until incus exec home-assistant -- ha core info 2>/dev/null | grep -q '"state": "running"'; do
-        sleep 10
-      done
-
-      echo "Configuring reverse proxy trust..."
-      incus exec home-assistant -- bash -c 'cat >> /mnt/data/supervisor/homeassistant/configuration.yaml << "YAML"
-
-http:
-  use_x_forwarded_for: true
-  trusted_proxies:
-    - 192.168.10.200
-YAML'
-
-      incus exec home-assistant -- ha core restart
     EOF
   }
 }
