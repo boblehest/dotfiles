@@ -47,6 +47,14 @@
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  services.pipewire.wireplumber.extraConfig."10-bluetooth" = {
+    "monitor.bluez.properties" = {
+      "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
+      "bluez5.codecs" = [ "sbc" "sbc_xq" "aac" ];
+    };
+    "bluetooth.autoswitch-to-headset-profile" = false;
+  };
+
   services.openssh = {
     enable = true;
     settings = {
