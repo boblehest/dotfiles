@@ -8,7 +8,7 @@
     conserveMemory = false;
     ntfsDriver = true;
     videoDrivers = [ "intel" ];
-    disks.device = "/dev/nvme0n1"; # TODO: verify
+    disks.device = "/dev/nvme0n1";
     features = {
       postgres = true;
       virtualisation = true;
