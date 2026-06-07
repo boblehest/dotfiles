@@ -212,17 +212,21 @@ vim.g.better_whitespace_enabled = 1
 require('telescope').setup{}
 require('telescope').load_extension('ui-select')
 require('which-key').setup{}
-require('nvim-treesitter.configs').setup{
-  highlight = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  textobjects = {
-    select = {
-      enable = true,
-    },
-  },
-}
+
+-- NOTE: Disabled: apparently this lua module does not exist after updating
+-- nixos to 26.05
+-- require('nvim-treesitter.configs').setup{
+--   highlight = {
+--     enable = true,
+--   },
+--   indent = {
+--     enable = true,
+--   },
+--   textobjects = {
+--     select = {
+--       enable = true,
+--     },
+--   },
+-- }
+
 require('nvim-surround').setup{}
