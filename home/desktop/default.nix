@@ -48,10 +48,9 @@
 
       swayidle = {
         enable = true;
-        events = [{
-          event = "before-sleep";
-          command = "${pkgs.swaylock}/bin/swaylock -fF";
-        }];
+        events = {
+          "before-sleep" = "${pkgs.swaylock}/bin/swaylock -fF";
+        };
       };
 
       avizo = { # Notification daemon for volume and brightness adjustment

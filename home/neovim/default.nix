@@ -43,7 +43,7 @@
       vim-unimpaired # just custom keybindings for some commands? Not sure what keybinds I use anymore
       which-key-nvim # tooltip to show available keybindings (pops up while typing a multi-key command)
     ];
-    extraLuaConfig = lib.strings.fileContents ./config/init.lua;
+    initLua = lib.strings.fileContents ./config/init.lua;
     extraPackages = with pkgs; [
       texlab
       gcc # treesitter wants `cc` available
