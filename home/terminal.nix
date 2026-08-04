@@ -41,7 +41,7 @@
       };
       commands = {
         open  = "&${pkgs.mimeo}/bin/mimeo \"$f\"";
-        trash = "%set -f; ${pkgs.trashy}/bin/trash put \"$fx\"";
+        trash = "%set -f; ${pkgs.gtrash}/bin/gtrash put \"$fx\"";
       };
     };
 
@@ -53,5 +53,5 @@
     };
   };
 
-  home.packages = [ pkgs.trashy ];
+  home.packages = [ pkgs.gtrash ];
 }
