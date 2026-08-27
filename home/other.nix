@@ -18,7 +18,7 @@ in {
 
   config = {
     home.packages = with pkgs; [
-      jmtpfs
+      simple-mtpfs
       jq
       yq
     ];

@@ -78,10 +78,8 @@
 
       flameshot = { # screenshot utility
         enable = true;
-        package = pkgs.flameshot.override { enableWlrSupport = true; };
         settings = {
           General = {
-            disabledGrimWarning = true;
             disabledTrayIcon = true;
           };
         };

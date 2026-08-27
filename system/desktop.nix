@@ -14,7 +14,8 @@
       xdg.portal = {
         enable = true;
         wlr.enable = true;
-        config.common.default = [ "wlr" ];
+        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        config.common.default = [ "wlr" "gtk" ];
       };
       services.gnome.gnome-keyring.enable = true;
       services.gnome.gcr-ssh-agent.enable = false; # using programs.ssh.startAgent instead
