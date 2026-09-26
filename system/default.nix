@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -13,6 +13,7 @@
     ./onyx-boox-max3.nix
     ./postgres.nix
     ./printing.nix
+    ./secrets.nix
     ./sleep.nix
     ./users.nix
     ./video.nix

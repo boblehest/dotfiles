@@ -14,9 +14,13 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, nixos-hardware, battery_monitor, disko, ... }:
+  outputs = { nixpkgs, home-manager, nixos-hardware, battery_monitor, disko, sops-nix, ... }:
   let
     specialArgs = { inherit battery_monitor home-manager nixos-hardware; };
     mkHost = { hardware, host, system ? "x86_64-linux" }:
@@ -25,6 +29,7 @@
         modules = [
           { nixpkgs.overlays = [ battery_monitor.overlays.default ]; }
           disko.nixosModules.disko
+          sops-nix.nixosModules.sops
           hardware
           ./modules/default.nix
           ./system

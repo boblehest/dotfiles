@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   config.my = {
     username = "jlo";
@@ -21,13 +21,16 @@
 
   # features.desktop = true by default, so not listed above
 
+  config.sops.defaultSopsFile = ../../secrets/jlo-zrch.yaml;
+  config.sops.secrets.wireguard-private-key = {};
+
   config.my.services.wireguard = {
     enable = true;
     peerType = "client";
     vpnInterface = "wg0";
     ipAddressWithSubnet = "10.13.37.3/24";
     listenPort = 43434;
-    privateKeyFile = "/etc/wireguard-key"; # TODO: move into secrets management
+    privateKeyFile = config.sops.secrets.wireguard-private-key.path;
     peers = [
       {
         publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";

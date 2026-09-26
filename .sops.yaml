@@ -1,0 +1,15 @@
+keys:
+  - &admin_jlo age1j6g2amz3uszzlv90fs73f0xlax9j5e36y5cqxjjhrv0sjecghq4stn40a9
+  - &host_jlo_zrch age1qh7jtf85sygghuuhafujjj636z9e5wd7t2x8arrr70mstxz3geds459n7w
+  # frodo's host key is added here once it generates its own
+  # /var/lib/sops-nix/key.txt (see hosts/frodo/default.nix for sops.defaultSopsFile).
+creation_rules:
+  - path_regex: secrets/frodo\.yaml$
+    key_groups:
+      - age:
+          - *admin_jlo
+  - path_regex: secrets/jlo-zrch\.yaml$
+    key_groups:
+      - age:
+          - *admin_jlo
+          - *host_jlo_zrch
