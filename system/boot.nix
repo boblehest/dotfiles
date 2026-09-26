@@ -6,6 +6,7 @@
     hardware.keyboard.zsa.enable = config.my.features.zsaKeyboard;
 
     boot = lib.mkMerge [{
+      kernel.sysctl."kernel.sysrq" = true;
       kernelPackages = pkgs.linuxPackages_latest;
       kernelParams = [
         # TODO Why was this added?
