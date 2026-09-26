@@ -8,6 +8,8 @@
     ./users.nix
   ];
 
+  config.sops.defaultSopsFile = ../../secrets/frodo.yaml;
+
   config.my = {
     username = "jlo";
     hostName = "frodo";

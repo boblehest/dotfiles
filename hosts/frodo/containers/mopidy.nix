@@ -11,12 +11,10 @@ stateVersion: { pkgs, ... }:
         hostname = "0.0.0.0";
       };
       audio.output = "pipewiresink";
-      subidy = {
-        url = "http://127.0.0.1:4533"; # TODO: point at navidrome container once containerised
-        username = "meow";
-        password = "meowmeow"; # TODO: move into secrets management
-      };
+      subidy.url = "http://10.0.0.4:4533";
     };
+    # username/password come from the sops-rendered [subidy] section.
+    extraConfigFiles = [ "/run/secrets/rendered/mopidy-subidy.conf" ];
   };
 
   systemd.services.mopidy.environment.PIPEWIRE_RUNTIME_DIR = "/run/pipewire";

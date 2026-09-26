@@ -17,6 +17,9 @@
         "/files.home/10.0.0.1"
         "/homeassistant.home/10.0.0.1"
         "/mopidy.home/10.0.0.1"
+        "/navidrome.home/10.0.0.1"
+        "/slskd.home/10.0.0.1"
+        "/transmission.home/10.0.0.1"
       ];
     };
   };
@@ -41,6 +44,18 @@
       "mopidy.home" = {
         locations."/".proxyPass = "http://10.0.0.2:6680";
       };
+      "navidrome.home" = {
+        locations."/".proxyPass = "http://10.0.0.4:4533";
+      };
+      "slskd.home" = {
+        locations."/" = {
+          proxyPass = "http://10.0.0.6:5030";
+          proxyWebsockets = true;
+        };
+      };
+      "transmission.home" = {
+        locations."/".proxyPass = "http://10.0.0.5:9091";
+      };
     };
   };
 
@@ -51,8 +66,17 @@
     "monitor.bluez.properties" = {
       "bluez5.roles" = [ "a2dp_sink" "a2dp_source" ];
       "bluez5.codecs" = [ "sbc" "sbc_xq" "aac" ];
+      # Automatically connect a2dp_sink profile when a device pairs
+      "bluez5.auto-connect" = [ "a2dp_sink" ];
     };
     "bluetooth.autoswitch-to-headset-profile" = false;
+  };
+
+  # WirePlumber has no Unit dependencies by default in system-wide mode
+  systemd.services.wireplumber = {
+    after = [ "pipewire.service" ];
+    bindsTo = [ "pipewire.service" ];
+    wantedBy = [ "pipewire.service" ];
   };
 
   services.openssh = {

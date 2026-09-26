@@ -1,5 +1,7 @@
-{ ... }:
+{ config, ... }:
 {
+  config.sops.secrets.wireguard-private-key = {};
+
   config.boot.kernel.sysctl."net.ipv4.ip_forward" = "1";
 
   # eno2 is enslaved to br-lan; the bridge holds the IP
@@ -28,7 +30,7 @@
     vpnInterface = "wg0";
     ipAddressWithSubnet = "10.13.37.1/24";
     listenPort = 43434;
-    privateKeyFile = "/etc/wireguard-key"; # TODO: move into secrets management
+    privateKeyFile = config.sops.secrets.wireguard-private-key.path;
     peers = [
       { # old laptop
         publicKey = "DQwMJJX6jIwjQU61Kn1MhnT/fX2H9gu6CkwhJIMwu3M=";
