@@ -1,4 +1,4 @@
-stateVersion: { ... }:
+stateVersion: { pkgs, ... }:
 {
   system.stateVersion = stateVersion;
 
@@ -7,6 +7,7 @@ stateVersion: { ... }:
 
   services.transmission = {
     enable = true;
+    package = pkgs.transmission_4;
     settings = {
       download-dir = "/downloads/complete";
       incomplete-dir = "/downloads/incomplete";
