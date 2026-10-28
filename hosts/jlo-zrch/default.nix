@@ -16,6 +16,7 @@
       postgres = true;
       virtualisation = true;
       onyxBoox = true;
+      fleet = true;
     };
   };
 

@@ -20,5 +20,6 @@
     ./video-conferencing.nix
     ./virtualisation.nix
     ./yubikey.nix
+    ./fleet.nix
   ];
 }
