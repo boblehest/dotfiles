@@ -4,7 +4,6 @@ let stateVersion = config.my.stateVersion; in
   users.groups.media = { gid = 988; };
 
   sops.secrets = {
-    nextcloud-admin-pass = { mode = "0444"; };
     # Only consumed via the mopidy-subidy.conf template below; stays root-only.
     mopidy-subidy-password = {};
     slskd-env = { mode = "0444"; };
@@ -54,15 +53,9 @@ let stateVersion = config.my.stateVersion; in
     privateNetwork = true;
     hostBridge = "br-containers";
     localAddress = "10.0.0.3/24";
-    bindMounts = {
-      "/run/secrets/nextcloud-admin-pass" = {
-        hostPath = config.sops.secrets.nextcloud-admin-pass.path;
-        isReadOnly = true;
-      };
-      "/var/lib/nextcloud" = {
-        hostPath = "/srv/nextcloud";
-        isReadOnly = false;
-      };
+    bindMounts."/var/lib/nextcloud" = {
+      hostPath = "/srv/nextcloud";
+      isReadOnly = false;
     };
     config = import ./nextcloud.nix stateVersion;
   };

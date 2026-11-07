@@ -6,7 +6,6 @@ stateVersion: { pkgs, ... }:
     enable = true;
     package = pkgs.nextcloud34; # TODO: bump when upgrading
     hostName = "files.home";
-    config.adminpassFile = "/run/secrets/nextcloud-admin-pass";
     config.dbtype = "sqlite";
   };
 
