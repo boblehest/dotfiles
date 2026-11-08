@@ -42,7 +42,11 @@
         };
       };
       "mopidy.home" = {
-        locations."/".proxyPass = "http://10.0.0.2:6680";
+        locations."/" = {
+          proxyPass = "http://10.0.0.2:6680";
+          # Iris talks to mopidy over a websocket (/mopidy/ws)
+          proxyWebsockets = true;
+        };
       };
       "navidrome.home" = {
         locations."/".proxyPass = "http://10.0.0.4:4533";
