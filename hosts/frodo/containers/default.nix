@@ -26,6 +26,19 @@ let stateVersion = config.my.stateVersion; in
     "d /srv/downloads/complete   2775 root media - -"
     "d /srv/downloads/incomplete 2775 root media - -"
     "d /srv/slskd                2775 root media - -"
+
+    # Mountpoint for navidrome's /music/nextcloud bind mount (below). It has to
+    # exist on the host because /music itself is mounted read-only.
+    "d /srv/music/nextcloud      0755 root root  - -"
+    # Nextcloud keeps its tree 0750 nextcloud:nextcloud, and its uid differs
+    # between containers, so grant the shared media group (gid 988 in every
+    # container) traversal down to the music folder and read access inside it.
+    # The default ACL covers files uploaded later.
+    "a+ /srv/nextcloud                      - - - - group:media:--x"
+    "a+ /srv/nextcloud/data                 - - - - group:media:--x"
+    "a+ /srv/nextcloud/data/jlo             - - - - group:media:--x"
+    "a+ /srv/nextcloud/data/jlo/files       - - - - group:media:--x"
+    "A+ /srv/nextcloud/data/jlo/files/music - - - - group:media:r-X,default:group:media:r-X"
   ];
 
   # TODO Consider abstracting this, so that we don't have to specify hostBridge,
@@ -68,6 +81,11 @@ let stateVersion = config.my.stateVersion; in
     bindMounts = {
       "/music" = {
         hostPath = "/srv/music";
+        isReadOnly = true;
+      };
+      # Nested under /music so navidrome scans it as part of its one MusicFolder.
+      "/music/nextcloud" = {
+        hostPath = "/srv/nextcloud/data/jlo/files/music";
         isReadOnly = true;
       };
       "/var/lib/navidrome" = {
