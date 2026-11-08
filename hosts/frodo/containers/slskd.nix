@@ -2,6 +2,9 @@ stateVersion: { ... }:
 {
   system.stateVersion = stateVersion;
 
+  users.groups.media = { gid = 988; };
+  users.users.slskd.extraGroups = [ "media" ];
+
   services.slskd = {
     enable = true;
     openFirewall = true;

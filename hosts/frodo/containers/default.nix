@@ -26,6 +26,8 @@ let stateVersion = config.my.stateVersion; in
     "d /srv/downloads/complete   2775 root media - -"
     "d /srv/downloads/incomplete 2775 root media - -"
     "d /srv/slskd                2775 root media - -"
+    # Must exist before slskd starts: its unit lists it in ReadWritePaths.
+    "d /srv/music/downloads      2775 root media - -"
 
     # Mountpoint for navidrome's /music/nextcloud bind mount (below). It has to
     # exist on the host because /music itself is mounted read-only.
