@@ -13,6 +13,10 @@
 
     tmux = { # terminal multiplexer
       enable = true;
+      # This setting isn't being honered fully: at startup tmux sets it to 500
+      # while negotiating with the terminal for capabilities. This appears to
+      # take a few seconds, before the `escapeTime` is then set to the
+      # configured value.
       escapeTime = 0;
       keyMode = "vi";
       terminal = "screen-256color";
