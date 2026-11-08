@@ -51,7 +51,6 @@
     enable = true;
     package = pkgs.nextcloud33; # TODO: bump when upgrading
     hostName = "10.13.37.1";
-    config.adminpassFile = "/etc/nextcloud-admin-pass"; # TODO: move into secrets management
     config.dbtype = "sqlite";
   };
 
