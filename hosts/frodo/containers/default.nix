@@ -116,6 +116,14 @@ let stateVersion = config.my.stateVersion; in
     config = import ./transmission.nix stateVersion;
   };
 
+  # Soulseek listen port: the router forwards it to frodo, frodo on to slskd, so
+  # other peers can connect to us directly (otherwise we're "firewalled").
+  networking.nat.forwardPorts = [{
+    proto = "tcp";
+    sourcePort = 50300;
+    destination = "10.0.0.6:50300";
+  }];
+
   containers.slskd = {
     autoStart = true;
     privateNetwork = true;
