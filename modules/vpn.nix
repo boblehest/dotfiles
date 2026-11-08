@@ -1,6 +1,19 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.my.services.wireguard;
+
+  # The single VPN server, as seen from every client. Clients route the VPN
+  # subnet and frodo's container network (*.home resolves into it) through it.
+  serverPeer = {
+    publicKey = "ZtRsDJHYOCowc/h5ZaZC+28aiuksvNyJ0fr/DfGjuyA="; # frodo
+    allowedIPs = [ "10.13.37.0/24" "10.0.0.0/24" ];
+    endpoint = "lavpan.net:43434";
+    # Keep re-resolving the endpoint: retries until DNS works at boot (the
+    # network-online.target ordering is meaningless with wait-online disabled
+    # below), and follows home IP changes and laptops switching networks.
+    dynamicEndpointRefreshSeconds = 60;
+    dynamicEndpointRefreshRestartSeconds = 10;
+  };
 in
   with lib;
 {
@@ -63,8 +76,17 @@ in
             (mkIf (cfg.peerType == "client") {
               persistentKeepalive = 25;
             })
-          ]) cfg.peers;
+          ]) (if cfg.peerType == "client" then [ serverPeer ] else cfg.peers);
         }
+        (mkIf (cfg.peerType == "client") {
+          postSetup = ''
+            ${pkgs.systemd}/bin/resolvectl dns ${cfg.vpnInterface} 10.13.37.1
+            ${pkgs.systemd}/bin/resolvectl domain ${cfg.vpnInterface} "~home"
+          '';
+          postShutdown = ''
+            ${pkgs.systemd}/bin/resolvectl revert ${cfg.vpnInterface}
+          '';
+        })
         (mkIf (cfg.peerType == "server" && config.networking.firewall.enable) {
           postSetup = ''
             ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s ${cfg.ipAddressWithSubnet} -o ${cfg.wanInterface} -j MASQUERADE

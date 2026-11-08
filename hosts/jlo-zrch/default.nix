@@ -32,13 +32,6 @@
     ipAddressWithSubnet = "10.13.37.3/24";
     listenPort = 43434;
     privateKeyFile = config.sops.secrets.wireguard-private-key.path;
-    peers = [
-      {
-        publicKey = "M4JnZkZ61lp1omaUOgR6M7G+7GTTZqSwWedei4X6Wlw=";
-        allowedIPs = [ "10.13.37.0/24" ];
-        endpoint = "92.220.73.158:43434";
-      }
-    ];
   };
 
   config.programs.openvpn3.enable = true;
