@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 {
   services.dnsmasq = {
     enable = true;
@@ -9,18 +9,8 @@
       no-resolv = true;
       server = [ "1.1.1.1" "8.8.8.8" ];
       # HTTP services point to frodo; nginx routes by hostname
-
-      # TODO Consider abstracting this, to make it clear how the dnsmasq config
-      # related to the nginx config (i.e. have one setting that writes both
-      # dnsmasq config and nginx config)
-      address = [
-        "/files.home/10.0.0.1"
-        "/homeassistant.home/10.0.0.1"
-        "/mopidy.home/10.0.0.1"
-        "/navidrome.home/10.0.0.1"
-        "/slskd.home/10.0.0.1"
-        "/transmission.home/10.0.0.1"
-      ];
+      address = map (host: "/${host}/10.0.0.1")
+        (lib.attrNames config.services.nginx.virtualHosts);
     };
   };
 
