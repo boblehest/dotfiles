@@ -33,7 +33,14 @@
     recommendedProxySettings = true;
     virtualHosts = {
       "files.home" = {
-        locations."/".proxyPass = "http://10.0.0.3";
+        locations."/" = {
+          proxyPass = "http://10.0.0.3";
+          # Should match services.nextcloud.maxUploadSize in the container
+          extraConfig = ''
+            client_max_body_size 2G;
+            proxy_request_buffering off;
+          '';
+        };
       };
       "homeassistant.home" = {
         locations."/" = {
