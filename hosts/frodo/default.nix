@@ -3,6 +3,7 @@
   imports = [
     ./backup.nix
     ./containers
+    ./ddns.nix
     ./incus.nix
     ./network.nix
     ./public-services.nix
