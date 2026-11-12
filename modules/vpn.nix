@@ -66,6 +66,8 @@ in
       allowedUDPPorts = [ cfg.listenPort ];
     };
 
+    services.resolved.enable = true;
+
     networking.wireguard.interfaces = {
       ${cfg.vpnInterface} = mkMerge [
         {
