@@ -66,7 +66,9 @@ in
       allowedUDPPorts = [ cfg.listenPort ];
     };
 
-    services.resolved.enable = true;
+    # Not on the server: its NixOS containers copy the host's resolv.conf, and
+    # resolved's stub (127.0.0.53) is unreachable from their network namespace.
+    services.resolved.enable = mkIf (cfg.peerType == "client") true;
 
     networking.wireguard.interfaces = {
       ${cfg.vpnInterface} = mkMerge [
