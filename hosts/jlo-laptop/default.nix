@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   config.my = {
     username = "jlo";
@@ -15,13 +15,16 @@
     };
   };
 
+  config.sops.defaultSopsFile = ../../secrets/jlo-laptop.yaml;
+  config.sops.secrets.wireguard-private-key = {};
+
   config.my.services.wireguard = {
     enable = true;
     peerType = "client";
     vpnInterface = "wg0";
     ipAddressWithSubnet = "10.13.37.2/24";
     listenPort = 43434;
-    privateKeyFile = "/etc/wireguard-key";
+    privateKeyFile = config.sops.secrets.wireguard-private-key.path;
   };
 
   config.services.gnome.gcr-ssh-agent.enable = false;
