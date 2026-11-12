@@ -7,7 +7,7 @@
       enableBashIntegration = false;
       enableFishIntegration = true;
       enableZshIntegration = false;
-      changeDirWidgetCommand = "${pkgs.fd}/bin/fd --type d";
+      changeDirWidget.command = "${pkgs.fd}/bin/fd --type d";
       defaultCommand = "${pkgs.fd}/bin/fd --type f";
     };
 
