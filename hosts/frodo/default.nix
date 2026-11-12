@@ -5,6 +5,7 @@
     ./containers
     ./incus.nix
     ./network.nix
+    ./public-services.nix
     ./services.nix
     ./users.nix
   ];

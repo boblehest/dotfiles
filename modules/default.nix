@@ -4,6 +4,7 @@ with lib;
   imports = [
     ./grafana.nix
     ./mediaserver.nix
+    ./public-services.nix
     ./users.nix
     ./vpn.nix
   ];
